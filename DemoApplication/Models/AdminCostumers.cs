@@ -23,7 +23,9 @@ namespace DemoApplication.Models
         [Required(ErrorMessage = "Please enter phone number")]
         [DataType(DataType.PhoneNumber)]
         public long Phone { get; set; }
+        [Required(ErrorMessage = "Please select country")]
         public string Country { get; set; }
+        [Required(ErrorMessage = "Please select state")]
         public string State { get; set; }
         public string TypeOfService { get; set; }
         [Column(TypeName = "Date")]
