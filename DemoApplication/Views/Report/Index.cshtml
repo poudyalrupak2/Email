@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DemoApplication.Models.CustomerSuperAdmin>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <div><a href="@Url.Action("ExportReport")"> Report PDF </a></div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+           Name
+        </th>
+     
+    </tr>
+
+@foreach (var item in ViewBag.Costumers) {
+    <tr>
+        <td>
+            @item.Name
+        </td>
+      
+       
+    </tr>
+}
+
+</table>

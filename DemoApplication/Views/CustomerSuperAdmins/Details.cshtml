@@ -1,0 +1,151 @@
+﻿@model DemoApplication.Models.CustomerSuperAdmin
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CustomerSuperAdmin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PanNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PanNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.URL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.URL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkingArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkingArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NatureOfWork)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NatureOfWork)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CitizenShipPhoto)
+        </dt>
+
+        <dd>
+            <img src=@Model.CitizenShipPhoto height="100" width="100">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyDocument)
+        </dt>
+
+        <dd>
+            <img src=@Model.CompanyDocument height="100" width="100">
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Logo)
+        </dt>
+
+        <dd>
+            <img src=@Model.Logo height="100" width="100">
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PpsizePhoto)
+        </dt>
+
+        <dd>
+            <img src=@Model.PpsizePhoto height="100" width="100">
+
+        </dd>
+
+     
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
