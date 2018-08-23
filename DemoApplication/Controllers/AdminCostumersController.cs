@@ -60,23 +60,23 @@ namespace DemoApplication.Controllers
                 adminCostumers.CreatedBy = Session["userEmail"].ToString();
                 db.AdminCostumers.Add(adminCostumers);
                 db.SaveChanges();
-                ReportDocument rd = new ReportDocument();
-                rd.Load(Path.Combine(Server.MapPath("~/CrystalReport2.rpt")));
+                //ReportDocument rd = new ReportDocument();
+                //rd.Load(Path.Combine(Server.MapPath("~/CrystalReport2.rpt")));
 
-                rd.SetDataSource(db.Costumers.Where(s=>s.email1==adminCostumers.Email)
-                .Select(p => new {
-                    Name = p.Name,
-                    Email1 = p.email1
-                }).ToList());
+                //rd.SetDataSource(db.Costumers.Where(s=>s.email1==adminCostumers.Email)
+                //.Select(p => new {
+                //    Name = p.Name,
+                //    Email1 = p.email1
+                //}).ToList());
 
-                Response.Buffer = false;
-                Response.ClearContent();
-                Response.ClearHeaders();
+                //Response.Buffer = false;
+                //Response.ClearContent();
+                //Response.ClearHeaders();
 
 
-                Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-                stream.Seek(0, SeekOrigin.Begin);
-                return File(stream, "application/pdf", "CustomerList.pdf");
+                //Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                //stream.Seek(0, SeekOrigin.Begin);
+                //return File(stream, "application/pdf", "CustomerList.pdf");
                 return RedirectToAction("Index");
             }
 

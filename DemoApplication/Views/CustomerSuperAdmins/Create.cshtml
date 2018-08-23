@@ -31,11 +31,19 @@
         </div>
     </div>
 
+    <div class="col-md-4 mb-3" id="category">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Categoty, htmlAttributes: new { @class = "control-label col-md-2" })
 
+            @Html.DropDownList("Categoty", new List<SelectListItem> { new SelectListItem { Text = "---Select Category--", Value = "" }, new SelectListItem { Text = "Individual", Value = "Individual" }, new SelectListItem { Text = "Organization", Value = "Organization" } }, new { @class = "form-control", id = "ddlname" })
+
+            @Html.ValidationMessageFor(model => model.Categoty, "", new { @class = "text-danger" })
+        </div>
+    </div>
     <div class="col-md-4 mb-3">
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RegisterDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RegisterDate, new { id = "ddlRegisterdate" })
 
             @Html.TextBoxFor(model => model.RegisterDate, new { id = "datepicker", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.RegisterDate, "", new { @class = "text-danger" })
@@ -78,9 +86,9 @@
             @Html.ValidationMessageFor(model => model.Phone1, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div class="col-md-4 mb-3">
+        <div class="form-group">
 
-    <div class="form-group">
-        <div class="col-md-4 mb-3">
 
             @Html.LabelFor(model => model.PanNo, htmlAttributes: new { @class = "control-label col-md-2" })
 
@@ -240,7 +248,10 @@
 
                     }
                 });
+               
+
             </script>
+
         }
 
 

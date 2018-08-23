@@ -32,9 +32,7 @@
         <th>
             @Html.DisplayNameFor(model => model.TypeOfService)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProvidedDate)
-        </th>
+      
         <th></th>
     </tr>
 
@@ -61,9 +59,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.TypeOfService)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProvidedDate)
-        </td>
+       
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

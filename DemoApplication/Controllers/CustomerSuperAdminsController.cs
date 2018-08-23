@@ -117,7 +117,7 @@ namespace DemoApplication.Controllers
 
 
 
-                    mail.Subject = "Password Recovery";
+                    mail.Subject = "Change Password";
                     mail.Body = "Use this Password to login:" + password;
 
                     mail.IsBodyHtml = false;
@@ -270,6 +270,19 @@ namespace DemoApplication.Controllers
             db.Costumers.Remove(customerSuperAdmin);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public bool IsEmailExists(string Email)
+        {
+            var validateName = db.Costumers.FirstOrDefault
+                                (x => x.email1 == Email);
+            if (validateName != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         protected override void Dispose(bool disposing)

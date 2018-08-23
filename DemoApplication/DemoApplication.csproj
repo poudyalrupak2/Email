@@ -180,7 +180,6 @@
     <Compile Include="Controllers\AdminCostumersController.cs" />
     <Compile Include="Controllers\CustomerSuperAdminsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="CrystalReport2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -206,6 +205,14 @@
     <Compile Include="Migrations\201808220729099_init3.cs" />
     <Compile Include="Migrations\201808220729099_init3.Designer.cs">
       <DependentUpon>201808220729099_init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808230756318_init4.cs" />
+    <Compile Include="Migrations\201808230756318_init4.Designer.cs">
+      <DependentUpon>201808230756318_init4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808230957570_init5.cs" />
+    <Compile Include="Migrations\201808230957570_init5.Designer.cs">
+      <DependentUpon>201808230957570_init5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminCostumers.cs" />
@@ -838,6 +845,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808220729099_init3.resx">
       <DependentUpon>201808220729099_init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808230756318_init4.resx">
+      <DependentUpon>201808230756318_init4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808230957570_init5.resx">
+      <DependentUpon>201808230957570_init5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

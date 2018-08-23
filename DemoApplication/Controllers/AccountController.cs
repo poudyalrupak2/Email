@@ -272,6 +272,11 @@ namespace Newspaper.Controllers
         {
             return PartialView();
         }
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Login");
+        }
 
         //    }
         //}
