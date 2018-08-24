@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Categoty, htmlAttributes: new { @class = "control-label col-md-2" })
 
-            @Html.DropDownList("Categoty", new List<SelectListItem> { new SelectListItem { Text = "---Select Category--", Value = "" }, new SelectListItem { Text = "Individual", Value = "Individual" }, new SelectListItem { Text = "Organization", Value = "Organization" } }, new { @class = "form-control", id = "ddlname" })
+            @Html.DropDownList("Categoty", new List<SelectListItem> { new SelectListItem { Text = "---Select Category--", Value = "" }, new SelectListItem { Text = "Individual", Value = "Individual" }, new SelectListItem { Text = "Organization", Value = "Organization" } }, new { @class = "form-control", id = "ddlCustomerType" })
 
             @Html.ValidationMessageFor(model => model.Categoty, "", new { @class = "text-danger" })
         </div>
@@ -50,15 +50,7 @@
         </div>
     </div>
 
-    <div class="col-md-4 mb-3" id="category">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Categoty, htmlAttributes: new { @class = "control-label col-md-2" })
-
-            @Html.DropDownList("Categoty", new List<SelectListItem> { new SelectListItem { Text = "---Select Category--", Value = "" }, new SelectListItem { Text = "Individual", Value = "Individual" }, new SelectListItem { Text = "Organization", Value = "Organization" } }, new { @class = "form-control", id = "ddlCustomerType" })
-
-            @Html.ValidationMessageFor(model => model.Categoty, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    
 
     <div class="col-md-4 mb-3">
         <div class="form-group">

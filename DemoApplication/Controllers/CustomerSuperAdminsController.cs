@@ -58,99 +58,103 @@ namespace DemoApplication.Controllers
 
             if (ModelState.IsValid)
             {
-
-                HttpFileCollectionBase image = Request.Files;
-                if (CImageFile != null)
+                var data = db.Login.Where(t => t.Email == customerSuperAdmin.email1);
+                if (data == null)
                 {
-                    string fileName1 = CImageFile.FileName;
-                    string filename1 = Path.GetFileNameWithoutExtension(CImageFile.FileName);
-                    string extension1 = Path.GetExtension(CImageFile.FileName);
-                    filename1 = customerSuperAdmin.CustumerId + extension1;
-                    customerSuperAdmin.CitizenShipPhoto = "/images/Citizenship/" + filename1;
-                    filename1 = Path.Combine(Server.MapPath("~/Images/Citizenship/"), filename1);
-                    CImageFile.SaveAs(filename1);
-                }
-                if (CDImageFile != null)
-                {
-                    string fileName2 = CDImageFile.FileName;
-                    string filename2 = Path.GetFileNameWithoutExtension(CDImageFile.FileName);
-                    string extension2 = Path.GetExtension(CDImageFile.FileName);
-                    filename2 = customerSuperAdmin.CustumerId + extension2;
-                    customerSuperAdmin.CompanyDocument = "/images/CompanyDocument/" + filename2;
-                    filename2 = Path.Combine(Server.MapPath("~/Images/CompanyDocument/"), filename2);
-                    CDImageFile.SaveAs(filename2);
-
-                }
-                if (LImageFile != null)
-                {
-                    string fileName3 = LImageFile.FileName;
-
-                    string filename3 = Path.GetFileNameWithoutExtension(LImageFile.FileName);
-                    string extension3 = Path.GetExtension(LImageFile.FileName);
-                    filename3 = customerSuperAdmin.CustumerId + extension3;
-                    customerSuperAdmin.Logo = "/images/Logo/" + filename3;
-                    filename3 = Path.Combine(Server.MapPath("~/Images/Logo/"), filename3);
-                    LImageFile.SaveAs(filename3);
-                }
-                if (PPImageFile != null)
-                {
-                    string fileName4 = PPImageFile.FileName;
-
-                    string filename4 = Path.GetFileNameWithoutExtension(PPImageFile.FileName);
-                    string extension4 = Path.GetExtension(PPImageFile.FileName);
-
-
-                    filename4 = customerSuperAdmin.CustumerId + extension4;
-                    customerSuperAdmin.PpsizePhoto = "/images/PPSizePhoto/" + filename4;
-                    filename4 = Path.Combine(Server.MapPath("~/Images/PPSizePhoto/"), filename4);
-                    PPImageFile.SaveAs(filename4);
-                }
-                //save new record in database
-
-                string from = "dbugtest2016@gmail.com";
-                string fromPassword = "my@test#";
-                string password = Membership.GeneratePassword(6, 1);
-                using (MailMessage mail = new MailMessage(from, customerSuperAdmin.email1))
-                {
-
-                    try
+                    HttpFileCollectionBase image = Request.Files;
+                    if (CImageFile != null)
                     {
-
-
-
-                        mail.Subject = "Change Password";
-                        mail.Body = "Use this Password to login:" + password;
-
-                        mail.IsBodyHtml = false;
-                        SmtpClient smtp = new SmtpClient();
-                        smtp.Host = "smtp.gmail.com";
-                        smtp.EnableSsl = true;
-                        smtp.UseDefaultCredentials = false;
-                        NetworkCredential networkCredential = new NetworkCredential(from, fromPassword);
-
-                        smtp.Credentials = networkCredential;
-                        smtp.Port = 587;
-                        smtp.Send(mail);
-
-                        login.Email = customerSuperAdmin.email1;
-                        login.randompass = password;
-                        login.Category = "Admin";
-                        db.Login.Add(login);
-                        db.Costumers.Add(customerSuperAdmin);
-
-                        db.SaveChanges();
-
+                        string fileName1 = CImageFile.FileName;
+                        string filename1 = Path.GetFileNameWithoutExtension(CImageFile.FileName);
+                        string extension1 = Path.GetExtension(CImageFile.FileName);
+                        filename1 = customerSuperAdmin.CustumerId + extension1;
+                        customerSuperAdmin.CitizenShipPhoto = "/images/Citizenship/" + filename1;
+                        filename1 = Path.Combine(Server.MapPath("~/Images/Citizenship/"), filename1);
+                        CImageFile.SaveAs(filename1);
+                    }
+                    if (CDImageFile != null)
+                    {
+                        string fileName2 = CDImageFile.FileName;
+                        string filename2 = Path.GetFileNameWithoutExtension(CDImageFile.FileName);
+                        string extension2 = Path.GetExtension(CDImageFile.FileName);
+                        filename2 = customerSuperAdmin.CustumerId + extension2;
+                        customerSuperAdmin.CompanyDocument = "/images/CompanyDocument/" + filename2;
+                        filename2 = Path.Combine(Server.MapPath("~/Images/CompanyDocument/"), filename2);
+                        CDImageFile.SaveAs(filename2);
 
                     }
-                    catch
+                    if (LImageFile != null)
                     {
-                        return RedirectToAction("errorpage");
-                    }
-                   
-                }
+                        string fileName3 = LImageFile.FileName;
 
-                return RedirectToAction("Index");
+                        string filename3 = Path.GetFileNameWithoutExtension(LImageFile.FileName);
+                        string extension3 = Path.GetExtension(LImageFile.FileName);
+                        filename3 = customerSuperAdmin.CustumerId + extension3;
+                        customerSuperAdmin.Logo = "/images/Logo/" + filename3;
+                        filename3 = Path.Combine(Server.MapPath("~/Images/Logo/"), filename3);
+                        LImageFile.SaveAs(filename3);
+                    }
+                    if (PPImageFile != null)
+                    {
+                        string fileName4 = PPImageFile.FileName;
+
+                        string filename4 = Path.GetFileNameWithoutExtension(PPImageFile.FileName);
+                        string extension4 = Path.GetExtension(PPImageFile.FileName);
+
+
+                        filename4 = customerSuperAdmin.CustumerId + extension4;
+                        customerSuperAdmin.PpsizePhoto = "/images/PPSizePhoto/" + filename4;
+                        filename4 = Path.Combine(Server.MapPath("~/Images/PPSizePhoto/"), filename4);
+                        PPImageFile.SaveAs(filename4);
+                    }
+                    //save new record in database
+
+                    string from = "dbugtest2016@gmail.com";
+                    string fromPassword = "my@test#";
+                    string password = Membership.GeneratePassword(6, 1);
+                    using (MailMessage mail = new MailMessage(from, customerSuperAdmin.email1))
+                    {
+
+                        try
+                        {
+
+
+
+                            mail.Subject = "Change Password";
+                            mail.Body = "Use this Password to login:" + password;
+
+                            mail.IsBodyHtml = false;
+                            SmtpClient smtp = new SmtpClient();
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.EnableSsl = true;
+                            smtp.UseDefaultCredentials = false;
+                            NetworkCredential networkCredential = new NetworkCredential(from, fromPassword);
+
+                            smtp.Credentials = networkCredential;
+                            smtp.Port = 587;
+                            smtp.Send(mail);
+
+                            login.Email = customerSuperAdmin.email1;
+                            login.randompass = password;
+                            login.Category = "Admin";
+                            db.Login.Add(login);
+                            db.Costumers.Add(customerSuperAdmin);
+
+                            db.SaveChanges();
+
+
+                        }
+                        catch
+                        {
+                            return RedirectToAction("errorpage");
+                        }
+
+                    }
+
+                    return RedirectToAction("Index");
+                }
             }
+            ModelState.AddModelError("", "Email already exists");
             return View();
            
 

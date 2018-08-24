@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201808230957570_init5.Designer.cs">
       <DependentUpon>201808230957570_init5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808231053398_rupak.cs" />
+    <Compile Include="Migrations\201808231053398_rupak.Designer.cs">
+      <DependentUpon>201808231053398_rupak.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminCostumers.cs" />
     <Compile Include="Models\CustomerSuperAdmin.cs" />
@@ -851,6 +855,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808230957570_init5.resx">
       <DependentUpon>201808230957570_init5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808231053398_rupak.resx">
+      <DependentUpon>201808231053398_rupak.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

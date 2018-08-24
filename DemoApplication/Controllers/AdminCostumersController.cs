@@ -58,6 +58,7 @@ namespace DemoApplication.Controllers
             if (ModelState.IsValid)
             {
                 adminCostumers.CreatedBy = Session["userEmail"].ToString();
+                
                 db.AdminCostumers.Add(adminCostumers);
                 db.SaveChanges();
                 //ReportDocument rd = new ReportDocument();
