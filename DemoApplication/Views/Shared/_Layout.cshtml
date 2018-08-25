@@ -254,14 +254,11 @@
                 </li>
                 <!-- /.dropdown -->
             </ul>
-            @*@if (Session["Category"].ToString() == "SuperAdmin")
-            {
-                @Html.Partial("_SuperAdminMenu")
-            }
-            else
-            {
-                @Html.Partial("_AdminMenu")
-            }*@
+            
+            
+                @RenderSection("Nav",required:false);
+             
+
 
         </nav>
         <div id="page-wrapper">

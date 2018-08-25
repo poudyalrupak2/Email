@@ -58,8 +58,8 @@ namespace DemoApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                var data = db.Login.Where(t => t.Email == customerSuperAdmin.email1);
-                if (data == null)
+                int data = db.Login.Where(t => t.Email == customerSuperAdmin.email1).Count();
+                if (data== 0)
                 {
                     HttpFileCollectionBase image = Request.Files;
                     if (CImageFile != null)

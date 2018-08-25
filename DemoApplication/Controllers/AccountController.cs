@@ -59,14 +59,39 @@ namespace Newspaper.Controllers
                     {
                         Session.Add("id", Admin.Id);
                         Session.Add("userEmail", Admin.Email);
+                        Session.Add("category", Admin.Category);
+                     
                         var objAdmin = _db.Login.FirstOrDefault(a => (a.Email == l.Email && a.Password == l.Password));
                         if (objAdmin.Category == "Admin")
                         {
+                         
+                            var catecory = _db.Costumers.Where(t => t.email1 == Admin.Email)
+                                .Select(t => t.CustomerType).FirstOrDefault();
+                            if (catecory == "Trading")
+                            {
+                                ViewBag.message = "Trading";
+                                return RedirectToAction("Index", "Trading");
+                            }
+                            if (catecory == "Food and Beverage")
+                            {
+                                ViewBag.message = "Food";
+                                return RedirectToAction("Index", "Food");
+                            }
+                            if (catecory == "Tour and Travels")
+                            {
+                                ViewBag.message = "Tour";
+                                return RedirectToAction("Index", "Index");
+                            }
+                            if (catecory == "Hotel")
+                            {
+                                ViewBag.message = "Hotel";
+                                return RedirectToAction("Index", "Hotel");
+                            }
                             return RedirectToAction("Index", "AdminCostumers");
                         }
                         else
                         {
-                            return RedirectToAction("Index","CustomerSuperAdmins");
+                            return RedirectToAction("Index", "CustomerSuperAdmins");
                         }
 
                       //  return RedirectToAction("Index", "CustomerSuperAdmins");

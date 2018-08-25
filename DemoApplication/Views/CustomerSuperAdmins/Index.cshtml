@@ -38,33 +38,33 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegisterDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerType)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegisterDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerType)
+                </td>
 
 
 
-            <td>
-                <img src=@item.Logo height="50" width="50">
-            </td>
-            <td>
-                <img src=@item.PpsizePhoto height="50" width="50">
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+                <td>
+                    <img src=@item.Logo height="50" width="50">
+                </td>
+                <td>
+                    <img src=@item.PpsizePhoto height="50" width="50">
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -101,12 +101,14 @@
             $("#mytable").DataTable({
                 "columnDefs": [
                     {
-                        "orderable": false, "targets": [4,5],
+                        "orderable": false, "targets": [4, 5],
 
 
                     }
                 ],
                 "pageLength": 50,
+                "bInfo": false,
+
                 'initComplete': function () {
                     var api = this.api();
 
@@ -135,4 +137,52 @@
         });
     </script>
 }
+@section Nav{
 
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("Index","Customer")"><i class="fa fa-users"></i> View Customer</a>
+
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","SalesMan")"><i class="fa fa-male"></i> View SalesMan</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Service")"><i class="fa fa-route"></i> View Services</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","AreaRegister")"><i class="fas fa-chart-area"></i> View Area Register</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("ActivityLog","DashBoard")"><i class="fa fa-user-secret"></i>Activity Log</a>
+
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+}
