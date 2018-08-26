@@ -13,39 +13,56 @@ using System.Web.UI.WebControls;
 using DemoApplication.Models;
 using DemoApplication.Models.DAL;
 using Newspaper.Filters;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace DemoApplication.Controllers
 {
-    
-    [SessionCheck]
+
+
+  
     public class CustomerSuperAdminsController : Controller
     {
         private DemoDbContext db = new DemoDbContext();
         // GET: CustomerSuperAdmins
         public ActionResult Index()
         {
-            return View(db.Costumers.ToList());
+            if (Session["ACategory"] == null)
+            {
+
+                return View(db.Costumers.ToList());
+            }
+            return new HttpNotFoundResult();
         }
 
         // GET: CustomerSuperAdmins/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["ACategory"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                CustomerSuperAdmin customerSuperAdmin = db.Costumers.Find(id);
+                if (customerSuperAdmin == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(customerSuperAdmin);
             }
-            CustomerSuperAdmin customerSuperAdmin = db.Costumers.Find(id);
-            if (customerSuperAdmin == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customerSuperAdmin);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
         // GET: CustomerSuperAdmins/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["ACategory"] == null)
+            {
+                return View();
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+
         }
 
         // POST: CustomerSuperAdmins/Create
@@ -163,16 +180,21 @@ namespace DemoApplication.Controllers
         // GET: CustomerSuperAdmins/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["ACategory"] == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                CustomerSuperAdmin customerSuperAdmin = db.Costumers.Find(id);
+                if (customerSuperAdmin == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(customerSuperAdmin);
             }
-            CustomerSuperAdmin customerSuperAdmin = db.Costumers.Find(id);
-            if (customerSuperAdmin == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customerSuperAdmin);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
         }
 
         // POST: CustomerSuperAdmins/Edit/5

@@ -14,6 +14,11 @@ namespace DemoApplication.Models
         public int Id { get; set; }
         [Required(ErrorMessage ="Please enter name")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Please enter NationalId number ")]
+        public string NationalIdType { get; set; }
+        [Required(ErrorMessage = "Please enter NationalId number ")]
+        public string NationalIdNo { get; set; }
+
         [Required(ErrorMessage = "Please enter Date")]
         [Column(TypeName = "Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]

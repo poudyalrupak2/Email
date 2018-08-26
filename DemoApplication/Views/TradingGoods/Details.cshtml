@@ -1,0 +1,122 @@
+﻿@model DemoApplication.Models.TradingGoods
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TradingGoods</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GoodId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoodId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoodName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoodName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortDetail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortDetail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LongDetail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LongDetail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thumbail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thumbail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WholesaleRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WholesaleRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoupenCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoupenCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EditedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EditedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EditedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EditedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

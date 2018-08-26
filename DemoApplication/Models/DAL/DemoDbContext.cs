@@ -14,6 +14,8 @@ namespace DemoApplication.Models.DAL
         public DbSet<CustomerSuperAdmin> Costumers { get; set; }
         public DbSet<Login> Login { get; set; }
         public DbSet<AdminCostumers> AdminCostumers { get; set; }
+        public DbSet<TradingGoods> TradingGoods { get; set; }
+        public DbSet<Image> Images { get; set; }
 
     }
 }

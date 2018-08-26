@@ -34,7 +34,7 @@ namespace Newspaper.Controllers
         [HttpPost]
 
         public ActionResult Login(DemoApplication.Models.Login l, string ReturnUrl = "")
-        {
+         {
 
 
             var Admin = _db.Login.FirstOrDefault(a => (a.Email ==l.Email));
@@ -60,17 +60,18 @@ namespace Newspaper.Controllers
                         Session.Add("id", Admin.Id);
                         Session.Add("userEmail", Admin.Email);
                         Session.Add("category", Admin.Category);
-                     
+                    
                         var objAdmin = _db.Login.FirstOrDefault(a => (a.Email == l.Email && a.Password == l.Password));
                         if (objAdmin.Category == "Admin")
                         {
                          
                             var catecory = _db.Costumers.Where(t => t.email1 == Admin.Email)
                                 .Select(t => t.CustomerType).FirstOrDefault();
+                            Session.Add("ACategory", catecory);
                             if (catecory == "Trading")
                             {
                                 ViewBag.message = "Trading";
-                                return RedirectToAction("Index", "Trading");
+                                return RedirectToAction("Index", "TradingGoods");
                             }
                             if (catecory == "Food and Beverage")
                             {

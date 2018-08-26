@@ -180,6 +180,7 @@
     <Compile Include="Controllers\AdminCostumersController.cs" />
     <Compile Include="Controllers\CustomerSuperAdminsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TradingGoodsController.cs" />
     <Compile Include="CrystalReport2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -190,38 +191,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808200740485_init.cs" />
-    <Compile Include="Migrations\201808200740485_init.Designer.cs">
-      <DependentUpon>201808200740485_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808210929008_init1.cs" />
-    <Compile Include="Migrations\201808210929008_init1.Designer.cs">
-      <DependentUpon>201808210929008_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808220615081_init2.cs" />
-    <Compile Include="Migrations\201808220615081_init2.Designer.cs">
-      <DependentUpon>201808220615081_init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808220729099_init3.cs" />
-    <Compile Include="Migrations\201808220729099_init3.Designer.cs">
-      <DependentUpon>201808220729099_init3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808230756318_init4.cs" />
-    <Compile Include="Migrations\201808230756318_init4.Designer.cs">
-      <DependentUpon>201808230756318_init4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808230957570_init5.cs" />
-    <Compile Include="Migrations\201808230957570_init5.Designer.cs">
-      <DependentUpon>201808230957570_init5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808231053398_rupak.cs" />
-    <Compile Include="Migrations\201808231053398_rupak.Designer.cs">
-      <DependentUpon>201808231053398_rupak.cs</DependentUpon>
+    <Compile Include="Migrations\201808261215154_init.cs" />
+    <Compile Include="Migrations\201808261215154_init.Designer.cs">
+      <DependentUpon>201808261215154_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminCostumers.cs" />
     <Compile Include="Models\CustomerSuperAdmin.cs" />
     <Compile Include="Models\DAL\DemoDbContext.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\TradingGoods.cs" />
     <Compile Include="Models\ViewModels\PasswordConform.cs" />
@@ -797,7 +775,6 @@
     <Content Include="Views\CustomerSuperAdmins\Index.cshtml" />
     <Content Include="Views\Account\conformation.cshtml" />
     <Content Include="Views\Account\errorpage.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgetPassword.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -805,9 +782,7 @@
     <Content Include="Views\Account\NewPassword.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\AdminCostumers\Create.cshtml" />
     <Content Include="Views\AdminCostumers\Delete.cshtml" />
@@ -815,6 +790,11 @@
     <Content Include="Views\AdminCostumers\Edit.cshtml" />
     <Content Include="Views\AdminCostumers\Index.cshtml" />
     <Content Include="Views\Shared\_SuperAdminMenu.cshtml" />
+    <Content Include="Views\TradingGoods\Create.cshtml" />
+    <Content Include="Views\TradingGoods\Delete.cshtml" />
+    <Content Include="Views\TradingGoods\Details.cshtml" />
+    <Content Include="Views\TradingGoods\Edit.cshtml" />
+    <Content Include="Views\TradingGoods\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -822,6 +802,8 @@
     <Folder Include="images\CompanyDocument\" />
     <Folder Include="images\Logo\" />
     <Folder Include="images\PPSizePhoto\" />
+    <Folder Include="images\Thumbail\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -840,26 +822,8 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808200740485_init.resx">
-      <DependentUpon>201808200740485_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808210929008_init1.resx">
-      <DependentUpon>201808210929008_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808220615081_init2.resx">
-      <DependentUpon>201808220615081_init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808220729099_init3.resx">
-      <DependentUpon>201808220729099_init3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808230756318_init4.resx">
-      <DependentUpon>201808230756318_init4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808230957570_init5.resx">
-      <DependentUpon>201808230957570_init5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808231053398_rupak.resx">
-      <DependentUpon>201808231053398_rupak.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808261215154_init.resx">
+      <DependentUpon>201808261215154_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
