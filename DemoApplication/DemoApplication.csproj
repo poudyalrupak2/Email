@@ -191,9 +191,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808261215154_init.cs" />
-    <Compile Include="Migrations\201808261215154_init.Designer.cs">
-      <DependentUpon>201808261215154_init.cs</DependentUpon>
+    <Compile Include="Migrations\201808261501430_init.cs" />
+    <Compile Include="Migrations\201808261501430_init.Designer.cs">
+      <DependentUpon>201808261501430_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808261548591_init1.cs" />
+    <Compile Include="Migrations\201808261548591_init1.Designer.cs">
+      <DependentUpon>201808261548591_init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdminCostumers.cs" />
@@ -822,8 +826,11 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808261215154_init.resx">
-      <DependentUpon>201808261215154_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808261501430_init.resx">
+      <DependentUpon>201808261501430_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808261548591_init1.resx">
+      <DependentUpon>201808261548591_init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

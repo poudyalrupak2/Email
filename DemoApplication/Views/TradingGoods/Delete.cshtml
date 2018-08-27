@@ -110,7 +110,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
@@ -119,3 +120,47 @@
         </div>
     }
 </div>
+@section Nav{
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("Index","TradingGoods")"><i class="fa fa-users"></i> Create Goods</a>
+
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Costumer")"><i class="fa fa-male"></i>Create Costumer</a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("ActivityLog","DashBoard")"><i class="fa fa-user-secret"></i>Activity Log</a>
+
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+}

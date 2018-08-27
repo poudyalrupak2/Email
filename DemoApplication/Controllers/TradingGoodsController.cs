@@ -63,21 +63,23 @@ namespace DemoApplication.Controllers
                             var fileName = Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName));
 
 
-                           
-                            Image image = new Image()
-                            {
-                                ImageName = fileName,
-                                Path = Path.GetExtension(fileName),
 
+                        Image image = new Image()
+                        {
+                            ImageName = fileName,
+                            Path = Path.GetExtension(fileName),
+                            ImageId = Guid.NewGuid()
                             };
                             fileDetails.Add(image);
                         file.SaveAs(Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName)));
-                    }
-                    }
 
-                  
-                   
-                    tradingGoods.Image = fileDetails;
+                    }
+                    }
+                tradingGoods.Image = fileDetails;
+
+
+
+
                 if (TImage != null)
                 {
                     string fileName3 = TImage.FileName;
@@ -135,6 +137,7 @@ namespace DemoApplication.Controllers
                         {
                             string imagename = images.ImageName.ToString();
                             System.IO.File.Delete(imagename);
+
                             db.Database.ExecuteSqlCommand("delete from Images where ImageName='" + imagename + "'");
 
                         }
@@ -159,7 +162,7 @@ namespace DemoApplication.Controllers
                                 TradingGoodsId = tradingGoods.Id
                             };
                             fileDetails.Add(image);
-                            file.SaveAs(Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName)));
+                            file.SaveAs(fileName);
                             db.Entry(image).State = EntityState.Added;
                         }
                     }

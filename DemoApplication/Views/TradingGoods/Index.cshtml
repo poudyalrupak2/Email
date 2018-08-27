@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.GoodId)
@@ -17,36 +17,16 @@
         <th>
             @Html.DisplayNameFor(model => model.GoodName)
         </th>
+      
         <th>
-            @Html.DisplayNameFor(model => model.ShortDetail)
+           Thumbnail
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LongDetail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Thumbail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WholesaleRate)
-        </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CoupenCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EditedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EditedDate)
-        </th>
+        
+      
 
         <th></th>
     </tr>
@@ -60,37 +40,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.GoodName)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.ShortDetail)
+              <img src=@item.Thumbail height="100" width="100" />
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LongDetail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Thumbail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WholesaleRate)
-            </td>
+         
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoupenCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EditedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EditedDate)
-            </td>
-    
+           
+           
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
@@ -100,6 +59,7 @@
     }
 
 </table>
+
 @section Nav{
 
     <div class="navbar-default sidebar" role="navigation">
@@ -121,19 +81,14 @@
                 </li>
 
                 <li>
-                    <a href="@Url.Action("Index","Customer")"><i class="fa fa-users"></i> View Customer</a>
+                    <a href="@Url.Action("Index","TradingGoods")"><i class="fa fa-users"></i> Create Goods</a>
 
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="@Url.Action("Index","SalesMan")"><i class="fa fa-male"></i> View SalesMan</a>
+                    <a href="@Url.Action("Index","Costumer")"><i class="fa fa-male"></i>Create Costumer</a>
                 </li>
-                <li>
-                    <a href="@Url.Action("Index","Service")"><i class="fa fa-route"></i> View Services</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","AreaRegister")"><i class="fas fa-chart-area"></i> View Area Register</a>
-                </li>
+              
                 <li>
                     <a href="@Url.Action("ActivityLog","DashBoard")"><i class="fa fa-user-secret"></i>Activity Log</a>
 

@@ -8,7 +8,7 @@ namespace DemoApplication.Models
 {
     public class Image
     {
-        public int ImageId { get; set; }
+        public Guid ImageId { get; set; }
         [NotMapped]
         public IEnumerable<HttpPostedFile> Img { get; set; }
         public string ImageName { get; set; }
