@@ -14,35 +14,62 @@ using Newspaper.Filters;
 namespace DemoApplication.Controllers
 {
     [SessionCheck]
+
     public class TradingGoodsController : Controller
     {
         private DemoDbContext db = new DemoDbContext();
 
         // GET: TradingGoods
+        [OutputCache(Duration = 60, VaryByParam = "Id")]
+
         public ActionResult Index()
         {
-            return View(db.TradingGoods.Include(t=>t.Image).ToList());
+            if (Session["ACategory"] != null)
+            {
+                if (Session["ACategory"].ToString() == "Trading")
+                {
+                    return View(db.TradingGoods.Include(t => t.Image).ToList());
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
         }
 
         // GET: TradingGoods/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (Session["ACategory"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    TradingGoods TradingGoods = db.TradingGoods.Find(id);
+                    if (TradingGoods == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(TradingGoods);
+                }
             }
-            TradingGoods tradingGoods = db.TradingGoods.Find(id);
-            if (tradingGoods == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tradingGoods);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
         }
 
         // GET: TradingGoods/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["ACategory"] != null)
+            {
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    return View();
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
         }
 
         // POST: TradingGoods/Create
@@ -50,7 +77,7 @@ namespace DemoApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(TradingGoods tradingGoods,HttpPostedFileBase TImage,ICollection<HttpPostedFileBase> AImage)//[Bind(Include = "Id,GoodId,Name,ShortDetail,LongDetail,Thumbail,WholesaleRate,Quantity,CoupenCode,CreatedDate,CreatedBy,EditedBy,EditedDate,Imag )
+        public ActionResult Create(TradingGoods TradingGoods,HttpPostedFileBase TImage,ICollection<HttpPostedFileBase> AImage)//[Bind(Include = "Id,GoodId,Name,ShortDetail,LongDetail,Thumbail,WholesaleRate,Quantity,CoupenCode,CreatedDate,CreatedBy,EditedBy,EditedDate,Imag )
         {
             if (ModelState.IsValid)
             {
@@ -62,20 +89,18 @@ namespace DemoApplication.Controllers
                         {
                             var fileName = Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName));
 
-
-
-                        Image image = new Image()
+                       Image image = new Image()
                         {
-                            ImageName = fileName,
+                            ImageName = "/Uploads/Trading"+Path.GetFileName(fileName),
                             Path = Path.GetExtension(fileName),
-                            ImageId = Guid.NewGuid()
+                           
                             };
                             fileDetails.Add(image);
-                        file.SaveAs(Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName)));
+                        file.SaveAs(fileName);
 
                     }
                     }
-                tradingGoods.Image = fileDetails;
+                TradingGoods.Image = fileDetails;
 
 
 
@@ -86,48 +111,55 @@ namespace DemoApplication.Controllers
 
                     string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);
                     string extension3 = Path.GetExtension(TImage.FileName);
-                    filename3 = tradingGoods.GoodId + extension3;
-                    tradingGoods.Thumbail = "/images/Thumbail/" + filename3;
-                    filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/"), filename3);
+                    filename3 = TradingGoods.Id + extension3;
+                    TradingGoods.Thumbail = "/images/Thumbail/Trading/" + filename3;
+                    filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/Trading/"), filename3);
                    TImage.SaveAs(filename3);
                 }
-
-                db.TradingGoods.Add(tradingGoods);
+                TradingGoods.CreatedBy = Session["userEmail"].ToString();
+                TradingGoods.CreatedDate = DateTime.Now;
+                db.TradingGoods.Add(TradingGoods);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                   
             }
 
-            return View(tradingGoods);
+            return View(TradingGoods);
         }
 
         // GET: TradingGoods/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["ACategory"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    TradingGoods TradingGoods = db.TradingGoods.Include(s => s.Image).SingleOrDefault(x => x.Id == id);
+                    if (TradingGoods == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(TradingGoods);
+                }
             }
-            TradingGoods tradingGoods = db.TradingGoods.Include(s => s.Image).SingleOrDefault(x => x.Id == id);
-            if (tradingGoods == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tradingGoods);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-
         // POST: TradingGoods/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( TradingGoods tradingGoods, HttpPostedFileBase TImage, ICollection<HttpPostedFileBase> AImage)
+        public ActionResult Edit( TradingGoods TradingGoods, HttpPostedFileBase TImage, ICollection<HttpPostedFileBase> AImage)
         {
             if (ModelState.IsValid)
             {
 
-                var model = db.TradingGoods.Include(t => t.Image).SingleOrDefault(x => x.Id == tradingGoods.Id);
-
+                var model = db.TradingGoods.Include(t => t.Image).SingleOrDefault(x => x.Id == TradingGoods.Id);
+                string thumbail = db.TradingGoods.Include(t=>t.Image).Where(x => x.Id == TradingGoods.Id).Select(x => x.Thumbail).SingleOrDefault();
                 try
                 {
 
@@ -136,7 +168,9 @@ namespace DemoApplication.Controllers
                         foreach (var images in model.Image)
                         {
                             string imagename = images.ImageName.ToString();
-                            System.IO.File.Delete(imagename);
+                            var fileName = Path.Combine(Server.MapPath("/uploads/Trading/"),Path.GetFileName(imagename));
+
+                            System.IO.File.Delete(fileName);
 
                             db.Database.ExecuteSqlCommand("delete from Images where ImageName='" + imagename + "'");
 
@@ -154,66 +188,84 @@ namespace DemoApplication.Controllers
                     {
                         if (file != null && file.ContentLength > 0)
                         {
-                            var fileName = Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName));
+                            var fileName = Path.Combine(Server.MapPath("/uploads/Trading/"), Guid.NewGuid() + Path.GetExtension(file.FileName));
                             Image image = new Image()
                             {
-                                ImageName = fileName,
+                                ImageName = "/Uploads/Trading/" + Path.GetFileName(fileName),
                                 Path = Path.GetExtension(fileName),
-                                TradingGoodsId = tradingGoods.Id
+                                TradingGoodsId = TradingGoods.Id,
+
                             };
                             fileDetails.Add(image);
                             file.SaveAs(fileName);
                             db.Entry(image).State = EntityState.Added;
                         }
                     }
-                    db.SaveChanges();
 
-                    if (TImage != null)
+                 
+                        if (TImage != null)
+                        {
+                            string fileName3 = TImage.FileName;
+
+                            string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);
+                            string extension3 = Path.GetExtension(TImage.FileName);
+                            filename3 = TradingGoods.Id + extension3;
+                            TradingGoods.Thumbail = "/images/Thumbail/Trading/" + filename3;
+                            filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/Trading/"), filename3);
+                            TImage.SaveAs(filename3);
+
+
+                        }
+                        else
                     {
-                        string fileName3 = TImage.FileName;
-
-                        string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);
-                        string extension3 = Path.GetExtension(TImage.FileName);
-                        filename3 = tradingGoods.GoodId + extension3;
-                        tradingGoods.Thumbail = "/images/Thumbail/" + filename3;
-                        filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/"), filename3);
-                        TImage.SaveAs(filename3);
+                        TradingGoods.Thumbail = thumbail;
+                    }
+                        db.SaveChanges();
+                        // TradingGoods.Image = fileDetails;
+                        var objTradingGoods = db.TradingGoods.SingleOrDefault(m => m.Id == TradingGoods.Id);
+                        objTradingGoods.GoodId = TradingGoods.GoodId;
+                        objTradingGoods.CoupenCode = TradingGoods.CoupenCode;
+                        objTradingGoods.GoodName = TradingGoods.GoodName;
+                        objTradingGoods.LongDetail = TradingGoods.LongDetail;
+                        objTradingGoods.Quantity = TradingGoods.Quantity;
+                        objTradingGoods.ShortDetail = TradingGoods.ShortDetail;
+                        objTradingGoods.Thumbail = TradingGoods.Thumbail;
+                        objTradingGoods.WholesaleRate = TradingGoods.WholesaleRate;
+                        objTradingGoods.EditedBy = Session["userEmail"].ToString();
+                        objTradingGoods.EditedDate = DateTime.Now;
+                        //objTradingGoods.Image = fileDetails;//
+                        // db.Entry(TradingGoods).State = EntityState.Modified;
+                        db.Entry(objTradingGoods).Property(x => x.Thumbail).IsModified = true;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                  
                     }
 
-                    // tradingGoods.Image = fileDetails;
-                    var objtradingGoods = db.TradingGoods.SingleOrDefault(m => m.Id == tradingGoods.Id);
-                    objtradingGoods.GoodId = tradingGoods.GoodId;
-                    objtradingGoods.CoupenCode = tradingGoods.CoupenCode;
-                    objtradingGoods.GoodName = tradingGoods.GoodName;
-                    objtradingGoods.LongDetail = tradingGoods.LongDetail;
-                    objtradingGoods.Quantity = tradingGoods.Quantity;
-                    objtradingGoods.ShortDetail = tradingGoods.ShortDetail;
-                    objtradingGoods.Thumbail = tradingGoods.Thumbail;
-                    objtradingGoods.WholesaleRate = tradingGoods.WholesaleRate;
-
-                    //objtradingGoods.Image = fileDetails;//
-                    // db.Entry(tradingGoods).State = EntityState.Modified;
-
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
             }
-            return View(tradingGoods);
+            return View(TradingGoods);
         }
 
         // GET: TradingGoods/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["ACategory"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    TradingGoods TradingGoods = db.TradingGoods.Find(id);
+                    if (TradingGoods == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(TradingGoods);
+                }
             }
-            TradingGoods tradingGoods = db.TradingGoods.Find(id);
-            if (tradingGoods == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tradingGoods);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
         }
 
         // POST: TradingGoods/Delete/5
@@ -221,12 +273,63 @@ namespace DemoApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TradingGoods tradingGoods = db.TradingGoods.Find(id);
-            db.TradingGoods.Remove(tradingGoods);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            TradingGoods TradingGoods = db.TradingGoods.Find(id);
+            var model = db.TradingGoods.Include(t => t.Image).SingleOrDefault(x => x.Id == TradingGoods.Id);
+            foreach (var images in model.Image)
+            {
+                string imagename = images.ImageName.ToString();
+                var fileName = Path.Combine(Server.MapPath("/uploads/Trading"), Path.GetFileName(imagename));
 
+                System.IO.File.Delete(fileName);
+
+              //  db.Database.ExecuteSqlCommand("delete from Images where ImageName='" + imagename + "'");
+
+            }
+            try
+            {
+                var fileName1 = Path.Combine(Server.MapPath("~/Images/Thumbail/Trading/"), Path.GetFileName(TradingGoods.Thumbail));
+                System.IO.File.Delete(fileName1);
+                db.TradingGoods.Remove(TradingGoods);
+
+                db.SaveChanges();
+            }
+            catch
+            {
+                db.TradingGoods.Remove(TradingGoods);
+
+                db.SaveChanges();
+
+            }
+            return RedirectToAction("Index");
+
+        }
+        public ActionResult ImageViewer(int? id)
+        {
+            if (Session["ACategory"] != null)
+            {
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    var image = db.Images.Where(s => s.TradingGoodsId == id).ToList();
+                    if (image == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(image);
+                }
+            }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            
+        }
+        public ActionResult ActivityLog()
+        {
+            var count = db.ActivityLogs.OrderByDescending(u => u.Id);
+            return View(count.ToList());
+
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -235,5 +338,7 @@ namespace DemoApplication.Controllers
             }
             base.Dispose(disposing);
         }
+    
     }
 }
+

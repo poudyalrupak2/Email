@@ -177,9 +177,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminCostumersController.cs" />
+    <Compile Include="Controllers\customersController.cs" />
     <Compile Include="Controllers\CustomerSuperAdminsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PackagesController.cs" />
     <Compile Include="Controllers\TradingGoodsController.cs" />
     <Compile Include="CrystalReport2.cs">
       <AutoGen>True</AutoGen>
@@ -191,20 +192,55 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808261501430_init.cs" />
-    <Compile Include="Migrations\201808261501430_init.Designer.cs">
-      <DependentUpon>201808261501430_init.cs</DependentUpon>
+    <Compile Include="Migrations\201808271446244_init.cs" />
+    <Compile Include="Migrations\201808271446244_init.Designer.cs">
+      <DependentUpon>201808271446244_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808261548591_init1.cs" />
-    <Compile Include="Migrations\201808261548591_init1.Designer.cs">
-      <DependentUpon>201808261548591_init1.cs</DependentUpon>
+    <Compile Include="Migrations\201808280537532_init1.cs" />
+    <Compile Include="Migrations\201808280537532_init1.Designer.cs">
+      <DependentUpon>201808280537532_init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280615299_init2.cs" />
+    <Compile Include="Migrations\201808280615299_init2.Designer.cs">
+      <DependentUpon>201808280615299_init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280735387_init3.cs" />
+    <Compile Include="Migrations\201808280735387_init3.Designer.cs">
+      <DependentUpon>201808280735387_init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280830403_init4.cs" />
+    <Compile Include="Migrations\201808280830403_init4.Designer.cs">
+      <DependentUpon>201808280830403_init4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808290738032_init5.cs" />
+    <Compile Include="Migrations\201808290738032_init5.Designer.cs">
+      <DependentUpon>201808290738032_init5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808290945327_init6.cs" />
+    <Compile Include="Migrations\201808290945327_init6.Designer.cs">
+      <DependentUpon>201808290945327_init6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808291043246_init7.cs" />
+    <Compile Include="Migrations\201808291043246_init7.Designer.cs">
+      <DependentUpon>201808291043246_init7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808291109046_init8.cs" />
+    <Compile Include="Migrations\201808291109046_init8.Designer.cs">
+      <DependentUpon>201808291109046_init8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808300536130_init9.cs" />
+    <Compile Include="Migrations\201808300536130_init9.Designer.cs">
+      <DependentUpon>201808300536130_init9.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AdminCostumers.cs" />
+    <Compile Include="Models\ActivityLog.cs" />
+    <Compile Include="Models\customer.cs" />
     <Compile Include="Models\CustomerSuperAdmin.cs" />
     <Compile Include="Models\DAL\DemoDbContext.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Package.cs" />
+    <Compile Include="Models\PImage.cs" />
     <Compile Include="Models\TradingGoods.cs" />
     <Compile Include="Models\ViewModels\PasswordConform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -454,13 +490,18 @@
     <Content Include="Content\DataTables\images\sort_both.png" />
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\style.css" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\Sticky.css" />
+    <Content Include="css\demo.css" />
     <Content Include="css\jquery-ui.css" />
     <Content Include="css\theme.css" />
+    <Content Include="ErrorPage.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\banner2.jpg" />
+    <Content Include="Scripts\bjqs-1.3.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -468,6 +509,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\demo.css" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -712,6 +754,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1\jquery-ui.theme.min.css" />
     <Content Include="Scripts\jquery-ui-1.12.1\LICENSE.txt" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.secret-source.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -788,17 +831,27 @@
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
-    <Content Include="Views\AdminCostumers\Create.cshtml" />
-    <Content Include="Views\AdminCostumers\Delete.cshtml" />
-    <Content Include="Views\AdminCostumers\Details.cshtml" />
-    <Content Include="Views\AdminCostumers\Edit.cshtml" />
-    <Content Include="Views\AdminCostumers\Index.cshtml" />
     <Content Include="Views\Shared\_SuperAdminMenu.cshtml" />
     <Content Include="Views\TradingGoods\Create.cshtml" />
     <Content Include="Views\TradingGoods\Delete.cshtml" />
     <Content Include="Views\TradingGoods\Details.cshtml" />
     <Content Include="Views\TradingGoods\Edit.cshtml" />
     <Content Include="Views\TradingGoods\Index.cshtml" />
+    <Content Include="Views\TradingGoods\ImageViewer.cshtml" />
+    <Content Include="Views\customers\Create.cshtml" />
+    <Content Include="Views\customers\Delete.cshtml" />
+    <Content Include="Views\customers\Details.cshtml" />
+    <Content Include="Views\customers\Edit.cshtml" />
+    <Content Include="Views\customers\Index.cshtml" />
+    <Content Include="Views\Account\ActivityLog.cshtml" />
+    <Content Include="Views\TradingGoods\ActivityLog.cshtml" />
+    <Content Include="Views\Shared\_LayoutTravels.cshtml" />
+    <Content Include="Views\Packages\Create.cshtml" />
+    <Content Include="Views\Packages\Delete.cshtml" />
+    <Content Include="Views\Packages\Details.cshtml" />
+    <Content Include="Views\Packages\Edit.cshtml" />
+    <Content Include="Views\Packages\Index.cshtml" />
+    <Content Include="Views\CustomerSuperAdmins\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -806,8 +859,10 @@
     <Folder Include="images\CompanyDocument\" />
     <Folder Include="images\Logo\" />
     <Folder Include="images\PPSizePhoto\" />
-    <Folder Include="images\Thumbail\" />
-    <Folder Include="Uploads\" />
+    <Folder Include="images\Thumbail\Package\" />
+    <Folder Include="images\Thumbail\Trading\" />
+    <Folder Include="Uploads\PImage\" />
+    <Folder Include="Uploads\Trading\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -826,11 +881,35 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808261501430_init.resx">
-      <DependentUpon>201808261501430_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808271446244_init.resx">
+      <DependentUpon>201808271446244_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808261548591_init1.resx">
-      <DependentUpon>201808261548591_init1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808280537532_init1.resx">
+      <DependentUpon>201808280537532_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280615299_init2.resx">
+      <DependentUpon>201808280615299_init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280735387_init3.resx">
+      <DependentUpon>201808280735387_init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280830403_init4.resx">
+      <DependentUpon>201808280830403_init4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808290738032_init5.resx">
+      <DependentUpon>201808290738032_init5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808290945327_init6.resx">
+      <DependentUpon>201808290945327_init6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808291043246_init7.resx">
+      <DependentUpon>201808291043246_init7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808291109046_init8.resx">
+      <DependentUpon>201808291109046_init8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808300536130_init9.resx">
+      <DependentUpon>201808300536130_init9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

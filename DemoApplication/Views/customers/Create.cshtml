@@ -1,0 +1,189 @@
+﻿@model DemoApplication.Models.customer
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Firstname, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.Firstname, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Middlename, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.Middlename, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Middlename, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.DOB, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.DOB, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.email1, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.email1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.email1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 col-mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.email2, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.email2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.email2, "", new { @class = "text-danger" })
+                <br />
+            </div>
+        </div>
+        <div class="col-md-4 col-mb-3">
+
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.phone, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.phone2, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.phone2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.phone2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.NationalIdNo, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.NationalIdNo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NationalIdNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.tole, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.tole, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.tole, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.homeno, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.homeno, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.homeno, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.State, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.State, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Country, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.Country, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ZipCode, new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(model => model.ZipCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="col-md-4 mb-3">
+    <div class="form-group">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+@section Nav{
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("Index","TradingGoods")"><i class="fa fa-users"></i> Create Goods</a>
+
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Customers")"><i class="fa fa-male"></i>Create Costumer</a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("ActivityLog","TradingGoods")"><i class="fa fa-user-secret"></i>Activity Log</a>
+
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+}

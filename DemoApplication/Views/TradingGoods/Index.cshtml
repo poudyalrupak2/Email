@@ -53,7 +53,8 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
+                @Html.ActionLink("View Image", "ImageViewer", new { id = item.Id })
             </td>
         </tr>
     }
@@ -86,7 +87,7 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="@Url.Action("Index","Costumer")"><i class="fa fa-male"></i>Create Costumer</a>
+                    <a href="@Url.Action("Index","Customers")"><i class="fa fa-male"></i>Create Costumer</a>
                 </li>
               
                 <li>

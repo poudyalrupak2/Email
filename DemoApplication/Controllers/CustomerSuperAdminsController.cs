@@ -19,11 +19,13 @@ namespace DemoApplication.Controllers
 {
 
 
-  
+    [SessionCheck]
     public class CustomerSuperAdminsController : Controller
     {
         private DemoDbContext db = new DemoDbContext();
         // GET: CustomerSuperAdmins
+        [OutputCache(Duration = 60, VaryByParam = "Id")]
+
         public ActionResult Index()
         {
             if (Session["ACategory"] == null)
@@ -163,7 +165,7 @@ namespace DemoApplication.Controllers
                         }
                         catch
                         {
-                            return RedirectToAction("errorpage");
+                            return RedirectToAction("Error");
                         }
 
                     }
@@ -319,6 +321,10 @@ namespace DemoApplication.Controllers
             {
                 return true;
             }
+        }
+        public ActionResult Error()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)

@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace DemoApplication.Controllers
 {
+    [OutputCache(Duration = 60, VaryByParam = "Id")]
+
     public class HomeController : Controller
     {
         public ActionResult Index()

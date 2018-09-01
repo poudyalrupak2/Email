@@ -16,10 +16,10 @@ using Newspaper.Models.ViewModels;
 
 namespace Newspaper.Controllers
 {
-    
     public class AccountController : Controller
     {
         DemoDbContext _db = new DemoDbContext();
+
         public ActionResult Index()
         {
             return View();
@@ -78,17 +78,17 @@ namespace Newspaper.Controllers
                                 ViewBag.message = "Food";
                                 return RedirectToAction("Index", "Food");
                             }
-                            if (catecory == "Tour and Travels")
+                            if (catecory == "Tour and Travel")
                             {
                                 ViewBag.message = "Tour";
-                                return RedirectToAction("Index", "Index");
+                                return RedirectToAction("Index", "Packages");
                             }
                             if (catecory == "Hotel")
                             {
                                 ViewBag.message = "Hotel";
                                 return RedirectToAction("Index", "Hotel");
                             }
-                            return RedirectToAction("Index", "AdminCostumers");
+                          
                         }
                         else
                         {
@@ -303,57 +303,64 @@ namespace Newspaper.Controllers
             Session.Abandon();
             return RedirectToAction("Login");
         }
+        public ActionResult ActivityLog()
+        {
+            var count = _db.ActivityLogs.OrderByDescending(u => u.Id);
+            return View(count.ToList());
 
-        //    }
-        //}
-
-
-
-        ////[NonAction]
-        ////public void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
-        ////{
-        ////    var verifyUrl = "/User/" + emailFor + "/" + activationCode;
-        ////    var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
-
-        ////    var fromEmail = new MailAddress("dotnetawesome@gmail.com", "Dotnet Awesome");
-        ////    var toEmail = new MailAddress(emailID);
-        ////    var fromEmailPassword = "******"; // Replace with actual password
-
-        ////    string subject = "";
-        ////    string body = "";
-        ////    if (emailFor == "VerifyAccount")
-        ////    {
-        ////        subject = "Your account is successfully created!";
-        ////        body = "<br/><br/>We are excited to tell you that your Dotnet Awesome account is" +
-        ////            " successfully created. Please click on the below link to verify your account" +
-        ////            " <br/><br/><a href='" + link + "'>" + link + "</a> ";
-        ////    }
-        ////    else if (emailFor == "ResetPassword")
-        ////    {
-        ////        subject = "Reset Password";
-        ////        body = "Hi,<br/>br/>We got request for reset your account password. Please click on the below link to reset your password" +
-        ////            "<br/><br/><a href=" + link + ">Reset Password link</a>";
-        ////    }
-
-
-        ////    var smtp = new SmtpClient
-        ////    {
-        ////        Host = "smtp.gmail.com",
-        ////        Port = 587,
-        ////        EnableSsl = true,
-        ////        DeliveryMethod = SmtpDeliveryMethod.Network,
-        ////        UseDefaultCredentials = false,
-        ////        Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
-        ////    };
-
-        ////    using (var message = new MailMessage(fromEmail, toEmail)
-        ////    {
-        ////        Subject = subject,
-        ////        Body = body,
-        ////        IsBodyHtml = true
-        ////    })
-        ////        smtp.Send(message);
-        ////}
+        }
     }
+
+    //    }
+    //}
+
+
+
+    ////[NonAction]
+    ////public void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
+    ////{
+    ////    var verifyUrl = "/User/" + emailFor + "/" + activationCode;
+    ////    var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+
+    ////    var fromEmail = new MailAddress("dotnetawesome@gmail.com", "Dotnet Awesome");
+    ////    var toEmail = new MailAddress(emailID);
+    ////    var fromEmailPassword = "******"; // Replace with actual password
+
+    ////    string subject = "";
+    ////    string body = "";
+    ////    if (emailFor == "VerifyAccount")
+    ////    {
+    ////        subject = "Your account is successfully created!";
+    ////        body = "<br/><br/>We are excited to tell you that your Dotnet Awesome account is" +
+    ////            " successfully created. Please click on the below link to verify your account" +
+    ////            " <br/><br/><a href='" + link + "'>" + link + "</a> ";
+    ////    }
+    ////    else if (emailFor == "ResetPassword")
+    ////    {
+    ////        subject = "Reset Password";
+    ////        body = "Hi,<br/>br/>We got request for reset your account password. Please click on the below link to reset your password" +
+    ////            "<br/><br/><a href=" + link + ">Reset Password link</a>";
+    ////    }
+
+
+    ////    var smtp = new SmtpClient
+    ////    {
+    ////        Host = "smtp.gmail.com",
+    ////        Port = 587,
+    ////        EnableSsl = true,
+    ////        DeliveryMethod = SmtpDeliveryMethod.Network,
+    ////        UseDefaultCredentials = false,
+    ////        Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+    ////    };
+
+    ////    using (var message = new MailMessage(fromEmail, toEmail)
+    ////    {
+    ////        Subject = subject,
+    ////        Body = body,
+    ////        IsBodyHtml = true
+    ////    })
+    ////        smtp.Send(message);
+    ////}
 }
+
 
