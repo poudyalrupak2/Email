@@ -1,132 +1,138 @@
 ﻿@model DemoApplication.Models.TradingGoods
 
 @{
-    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
+
 }
 
-<h2>Edit</h2>
 
 @using (Html.BeginForm("Edit", "TradingGoods", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
     @Html.AntiForgeryToken()
-<div class="form-row">
+    <div class="form-row">
 
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
-    <div class="col-md-4 mb-3">
-        <div class="form-group">
-            @Html.LabelFor(model => model.GoodId, new { @class = "control-label col-md-2" })
-
-            @Html.TextBoxFor(model => model.GoodId, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.GoodId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <div class="form-group">
-            @Html.LabelFor(model => model.GoodName, new { @class = "control-label col-md-2" })
-
-            @Html.TextBoxFor(model => model.GoodName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.GoodName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <div class="form-group">
-            @Html.LabelFor(model => model.ShortDetail, new { @class = "control-label col-md-2" })
-
-            @Html.TextAreaFor(model => model.ShortDetail, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.ShortDetail, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <div class="form-group">
-            @Html.LabelFor(model => model.LongDetail, new { @class = "control-label col-md-2" })
-
-            @Html.TextAreaFor(model => model.LongDetail, new { @class = "form-control", @cols = 20, @rows = 8 })
-            @Html.ValidationMessageFor(model => model.LongDetail, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Thumbail, new { @class = "control-label col-md-2" })
-
-            <input type="file" id="TImage" Name="TImage" class="form-control" />
-
-            @Html.ValidationMessageFor(model => model.Thumbail, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="col-md-4 mb-3">
-
-        <div class="form-group">
-            Images
-
-            <input type="file" id="AImage" Name="AImage" class="form-control" multiple />
-
-
-        </div>
-    </div>
-    <div class="form-group">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
         <div class="col-md-4 mb-3">
-            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.GoodId, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.GoodId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GoodId, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
+
         <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.GoodName, new { @class = "control-label col-md-2" })
 
-            @Html.LabelFor(model => model.RetailRate, new { @class = "control-label col-md-2" })
-
-            @Html.TextBoxFor(model => model.RetailRate, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.RetailRate, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.GoodName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GoodName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.MfdDate, new { @class = "control-label col-md-2" })
 
+                @Html.TextBoxFor(model => model.MfdDate, new { @class = "form-control",@id="datepicker" })
+                @Html.ValidationMessageFor(model => model.MfdDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="form-group"> 
+                @Html.LabelFor(model => model.ExpiryDate, new { @class = "control-label col-md-2" })
 
-    <div class="form-group">
+                @Html.TextBoxFor(model => model.ExpiryDate, new { @class = "form-control",@id ="datepicker1" })
+                @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ShortDetail, new { @class = "control-label col-md-2" })
+
+                @Html.TextAreaFor(model => model.ShortDetail, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ShortDetail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.LongDetail, new { @class = "control-label col-md-2" })
+
+                @Html.TextAreaFor(model => model.LongDetail, new { @class = "form-control", @cols = 20, @rows = 8 })
+                @Html.ValidationMessageFor(model => model.LongDetail, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Thumbail, new { @class = "control-label col-md-2" })
+
+                <input type="file" id="TImage" Name="TImage" class="form-control" />
+
+                @Html.ValidationMessageFor(model => model.Thumbail, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="col-md-4 mb-3">
 
-            @Html.LabelFor(model => model.WholesaleRate, new { @class = "control-label col-md-2" })
+            <div class="form-group">
+                Images
 
-            @Html.TextBoxFor(model => model.WholesaleRate, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.WholesaleRate, "", new { @class = "text-danger" })
+                <input type="file" id="AImage" Name="AImage" class="form-control" multiple />
+
+
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-4 mb-3">
         <div class="form-group">
-            @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
+            <div class="col-md-4 mb-3">
 
-            @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.RetailRate, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.RetailRate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RetailRate, "", new { @class = "text-danger" })
+                <br />
+            </div>
         </div>
-    </div>
-    <div class="col-md-4 mb-3">
+
+
         <div class="form-group">
-            @Html.LabelFor(model => model.CoupenCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-4 mb-3">
 
-            @Html.TextBoxFor(model => model.CoupenCode, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.CoupenCode, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.WholesaleRate, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.WholesaleRate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.WholesaleRate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.CoupenCode, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.CoupenCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CoupenCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-
-   
-
-    
-
-    
-
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 
 }
 
@@ -135,48 +141,24 @@
     <div class="col-md-offset-2 col-md-10">
         @Html.ActionLink("Back to List", "Index")
     </div>
-    </div>
-    @section Nav{
+</div>
+@section Scripts {
+    <link rel="stylesheet" href="~/Scripts/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="~/Scripts/nepali.datepicker.v2.2.min.css">
 
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <!-- /input-group -->
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
-                    </li>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/nepali.datepicker.v2.2.min.js"></script>
 
-                    <li>
-                        <a href="@Url.Action("Index","TradingGoods")"><i class="fa fa-users"></i> Create Goods</a>
+    <script src="~/Scripts/jquery-ui-1.12.1/jquery-ui.js"></script>
 
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Index","Customers")"><i class="fa fa-male"></i>Create Costumer</a>
-                    </li>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+            $("#datepicker1").datepicker();
 
-                    <li>
-                        <a href="@Url.Action("ActivityLog","TradingGoods")"><i class="fa fa-user-secret"></i>Activity Log</a>
-
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
-                    </li>
+        });
+    </script>
+}
 
 
-                </ul>
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-    }

@@ -1,10 +1,14 @@
 ﻿@model DemoApplication.Models.TradingGoods
 
 @{
-    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
+
 }
 
-<h2>Create</h2>
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">@ViewBag.Message </div>
+}
 
 @using (Html.BeginForm("Create", "TradingGoods", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -31,6 +35,22 @@
                 @Html.ValidationMessageFor(model => model.GoodName, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.MfdDate, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.MfdDate, new { @class = "form-control",id="datepicker" })
+                @Html.ValidationMessageFor(model => model.MfdDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ExpiryDate, new { @class = "control-label col-md-2" })
+
+                @Html.TextBoxFor(model => model.ExpiryDate, new { @class = "form-control",id="datepicker1" })
+                @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="col-md-4 mb-3">
             <div class="form-group">
@@ -42,6 +62,15 @@
         </div>
 
         <div class="col-md-4 mb-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Vat, new { @class = "control-label col-md-2" })
+
+                @Html.CheckBoxFor(model => model.Vat, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Vat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-12">
+
             <div class="form-group">
                 @Html.LabelFor(model => model.LongDetail, new { @class = "control-label col-md-2" })
 
@@ -62,18 +91,14 @@
         <div class="col-md-4 mb-3">
 
             <div class="form-group">
-                Images
+                <label> Images</label>
 
                 <input type="file" id="AImage" Name="AImage" class="form-control" multiple />
 
 
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-4 mb-3">
-                <br />
-            </div>
-        </div>
+
         <div class="form-group">
             <div class="col-md-4 mb-3">
 
@@ -81,6 +106,7 @@
 
                 @Html.TextBoxFor(model => model.RetailRate, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.RetailRate, "", new { @class = "text-danger" })
+                <br />
             </div>
         </div>
 
@@ -129,50 +155,25 @@
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
         @Html.ActionLink("Back to List", "Index")
-        </div>
     </div>
-    @section Nav{
+</div>
+@section Scripts {
+    <link rel="stylesheet" href="~/Scripts/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="~/Scripts/nepali.datepicker.v2.2.min.css">
 
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <!-- /input-group -->
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
-                    </li>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/nepali.datepicker.v2.2.min.js"></script>
 
-                    <li>
-                        <a href="@Url.Action("Index","TradingGoods")"><i class="fa fa-users"></i> Create Goods</a>
+    <script src="~/Scripts/jquery-ui-1.12.1/jquery-ui.js"></script>
 
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Index","Customers")"><i class="fa fa-male"></i>Create Costumer</a>
-                    </li>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+            $("#datepicker1").datepicker();
 
-                    <li>
-                        <a href="@Url.Action("ActivityLog","TradingGoods")"><i class="fa fa-user-secret"></i>Activity Log</a>
-
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
-                    </li>
-
-
-                </ul>
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-    }
+           
+        });
+    </script>
+}
 

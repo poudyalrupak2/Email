@@ -6,7 +6,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+
 
 
 @using (Html.BeginForm("Edit", "CustomerSuperAdmins", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -212,10 +212,8 @@
 
     <script>
         $(function () {
-            $("#datepicker").nepaliDatePicker({
-                npdMonth: true,
-                npdYear: true,
-                npdYearCount: 100
+            $("#datepicker").datepicker({
+
             });
         });
         $("#cshipphoto").hide();
@@ -270,24 +268,12 @@
                 </li>
 
                 <li>
-                    <a href="@Url.Action("Index","Customer")"><i class="fa fa-users"></i> View Customer</a>
+                    <a href="@Url.Action("Index","CustomerSuperAdmins")"><i class="fa fa-users"></i> View Customer</a>
 
                     <!-- /.nav-second-level -->
                 </li>
-                <li>
-                    <a href="@Url.Action("Index","SalesMan")"><i class="fa fa-male"></i> View SalesMan</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","Service")"><i class="fa fa-route"></i> View Services</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","AreaRegister")"><i class="fas fa-chart-area"></i> View Area Register</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("ActivityLog","DashBoard")"><i class="fa fa-user-secret"></i>Activity Log</a>
-
-                    <!-- /.nav-second-level -->
-                </li>
+                
+               
                 <li>
                     <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
                 </li>

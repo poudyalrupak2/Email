@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace DemoApplication.Models
 {
-    public class customer
+    public class Customer
     {
         [Key]
         public int CustomerId { get; set; }
@@ -18,6 +19,8 @@ namespace DemoApplication.Models
 
         public string LastName { get; set; }
         [Required(ErrorMessage = "Dob is required")]
+        [Column(TypeName = "Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DOB { get; set; }
         [Required(ErrorMessage = "email is required")]
 
@@ -46,7 +49,8 @@ namespace DemoApplication.Models
         public DateTime? CreatedDate { get; set; }
         public string EditedBy { get; set; }
         public DateTime? EditedDate { get; set; }
-
+        public string category { get; set; }
+        public string  CustomerCategory { get; set; }
 
     }
 }

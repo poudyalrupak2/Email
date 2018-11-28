@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DemoApplication.Models.TradingComplete>
+
+@{
+    ViewBag.Title = "GetList";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
+}
+
+<table class="table" id="tblTrading">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Email
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TradingGoods.GoodName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+
+            @item.Customer.Firstname &nbsp;@item.Customer.LastName
+        </td>
+        <td>
+
+            @item.Customer.email1
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TradingGoods.GoodName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+
+    </tr>
+    }
+
+</table>
+

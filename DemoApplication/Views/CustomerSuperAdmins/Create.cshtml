@@ -4,8 +4,11 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
 
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">@ViewBag.Message </div>
+}
 
 @using (Html.BeginForm("Create", "CustomerSuperAdmins", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -15,7 +18,7 @@
 
         <div class="col-md-4 mb-3">
             <div class="form-group">
-                @Html.LabelFor(model => model.CustumerId,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CustumerId, new { @class = "control-label col-md-2" })
 
                 @Html.TextBoxFor(model => model.CustumerId, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CustumerId, "", new { @class = "text-danger" })
@@ -24,7 +27,7 @@
 
         <div class="col-md-4 mb-3">
             <div class="form-group">
-                @Html.LabelFor(model => model.Name,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
 
                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -33,7 +36,7 @@
 
         <div class="col-md-4 mb-3" id="category">
             <div class="form-group">
-                @Html.LabelFor(model => model.Categoty,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Categoty, new { @class = "control-label col-md-2" })
 
                 @Html.DropDownList("Categoty", new List<SelectListItem> { new SelectListItem { Text = "---Select Category--", Value = "" }, new SelectListItem { Text = "Individual", Value = "Individual" }, new SelectListItem { Text = "Organization", Value = "Organization" } }, new { @class = "form-control", id = "ddlCustomerType" })
 
@@ -63,7 +66,7 @@
         <div class="col-md-4 mb-3">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.email2,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.email2, new { @class = "control-label col-md-2" })
 
                 @Html.TextBoxFor(model => model.email2, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.email2, "", new { @class = "text-danger" })
@@ -72,7 +75,7 @@
         <div class="col-md-4 mb-3">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Phone1,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Phone1, new { @class = "control-label col-md-2" })
 
                 @Html.TextBoxFor(model => model.Phone1, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Phone1, "", new { @class = "text-danger" })
@@ -82,7 +85,7 @@
             <div class="form-group">
 
 
-                @Html.LabelFor(model => model.PanNo,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.PanNo, new { @class = "control-label col-md-2" })
 
                 @Html.TextBoxFor(model => model.PanNo, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PanNo, "", new { @class = "text-danger" })
@@ -92,7 +95,7 @@
         <div class="col-md-4 mb-3">
             <div class="form-group">
 
-                @Html.LabelFor(model => model.URL,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.URL, new { @class = "control-label col-md-2" })
 
                 @Html.TextBoxFor(model => model.URL, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
@@ -103,7 +106,7 @@
             <div class="form-group">
 
 
-                @Html.LabelFor(model => model.CustomerType,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CustomerType, new { @class = "control-label col-md-2" })
 
                 @Html.DropDownList("CustomerType", new List<SelectListItem> { new SelectListItem { Text = "---Select Costumer--", Value = "" }, new SelectListItem { Text = "Tour and Travel", Value = "Tour and Travel" }, new SelectListItem { Text = "Trading", Value = "Trading" }, new SelectListItem { Text = "Food and Beverage", Value = "Food and Beverage" }, new SelectListItem { Text = "Hotel", Value = "Hotel" } }, new { @class = "form-control", id = "ddlCustomerType" })
 
@@ -113,7 +116,7 @@
         <div class="col-md-4 mb-3">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Detail,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Detail, new { @class = "control-label col-md-2" })
 
                 @Html.TextBoxFor(model => model.Detail, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
@@ -122,7 +125,7 @@
         <div class="col-md-4 mb-3">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.WorkingArea,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.WorkingArea, new { @class = "control-label col-md-2" })
 
                 @Html.TextBoxFor(model => model.WorkingArea, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.WorkingArea, "", new { @class = "text-danger" })
@@ -131,7 +134,7 @@
         <div class="col-md-4 mb-3">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.NatureOfWork,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.NatureOfWork, new { @class = "control-label col-md-2" })
 
                 @Html.TextBoxFor(model => model.NatureOfWork, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.NatureOfWork, "", new { @class = "text-danger" })
@@ -140,7 +143,7 @@
         <div class="col-md-4 mb-3" id="cshipphoto">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.CitizenShipPhoto,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CitizenShipPhoto, new { @class = "control-label col-md-2" })
                 <input type="file" id="CImageFile" name="CImageFile" class="form-control" />
                 @Html.ValidationMessageFor(model => model.CitizenShipPhoto, "", new { @class = "text-danger" })
             </div>
@@ -151,7 +154,7 @@
         <div class="col-md-4 mb-3" id="pp">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PpsizePhoto,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.PpsizePhoto, new { @class = "control-label col-md-2" })
 
                 <input type="file" id="PPImageFile" name="PPImageFile" class="form-control" />
                 @Html.ValidationMessageFor(model => model.PpsizePhoto, "", new { @class = "text-danger" })
@@ -160,7 +163,7 @@
         <div class="col-md-4 mb-3" id="logo">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Logo,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Logo, new { @class = "control-label col-md-2" })
 
                 <input type="file" id="LImageFile" name="LImageFile" class="form-control" />
                 @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
@@ -169,7 +172,7 @@
         <div class="form-group">
             <div class="col-md-4 mb-3" id="cdocument">
 
-                @Html.LabelFor(model => model.CompanyDocument,  new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CompanyDocument, new { @class = "control-label col-md-2" })
                 <input type="file" id="CDImageFile" name="CDImageFile" class="form-control" />
 
                 @Html.ValidationMessageFor(model => model.CompanyDocument, "", new { @class = "text-danger" })
@@ -182,6 +185,7 @@
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
+
         <div class="form-group">
 
             <div class="col-md-offset-2 col-md-10">
@@ -207,11 +211,10 @@
 
     <script>
         $(function () {
-            $("#datepicker").nepaliDatePicker({
-                npdMonth: true,
-                npdYear: true,
-                npdYearCount: 100
+            $("#datepicker").datepicker({
+
             });
+           
         });
         $("#cshipphoto").hide();
         $("#cdocument").hide();
@@ -271,15 +274,7 @@
 
                     <!-- /.nav-second-level -->
                 </li>
-                <li>
-                    <a href="@Url.Action("Index","SalesMan")"><i class="fa fa-male"></i> View SalesMan</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","Service")"><i class="fa fa-route"></i> View Services</a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","AreaRegister")"><i class="fas fa-chart-area"></i> View Area Register</a>
-                </li>
+
                 <li>
                     <a href="@Url.Action("ActivityLog","DashBoard")"><i class="fa fa-user-secret"></i>Activity Log</a>
 

@@ -1,0 +1,516 @@
+﻿@model DemoApplication.Models.ViewModels.ShoppingCartDetails
+
+@{
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
+}
+@if (TempData["message"]!= null)
+{
+<div class="alert alert-danger">@TempData["message"] </div>
+}
+
+
+
+@using (Html.BeginForm("CreateCart", "TradingGoods", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <table class="table" id="tblCart">
+        <tr>
+            <th>
+                GoodName
+            </th>
+            <th>
+                price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Subtotal
+            </th>
+
+            @*<th></th>*@
+        </tr>
+        <tbody id="tbodyData">
+
+            @for (int i = 0; i < Model.AddToCarts.Count; i++)
+            {
+                @*<tr>
+                        <td>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(modelItem => item.GoodName)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(modelItem => item.price, new { data_price = item.price, id = "txtPrice" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(modelItem => item.Quantity, new { data_quantity = item.Quantity, id = "txtQty" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(modelItem => item.Subtotal, new { data_subTotal = item.Subtotal, id = "txtSubTotal" })
+                            </div>
+                        </td>
+
+                        <td>
+
+                            @Html.ActionLink("Remove", "Remove", new { id = item.CartId })
+                        </td>
+                    </tr>*@
+
+
+
+
+                <tr>
+
+                    @Html.HiddenFor(a => a.AddToCarts[i].ProductId)
+                    @Html.HiddenFor(a => a.AddToCarts[i].CartId, new { id = "txtCartId" })
+                    @Html.HiddenFor(a => a.AddToCarts[i].VatAmount, new { id = "txtVat" })
+                    <td>
+
+                        @Html.TextBoxFor(a => a.AddToCarts[i].GoodName, new { @readonly = "readonly", @class = "form-control" })
+
+                    </td>
+                    <td>
+
+                        @Html.TextBoxFor(a => a.AddToCarts[i].price, new { data_price = Model.AddToCarts[i].price, id = "txtPrice", onkeyup = "", @class = "form-control" })
+
+                    </td>
+                    <td>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(a => a.AddToCarts[i].Quantity, new { data_quantity = Model.AddToCarts[i].Quantity, id = "txtQty", type = "number", @class = "form-control" })
+                        </div>
+                    </td>
+
+                    <td>
+
+                        @Html.TextBoxFor(a => a.AddToCarts[i].Subtotal, new { data_subTotal = Model.AddToCarts[i].Subtotal, id = "txtSubTotal", @readonly = "readonly", @class = "form-control" })
+
+                    </td>
+                    @*<td>
+
+                            @Html.TextBoxFor(a => a[i].vat, new { data_vatTotal = Model[i].vat, id = "txtVatTotal", @readonly = "readonly", @class = "form-control" })
+
+                        </td>*@
+
+
+                    <td>
+                        <a class="fa fa-times" id="btnRemove" title="Delete"></a>
+
+                    </td>
+                </tr>
+
+
+            }
+        </tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td align="right">SubTotal:</td>
+            <td>
+                @{
+                    decimal sum = Model.AddToCarts.Sum(modelItem => modelItem.Subtotal);
+                    <input class="form-control" name="Total" id="txtGrandTotal" readonly="readonly" value="@sum">
+                }
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+            <td align="right">Vat:</td>
+            <td>
+                @{
+                    decimal vat = Model.AddToCarts.Sum(modelItem => modelItem.vat);
+                    <input class="form-control" name="vatTotal" id="txtVatTotal" readonly="readonly" value="@vat">
+                }
+            </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+            <td align="right">Other:</td>
+            <td>
+                @{
+
+                    <input class="form-control" name="other" id="txtOther" value=0>
+                }
+            </td>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td align="right">GrandTotal:</td>
+            <td>
+                @{
+                    decimal grandtotal = Model.AddToCarts.Sum(modelItem => modelItem.vat) + Model.AddToCarts.Sum(modelItem => modelItem.Subtotal);
+                    <input class="form-control" name="GrandTotal" id="GrandTotal" readonly="readonly" value="@grandtotal">
+                }
+            </td>
+        </tr>
+    </table>
+
+
+    <table class="table" id="tblCustomer">
+        <thead>
+            <tr>
+                <th>
+                    CustomerName
+                </th>
+                <th>
+                    Email
+                </th>
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (int i = 0; i < Model.Customers.Count; i++)
+            {
+                @*<tr>
+                        <td>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(modelItem => item.GoodName)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(modelItem => item.price, new { data_price = item.price, id = "txtPrice" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(modelItem => item.Quantity, new { data_quantity = item.Quantity, id = "txtQty" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(modelItem => item.Subtotal, new { data_subTotal = item.Subtotal, id = "txtSubTotal" })
+                            </div>
+                        </td>
+
+                        <td>
+
+                            @Html.ActionLink("Remove", "Remove", new { id = item.CartId })
+                        </td>
+                    </tr>*@
+
+
+
+
+                <tr>
+                    <td>
+
+                        @Model.Customers[i].Firstname&nbsp;@Model.Customers[i].LastName
+
+                    </td>
+                    <td>
+
+                        @Model.Customers[i].email1
+
+                    </td>
+                    <td>
+                        @Html.RadioButton("customerId", Model.Customers[i].CustomerId)
+                    </td>
+                    @*<td>
+
+                            @Html.TextBoxFor(a => a[i].vat, new { data_vatTotal = Model[i].vat, id = "txtVatTotal", @readonly = "readonly", @class = "form-control" })
+
+                        </td>*@
+
+
+
+                </tr>
+
+
+            }
+        </tbody>
+
+    </table>
+
+    <input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary btn-lg" />
+}
+@section scripts{
+    <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
+
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/datatables/dataTables.bootstrap.js">
+    </script>
+
+    <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
+
+    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/DataTables/css/jquery.dataTables.yadcf.js"></script>
+    <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap.css" />
+
+
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/datatables/dataTables.bootstrap.js">
+    </script>
+    <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tblCustomer").DataTable({
+                "columnDefs": [
+                    {
+                        "orderable": false, "targets": [2],
+
+
+                    }
+                ],
+                "dom": "Bfrtp",
+                "language": {
+                    "search": "Filter :"
+                }
+            });
+
+
+
+
+            //$("#tblCustomer").DataTable();
+
+            //    $('body #tblCustomer tfoot th').each(function () {
+            //        var title = $(this).text();
+            //        if (title == "Email") {
+            //            $(this).html('<input name="email" type="text" placeholder="Search ' + title + '" />');
+            //        }
+            //        else if (title == "CustomerName") {
+            //            $(this).html('<input name="customerName" type="text" placeholder="Search ' + title + '" />');
+            //        }
+            //    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            //});
+
+            // DataTable
+            //var table = $('#tblCustomer').DataTable();
+
+            //// Apply the search
+            //table.columns().each(function (value,index) {
+            //    var that =this;
+
+            //$('body input', this.footer()).on('keyup change', function () {
+            //    if (table.columns(index).search() !== this.value) {
+            //        table.columns(index)
+            //            .search(this.value)
+            //            .draw();
+            //    }
+            //});
+
+
+
+
+
+            //var Table = $('#tblCustomer').DataTable();
+
+            //$(function () { // this will be called when the DOM is ready
+            //    $('body #txtCustomer').keyup(function () {
+            //        Table.search($(this).val()).draw();
+            //    });
+            //});
+            ////$('body #txtCustomer').keyup(function () {
+            ////    Table.search($(this).val()).draw();
+            ////});
+
+            //////OR search (enabling regular expression search)
+            //var input = $('#txtCustomer');
+            //input.unbind('keyup search input').bind('keypress', function (e) {
+            //    if (e.which == 13) {
+            //        var keywords = input.val().split(' '),
+            //            filter = '';
+            //        for (var i = 0; i < keywords.length; i++) {
+            //            filter = (filter !== '') ? filter + '|' + keywords[i] : keywords[i];
+            //        }
+            //        //true (param 2) turns regex on, false (param 3) turns smart search off
+            //        Table.search(filter, true, false).draw();
+            //    }
+            //});
+
+
+            //$("#tblCustomer").DataTable();
+            ////var dataSrc = [];
+
+
+
+            $("body #txtPrice").keyup(function () {
+                var $tr = $(this).closest('tr');
+                calculateSubtotal($tr);
+                calculateVatTotal();
+                calculateTotal();
+            });
+
+            //var table = $("#tblCustomer").DataTable();
+            //$("body #txtCustomer").keyup(function () {
+            //    table.draw();
+            //});
+
+
+
+            $("body #txtQty").keyup(function (e) {
+                var qty = parseInt($(this).val());
+                var totalQty = parseInt($(this).attr('data-quantity'));
+                if (qty > totalQty) {
+                    alert("Quantity greater than total quantity.Available quantity:" + totalQty);
+                    var $txtQty = $tr.find(':input#txtQty');
+                    $txtQty.val(10);
+                    e.preventDefault();
+                }
+                else {
+                    var $tr = $(this).closest('tr');
+                    calculateSubtotal($tr);
+                    calculateTotalVat();
+                    calculateTotal();
+                }
+            });
+
+
+
+            $("body #txtPrice").change(function () {
+                var $tr = $(this).closest('tr');
+                calculateSubtotal($tr);
+                calculateTotal();
+                calculateVatTotal();
+                calculateGrandtotal();
+            });
+
+            $("body #txtSubTotal").change(function () {
+                calculateTotal();
+                calculateVatTotal();
+                // calculateGrandtotal();
+            });
+            $("body #txtOther").change(function () {
+                calculateGrandtotal();
+            });
+
+            $("body #txtOther").keyup(function () {
+                calculateGrandtotal();
+            });
+            //$("body #btnRemove").click(function () {
+            //    $(this).closest("tr").remove();
+            //    calculateTotal();
+            //});
+            $('body #btnRemove').on('click', function () {
+                if (confirm("Are you sure to delete this contact?")) {
+                    var tr = $(this).closest('tr');
+                    var CartId = $(this).closest('tr').find("input#txtCartId").val();
+                    //Deletes the record with ID sent below
+                    $.post(
+                        '/TradingGoods/DeleteCart/',
+                        { CartId: CartId },
+                        function (item) {
+                            tr.remove();
+                        }, "json");
+
+                    location.reload();
+                    calculateTotal();
+                }
+            });
+            $("body #txtQty").change(function (e) {
+                var qty = parseInt($(this).val());
+                var totalQty = parseInt($(this).attr('data-quantity'));
+                if (qty > totalQty) {
+                    alert("Quantity greater than total quantity.Available quantity:" + totalQty);
+                    var totalQty = parseInt($(this).attr('data-quantity'));
+                    $txtSubTotal.val(totalQty);
+                    var $txtQty = $tr.find(':input#txtQty');
+                    $txtQty.val(10);
+                    e.preventDefault();
+                }
+                else {
+                    var $tr = $(this).closest('tr');
+                    calculateSubtotal($tr);
+                    calculateTotalVat();
+                    calculateTotal();
+                    // calculateGrandtotal();
+                }
+            });
+            $("#btnSubmit").click(function () {
+                var i = 0;
+                $("body #tblCart tbody#tbodyData tr").each(function () {
+                    $(this).find("input").each(function () {
+                        var currentName = $(this).attr('name');
+                        var currentIndex = currentName.match(/\d+/);
+                        var newName = currentName.replace('[' + currentIndex + ']', '[' + parseInt(i) + ']');
+                        $(this).attr("name", newName);
+                    });
+                    i = (parseInt(i) + 1);
+                });
+            });
+
+
+        });
+        function calculateSubtotal($tr) {
+            // var $tr = $(this).closest('tr');
+            var $txtPrice = $tr.find(':input#txtPrice');
+            var $txtQty = $tr.find(':input#txtQty');
+            var $txtSubTotal = $tr.find(':input#txtSubTotal');
+            var $txtVat = $tr.find(':input#txtVat');
+            var amount = parseFloat($txtPrice.val()) * parseFloat($txtQty.val());
+            var vatAmount = parseFloat($txtVat.val()) * amount / 100;
+            $txtSubTotal.val(parseFloat(amount)); //+ parseFloat(vatAmount)
+        }
+        function calculateGrandtotal() {
+
+            var amount = parseFloat($("body #txtGrandTotal").val()) + parseFloat($("body #txtVatTotal").val()) + parseFloat($("body #txtOther").val());
+
+            $("body table#tblCart tbody input#GrandTotal").val(amount); //+ parseFloat(vatAmount)
+        }
+
+        function calculateTotal() {
+            var totalVal = 0;
+            $("body #tblCart tbody#tbodyData tr").each(function () {
+                var $tr = $(this);
+                var total = $(this).find(':input#txtSubTotal').val();
+                totalVal = parseFloat(total) + parseFloat(totalVal);
+            })
+            $("body #txtGrandTotal").val(totalVal);
+            calculateVatTotal();
+            calculateGrandtotal();
+        }
+
+        function calculateVatTotal() {
+            var totalVal = 0;
+            $("body #tblCart tbody#tbodyData tr").each(function () {
+                var $tr = $(this);
+                var total = $(this).find(':input#txtVatTotal').val();
+                totalVal = parseFloat(total) + parseFloat(totalVal);
+            })
+            $("body #txtTotalVat").val(totalVal);
+        }
+        function calculateTotalVat() {
+            // var $tr = $(this).closest('tr');
+            var totalVat = 0;
+            $("body #tblCart tbody#tbodyData tr").each(function () {
+                var $tr = $(this);
+                var $txtVat = $tr.find(':input#txtVat');
+                var $txtPrice = $tr.find(':input#txtPrice');
+                var $txtQty = $tr.find(':input#txtQty');
+
+                if (parseInt($txtVat.val()) > 0) {
+                    var vat = parseFloat($txtVat.val()) * parseFloat($txtPrice.val()) * parseFloat($txtQty.val()) / 100;
+                    totalVat = parseFloat(totalVat) + parseFloat(vat);
+                }
+            });
+            $("body #txtVatTotal").val(totalVat);
+        }
+
+
+
+    </script>
+
+}

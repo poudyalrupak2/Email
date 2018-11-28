@@ -13,6 +13,8 @@ namespace Newspaper.Models
         public int Id { get; set; }
         public string Operation { get; set; }
         public string CreatedBy { get; set; }
+        public  string category { get; set; }
+       
         public DateTime CreatedDate { get; set; }
     }
 }

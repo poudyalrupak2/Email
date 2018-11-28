@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<DemoApplication.Models.Image>
 @{
-    ViewBag.Title = "ImageViewer";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
 }
 
 
@@ -23,9 +23,9 @@
             var active = i == 1 ? "active" : "";
            
                 <div class="item @active">
-
-                    <img src=@item.ImageName  >
-
+                    <center>
+                        <img src=@item.ImageName style="height:600px;width:auto">
+                    </center>
                 </div>
             
         }
@@ -58,47 +58,4 @@
                 </script>*@
    
 
-@section Nav{
 
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                    <!-- /input-group -->
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
-                </li>
-
-                <li>
-                    <a href="@Url.Action("Index","TradingGoods")"><i class="fa fa-users"></i> Create Goods</a>
-
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","Customers")"><i class="fa fa-male"></i>Create Costumer</a>
-                </li>
-
-                <li>
-                    <a href="@Url.Action("ActivityLog","TradingGoods")"><i class="fa fa-user-secret"></i>Activity Log</a>
-
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
-                </li>
-
-
-            </ul>
-        </div>
-        <!-- /.sidebar-collapse -->
-    </div>
-}

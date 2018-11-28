@@ -20,19 +20,16 @@ namespace DemoApplication.Controllers
         private DemoDbContext db = new DemoDbContext();
 
         // GET: customers
-        [OutputCache(Duration = 60, VaryByParam = "Id")]
 
         public ActionResult Index()
         {
             if (Session["ACategory"] != null)
             {
-                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
-                {
-                    return View(db.customers.ToList());
-                }
+                string category = Session["ACategory"].ToString();
+                    return View(db.customers.Where(t=>t.category==category ).ToList());
+                
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
         }
 
         // GET: customers/Details/5
@@ -40,19 +37,18 @@ namespace DemoApplication.Controllers
         {
             if (Session["ACategory"] != null)
             {
-                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
-                {
+
                     if (id == null)
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
-                    customer customer = db.customers.Find(id);
+                    Customer customer = db.customers.Find(id);
                     if (customer == null)
                     {
                         return HttpNotFound();
                     }
                     return View(customer);
-                }
+                
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
@@ -60,13 +56,12 @@ namespace DemoApplication.Controllers
         // GET: customers/Create
         public ActionResult Create()
         {
-            if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
-            {
+           
                 if (Session["ACategory"] != null)
                 {
                     return View();
                 }
-            }
+            
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
         }
@@ -76,14 +71,15 @@ namespace DemoApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerId,Firstname,Middlename,LastName,DOB,email1,email2,phone,phone2,NationalIdNo,tole,homeno,State,Country,ZipCode,CreatedBy,CreatedDate,EditedBy,EditedDate")] customer customer)
-        {
+        public ActionResult Create(Customer customer)
+            {
             if (ModelState.IsValid)
             {
                 customer.CreatedDate = DateTime.Now;
                 customer.CreatedBy = Session["userEmail"].ToString(); ;
                 try
                 {
+                    customer.category = Session["ACategory"].ToString();
                     db.customers.Add(customer);
                   
                     String Operation = "Customer Created Sucessfully";
@@ -91,7 +87,9 @@ namespace DemoApplication.Controllers
                     {
                         Operation = Operation,
                         CreatedBy = Session["userEmail"].ToString(),
-                        CreatedDate = DateTime.Now
+                        CreatedDate = DateTime.Now,
+                        category= Session["ACategory"].ToString()
+
 
                     });
                     db.SaveChanges();
@@ -112,19 +110,20 @@ namespace DemoApplication.Controllers
         {
             if (Session["ACategory"] != null)
             {
-                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
-                {
+               
                     if (id == null)
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
-                    customer customer = db.customers.Find(id);
+                string category = Session["ACategory"].ToString();
+
+                Customer customer = db.customers.Where(t => t.category ==category).Where(t=>t.CustomerId==id).SingleOrDefault();
                     if (customer == null)
                     {
                         return HttpNotFound();
                     }
                     return View(customer);
-                }
+                
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
@@ -135,7 +134,7 @@ namespace DemoApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerId,Firstname,Middlename,LastName,DOB,email1,email2,phone,phone2,NationalIdNo,tole,homeno,State,Country,ZipCode,CreatedBy,CreatedDate,EditedBy,EditedDate")] customer customer)
+        public ActionResult Edit([Bind(Include = "CustomerId,Firstname,Middlename,LastName,DOB,email1,email2,phone,phone2,NationalIdNo,tole,homeno,State,Country,ZipCode,CreatedBy,CreatedDate,EditedBy,EditedDate")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -143,6 +142,7 @@ namespace DemoApplication.Controllers
                 customer.EditedDate = DateTime.Now;
                 try
                 {
+                    customer.category = Session["ACategory"].ToString();
                     db.Entry(customer).State = EntityState.Modified;
 
                     
@@ -152,9 +152,11 @@ namespace DemoApplication.Controllers
                     {
                         Operation = Operation,
                         CreatedBy = Session["userEmail"].ToString(),
-                        CreatedDate = DateTime.Now
+                        CreatedDate = DateTime.Now,
+                        category =  Session["ACategory"].ToString()
 
-                    });
+
+                });
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -169,21 +171,23 @@ namespace DemoApplication.Controllers
         // GET: customers/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
-            {
+            
                 if (Session["ACategory"] != null)
                 {
                     if (id == null)
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
-                    customer customer = db.customers.Find(id);
+                string category = Session["ACategory"].ToString();
+
+                Customer customer = db.customers.Where(t => t.category == category).Where(t => t.CustomerId == id).SingleOrDefault();
+
                     if (customer == null)
                     {
                         return HttpNotFound();
                     }
                     return View(customer);
-                }
+                
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
@@ -194,7 +198,9 @@ namespace DemoApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            customer customer = db.customers.Find(id);
+            string category = Session["ACategory"].ToString();
+
+            Customer customer = db.customers.Where(t => t.category == category).SingleOrDefault();
             try
             {
                 db.customers.Remove(customer);
@@ -204,9 +210,11 @@ namespace DemoApplication.Controllers
                 {
                     Operation = Operation,
                     CreatedBy = Session["userEmail"].ToString(),
-                    CreatedDate = DateTime.Now
+                    CreatedDate = DateTime.Now,
+                    category =  Session["ACategory"].ToString()
 
-                });
+
+            });
                 db.SaveChanges();
 
                 return RedirectToAction("Index");

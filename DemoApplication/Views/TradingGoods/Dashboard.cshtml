@@ -1,0 +1,223 @@
+﻿
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
+}
+
+
+
+
+<div class="row">
+
+    <div class="col-lg-3 col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" id="CountCustomers">
+                            <span>
+                                @if (ViewBag.message != null)
+                                {
+                                    @ViewBag.message;
+                                }
+                            </span>
+                        </div>
+                        <div>Customers!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("Index", "Customers")" class="viewDetails" data-type="customers">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+
+
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-4">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-male fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" id="SellsMan">
+                            <span>
+                                @if (ViewBag.good != null)
+                                {
+                                    @ViewBag.good;
+                                }
+                            </span>
+                        </div>
+                        <div>Goods!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("Index", "TradingGoods")">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-4">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge" id="Active-Users">
+                            <span>
+                                @if (ViewBag.cartitem != null)
+                                {
+                                    @ViewBag.cartitem;
+                                }
+                            </span>
+                        </div>
+                        <div>Cart</div>
+                    </div>
+                </div>
+
+            </div>
+            <a href="@Url.Action("ViewCart", "TradingGoods")">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+    
+
+</div>
+
+
+@section Scripts {
+    <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
+
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/datatables/dataTables.bootstrap.js">
+    </script>
+
+    <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
+
+
+    <script src="~/Content/DataTables/css/jquery.dataTables.yadcf.js"></script>
+    <script type="text/javascript">
+
+
+        $('.myMenuLink').click(function () {
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+            return false;
+        });
+
+        $.ajax
+        ({
+            url: "/Dashboard/RecientCostumer",
+            contentType: "application/html; charset=utf-8",
+            type: "GET",
+            cache: !0,
+            datatype: "html",
+            success: function (t) {
+                $("#RecentCostumer").html(t)
+            },
+            error: function () {
+                $("#RecentCostumer").html("Costumer Not Found")
+            }
+        })
+
+        $.ajax
+        ({
+            url: "/Dashboard/OldestCostumer",
+            contentType: "application/html; charset=utf-8",
+            type: "GET",
+            cache: !0,
+            datatype: "html",
+            success: function (t) {
+                $("#OldCostumers").html(t)
+            },
+            error: function () {
+                $("#OldCostumers").html("Costumer Not Found")
+            }
+        })
+        //function myFunction() {
+        //    var input, filter, table, tr, td, i;
+        //    input = document.getElementById("myInput");
+        //    filter = input.value.toUpperCase();
+        //    table = document.getElementById("myTable");
+        //    tr = table.getElementsByTagName("tr");
+        //    for (i = 0; i < tr.length; i++) {
+        //        td = tr[i].getElementsByTagName("td")[0];
+        //        if (td) {
+        //            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        //                tr[i].style.display = "";
+        //            } else {
+        //                tr[i].style.display = "none";
+        //            }
+        //        }
+        //    }
+        //}
+        $(document).ready(function () {
+            var dataSrc = [];
+
+            var table=  $("#myTable").DataTable({
+                "columnDefs": [
+                    { "orderable": false, "targets": 3 }
+
+                ],
+                "pageLength": 50,
+
+                'initComplete': function () {
+                    var api = this.api();
+
+                    // Populate a dataset for autocomplete functionality
+                    // using data from first, second and third columns
+                    api.cells('tr', [0, 1, 2]).every(function () {
+                        // Get cell data as plain text
+                        var data = $('<div>').html(this.data()).text();
+                        if (dataSrc.indexOf(data) === -1) { dataSrc.push(data); }
+                    });
+
+                    // Sort dataset alphabetically
+                    dataSrc.sort();
+
+                    // Initialize Typeahead plug-in
+                    $('.dataTables_filter input[type="search"]', api.table().container())
+                        .typeahead({
+                            source: dataSrc,
+                            afterSelect: function (value) {
+                                api.search(value).draw();
+                            }
+                        }
+                        );
+                }
+            });
+        });
+
+
+
+
+
+
+    </script>
+}
+
+
+

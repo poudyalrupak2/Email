@@ -16,9 +16,16 @@ namespace DemoApplication.Models.DAL
         public DbSet<Login> Login { get; set; }
         public DbSet<TradingGoods> TradingGoods { get; set; }
         public DbSet<Image> Images { get; set; }
-        public DbSet<customer> customers { get; set; }
+        public DbSet<Customer> customers { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
         public DbSet<Package> packages { get; set; }
         public DbSet<PImage> pImages { get; set; }
+        public DbSet<Tickets> Tickets { get; set; }
+        public DbSet<AddToCart> addToCarts { get; set; }
+        public DbSet<Vat> vat { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<INVProduct> INVProducts { get; set; }
+        public DbSet<InvoiceGenerate> InvoiceGenerates { get; set; }
+        public DbSet<AssignPackage> AssignPackages { get; set; }
     }
 }

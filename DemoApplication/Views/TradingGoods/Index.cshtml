@@ -1,107 +1,142 @@
 ﻿@model IEnumerable<DemoApplication.Models.TradingGoods>
 
 @{
-    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GoodId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoodName)
-        </th>
-      
-        <th>
-           Thumbnail
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        
-      
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.GoodId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GoodName)
-            </td>
-            
-            <td>
-              <img src=@item.Thumbail height="100" width="100" />
-            </td>
-         
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-           
-           
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
-                @Html.ActionLink("View Image", "ImageViewer", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-</table>
-
-@section Nav{
-
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                    <!-- /input-group -->
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
-                </li>
-
-                <li>
-                    <a href="@Url.Action("Index","TradingGoods")"><i class="fa fa-users"></i> Create Goods</a>
-
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","Customers")"><i class="fa fa-male"></i>Create Costumer</a>
-                </li>
-              
-                <li>
-                    <a href="@Url.Action("ActivityLog","DashBoard")"><i class="fa fa-user-secret"></i>Activity Log</a>
-
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
-                </li>
-
-
-            </ul>
-        </div>
-        <!-- /.sidebar-collapse -->
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-danger">@TempData["Message"] </div>
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <i class="fa fa-clock-o fa-fw"></i>GOODS
     </div>
-}
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <table class="table table-bordered" id="mytable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GoodId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GoodName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+
+
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GoodId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GoodName)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("AddToCart", "AddToCart", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>
+            @Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-primary" })|
+            @Html.ActionLink("Add", "AddGoods", null, new { @class = "btn btn-primary" })
+
+        </p>
+    </div>
+        </div>
+        @section Scripts {
+            <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
+
+            <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+            <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+            <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+            <script src="~/Scripts/datatables/dataTables.bootstrap.js">
+            </script>
+
+            <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
+
+
+            <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+            <script src="~/Content/DataTables/css/jquery.dataTables.yadcf.js"></script>
+            <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+            <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css" />
+            <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap.css" />
+
+
+
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+            <script src="~/Scripts/datatables/dataTables.bootstrap.js">
+            </script>
+            <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    var dataSrc = [];
+
+                    $("#mytable").DataTable({
+                        "columnDefs": [
+                            {
+                                "orderable": false, "targets": [3],
+
+
+                            }
+                        ],
+
+                        "pageLength": 50,
+                        "bInfo": false,
+                        "dom": "Bfrtp",
+                        "language": {
+                            "search": "Filter :"
+                        },
+
+                        'initComplete': function () {
+                            var api = this.api();
+
+                            // Populate a dataset for autocomplete functionality
+                            // using data from first, second and third columns
+                            api.cells('tr', [0, 1, 2]).every(function () {
+                                // Get cell data as plain text
+                                var data = $('<div>').html(this.data()).text();
+                                if (dataSrc.indexOf(data) === -1) { dataSrc.push(data); }
+                            });
+
+                            // Sort dataset alphabetically
+                            dataSrc.sort();
+
+                            // Initialize Typeahead plug-in
+                            $('.dataTables_filter input[type="search"]}', api.table().container())
+                                .typeahead({
+                                    source: dataSrc,
+                                    afterSelect: function (value) {
+                                        api.search(value).draw();
+                                    }
+                                }
+                                );
+                        }
+                    });
+                });
+            </script>
+        }
+

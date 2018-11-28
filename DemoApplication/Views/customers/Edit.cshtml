@@ -1,7 +1,15 @@
-﻿@model DemoApplication.Models.customer
+﻿@model DemoApplication.Models.Customer
 
 @{
-    ViewBag.Title = "Edit";
+    if (Session["ACategory"].ToString() == "Tour and Travel")
+    {
+        Layout = "~/Views/Shared/_LayoutTravels.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutTrading.cshtml";
+
+    }
 }
 
 <h2>Edit</h2>
@@ -43,7 +51,7 @@
         <div class="col-md-4 mb-3">
             <div class="form-group">
                 @Html.LabelFor(model => model.DOB, new { @class = "control-label col-md-2" })
-                @Html.TextBoxFor(model => model.DOB, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", id = "datepicker" })
                 @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -147,47 +155,22 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 </div>
-@section Nav{
+@section Scripts {
+    <link rel="stylesheet" href="~/Scripts/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="~/Scripts/nepali.datepicker.v2.2.min.css">
 
-<div class="navbar-default sidebar" role="navigation">
-    <div class="sidebar-nav navbar-collapse">
-        <ul class="nav" id="side-menu">
-            <li class="sidebar-search">
-                <div class="input-group custom-search-form">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-                <!-- /input-group -->
-            </li>
-            <li>
-                <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
-            </li>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/nepali.datepicker.v2.2.min.js"></script>
 
-            <li>
-                <a href="@Url.Action("Index","TradingGoods")"><i class="fa fa-users"></i> Create Goods</a>
+    <script src="~/Scripts/jquery-ui-1.12.1/jquery-ui.js"></script>
 
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="@Url.Action("Index","Customers")"><i class="fa fa-male"></i>Create Costumer</a>
-            </li>
-
-            <li>
-                <a href="@Url.Action("ActivityLog","TradingGoods")"><i class="fa fa-user-secret"></i>Activity Log</a>
-
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
-            </li>
-
-
-        </ul>
-    </div>
-    <!-- /.sidebar-collapse -->
-</div>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                
+            });
+        });
+    </script>
 }
+

@@ -17,28 +17,31 @@ namespace DemoApplication.Models
         [Required]
         public string ShortDetail { get; set; }
         [Required(ErrorMessage = "firstname is required")]
-        [MinLength(length:50,ErrorMessage ="minimum 50 letter is required")]
+       
         public string LongDetail { get; set; }
-        
+        public DateTime? ExpiryDate { get; set; }
+        public DateTime? MfdDate { get; set; }
         public string Thumbail { get; set; }
         [NotMapped]
         public HttpPostedFileBase TImageFile { get; set; }
         [Required(ErrorMessage ="retail price is required ")]
-       public int? RetailRate { get; set; }
-        [Required(ErrorMessage = "whilesale rate is required")]
+       public decimal RetailRate { get; set; }
+        [Required(ErrorMessage = "wholesale rate is required")]
 
-        public decimal WholesaleRate { get; set; }
-        [Required(ErrorMessage = "Quantity is   required")]
-
+        public int? WholesaleRate { get; set; }
+        //[Required(ErrorMessage = "Quantity is   required")]
+        //public int? Discount { get; set; }
+        public string Status { get; set; }
         public int Quantity { get; set; }
         public string  CoupenCode { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public string EditedBy { get; set; }
         public DateTime? EditedDate { get; set; }
-      
+         
         public virtual ICollection<Image> Image { get; set; }
-
+        
+        public bool Vat{ get; set; }
 
     }
 

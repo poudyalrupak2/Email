@@ -1,0 +1,119 @@
+﻿@model DemoApplication.Models.Tickets
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutTravels.cshtml";
+}
+
+
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CostumerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostumerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.From)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartureTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReturnTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReturnTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfPersons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfPersons)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

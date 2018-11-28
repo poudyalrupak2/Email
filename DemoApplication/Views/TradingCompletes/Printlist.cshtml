@@ -1,0 +1,258 @@
+﻿@model DemoApplication.Models.ViewModels.invoiceVM
+
+@{
+    ViewBag.Title = "GetList";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
+}
+
+<style>
+    table, tr, td {
+        border: none;
+    }
+
+        tr.details td {
+            border-style: hidden;
+        }
+
+        tr.details1 td {
+            border-right: hidden;
+            border-left: hidden;
+            border-bottom: hidden;
+            border-top: 1px solid black;
+        }
+
+   
+</style>
+<div id="ExpReport">
+    <h5 style="text-align:right">Date:@DateTime.Now.ToShortDateString()</h5>
+
+
+    <h1 style="text-align:center"><b> DibugSoft </b></h1>
+    <h3 style="text-align:Left">Name:@Model.Customer</h3>
+    <h3 style="text-align:Left">InvoiceNo:INV-@Model.InvoiceNo</h3>
+
+
+    <table class="table table-bordered" id="tblTrading">
+        <tr>
+            <th>
+                sno
+            </th>
+            <th>
+                ProductName
+            </th>
+
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Total
+            </th>
+
+        </tr>
+        @if (Model.Goods.Count() > 0)
+        {
+            int i = 0;
+
+            foreach (var item in Model.Goods)
+            {
+
+                <tr>
+                    <td>
+                        @(i += 1)
+                    </td>
+                    <td>
+                        @item.GoodsName
+
+                    </td>
+                    <td>
+
+                        @item.Quantity
+                    </td>
+                    <td>
+                        @item.Rate
+                    </td>
+                    <td>
+                        @item.subTotal
+                    </td>
+
+
+
+                </tr>
+            }
+            <tr class="border-0">
+                <td></td>
+                <td>
+                <td></td>
+                <td align="right" >Subtotal:</td>
+                <td>
+                    @{
+                        @Model.Subtotal
+
+                    }
+                </td>
+            </tr>
+
+            <tr style="border:none">
+                <td></td>
+                <td>
+                <td></td>
+                <td align="right">Vat:</td>
+                <td>
+                    @{
+                        @Model.Vat
+
+                    }
+                </td>
+            </tr>
+
+            <tr class="details" style="border:0">
+                <td></td>
+                <td>
+                <td></td>
+                <td align="right">Other:</td>
+
+                <td>
+                    @Model.Other
+                </td>
+
+            </tr>
+            <tr class="details">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td align="right">GrandTotal:</td>
+                <td>
+
+                    @Model.GrandTotal
+
+                </td>
+            </tr>
+        }
+    </table>
+    @*<div class="row">
+        <div class="col-md-6 text-left">
+            <label><br />...........................<br />Costumer Signature </label>
+        </div>
+        <div class="col-md-6 text-right">
+            <label><br />............................<br />TradorSignature</label>
+        </div>
+    </div>*@
+    <div style="width:100%;">
+            <span style="width:50%;  float:left;">
+                 <label><br />.................................<br />Customer Signature </label>
+            </span>
+            <span style="width:50%; text-align:right; float:right;">
+                 <label><br />..............................<br />Trador Signature</label>
+            </span>
+        </div>
+    <br />
+
+
+   
+</div>
+<div class="row text-center">
+    <button class="btn btn-primary" id="btnPrint"><i class="fa fa-print"></i> Print</button>
+</div>
+
+@*<div class="container right-container col-md-6" id="printableArea" style="display:block;">
+        <span id="link7">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h3 id="school_title">School Name </h3>
+                    <p><p>
+                    <p style="font-size: 1.1em;" id="exam_title">Annual Examination [ 2015-2016 ] <p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="header-time-date-marks">
+                                    <span id="exam_time">Time: 12 AM - 2 PM</span>
+                                    <span id="exam_date">Date: 30/12/2016</span>
+                                </div>
+                            </div>
+                            <div class="col-md-8 header-time-date-marks" style="text-align: right;padding-right: 36px;">
+                                <span id="exam_marks">100 Marks</span>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <hr / id="line" style="margin-top: 13px;">
+            <div class="row q-question-type-style" id='question_section'>
+            </div>
+        </span>
+    </div>
+
+    <div>
+        <h1>
+            asdads
+        </h1>
+    </div>
+
+
+    <button class="btn btn-default" onclick="printDiv('printableArea')"><i class="fa fa-print" aria-hidden="true" style="    font-size: 17px;"> Print</i></button>
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>*@
+
+
+
+<script src="~/Scripts/jQuery.min.js"></script>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("#btnPrint").click(function (e) {
+            PrintElem("ExpReport");
+        });
+    });
+
+    function PrintElem(elem) {
+        //var mywindow = window.open('', 'PRINT', 'height=842,width=590');
+
+        //mywindow.document.write('<html><head><style>table {border-collapse:collapse;width: 100%;border: 1px solid }th, td {text-align: left;padding: 8px; border: 1px solid ;}tr:nth-child(even){background-color: #f2f2f2;}tr.details1 td {border-right: hidden;border-left:hidden;border-bottom:hidden;border-top:1px solid black;    } tr.details td{border-style: hidden; }</style><title></title>');
+        //mywindow.document.write('</head><body >');
+        // window.document.write(document.getElementById(elem).innerHTML);
+        //mywindow.document.write('</body></html>');
+
+        //mywindow.document.close(); // necessary for IE >= 10
+        //mywindow.focus(); // necessary for IE >= 10*/
+        if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+            var printContents = document.getElementById('ExpReport').innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            document.title = "Print page title";
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+            // Chrome Browser Detected?
+            //mywindow.document.getElementById("btnPrint").style.display="none";
+            //window.PPClose = false;                                     // Clear Close Flag
+            //window.onbeforeunload = function () {                         // Before Window Close Event
+            //    if (window.PPClose === false) {                           // Close not OK?
+            //        return 'Leaving this page will block the parent window!\nPlease select "Stay on this Page option" and use the\nCancel button instead to close the Print Preview Window.\n';
+            //    }
+            //}
+            //window.print();                                             // Print preview
+            //window.PPClose = true;                                      // Set Close Flag to OK.
+        }
+        //window.document.getElementById("btnPrint").style.display="block";
+    }
+
+</script>
+
+
+

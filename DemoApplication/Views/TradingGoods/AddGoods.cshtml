@@ -1,0 +1,39 @@
+﻿@model DemoApplication.Models.TradingGoods
+
+@{
+    /**/
+
+    ViewBag.Title = "AddGoods";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
+}
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-danger">@ViewBag.Message </div>
+}
+@using (Html.BeginForm("AddGoods", "TradingGoods", null, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-4 mb-3">
+        <div class="form-group">
+
+
+            <label for="GoodName" class="control-label col-md-2">Goodname</label>
+            @Html.DropDownList("Id", null, "---Select GoodName---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.GoodName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantity, new { @class = "control-label col-md-2" })
+
+            @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}

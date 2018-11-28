@@ -17,6 +17,7 @@ namespace DemoApplication.Models
         public long Size { get; set; }
         public string Path { get; set; }
         public int TradingGoodsId { get; set; }
-        public virtual TradingGoods tradingGoods { get; set; }
+        public virtual TradingGoods tradingGoods { get; set; }    
+       
     }
 }

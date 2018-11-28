@@ -1,0 +1,161 @@
+﻿@model IEnumerable<DemoApplication.Models.Tickets>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTravels.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <i class="fa fa-clock-o fa-fw"></i> CUSTOMERS LIST
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table class="table" id="mytable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CostumerName)
+                            </th>
+
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.From)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TO)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.NoOfPersons)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nationality)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalCost)
+                            </th>
+
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CostumerName)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.From)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TO)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NoOfPersons)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nationality)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TotalCost)
+                                </td>
+
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <p>
+                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
+
+    <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/datatables/dataTables.bootstrap.js">
+    </script>
+
+    <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
+
+
+    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/DataTables/css/jquery.dataTables.yadcf.js"></script>
+    <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap.css" />
+
+
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/datatables/dataTables.bootstrap.js">
+    </script>
+    <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var dataSrc = [];
+
+            $("#mytable").DataTable({
+                "columnDefs": [
+                    {
+                        "orderable": false, "targets": [6],
+
+
+                    }
+                ],
+
+                "pageLength": 50,
+                "bInfo": false,
+                "dom": "Bfrtp",
+                "language": {
+                    "search": "Filter :"
+                },
+
+                'initComplete': function () {
+                    var api = this.api();
+
+                    // Populate a dataset for autocomplete functionality
+                    // using data from first, second and third columns
+                    api.cells('tr', [0, 1, 2]).every(function () {
+                        // Get cell data as plain text
+                        var data = $('<div>').html(this.data()).text();
+                        if (dataSrc.indexOf(data) === -1) { dataSrc.push(data); }
+                    });
+
+                    // Sort dataset alphabetically
+                    dataSrc.sort();
+
+                    // Initialize Typeahead plug-in
+                    $('.dataTables_filter input[type="search"]}', api.table().container())
+                        .typeahead({
+                            source: dataSrc,
+                            afterSelect: function (value) {
+                                api.search(value).draw();
+                            }
+                        }
+                        );
+                }
+            });
+        });
+    </script>
+}

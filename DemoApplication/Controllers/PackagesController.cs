@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using DemoApplication.Models;
@@ -14,11 +17,11 @@ using Newspaper.Filters;
 namespace DemoApplication.Controllers
 {
     [SessionCheck]
-    [OutputCache(Duration = 60, VaryByParam = "Id")]
 
     public class PackagesController : Controller
     {
         private DemoDbContext db = new DemoDbContext();
+        private ImageUpload imgesUpload = new ImageUpload();
 
         // GET: Packages
         public ActionResult Index()
@@ -67,39 +70,138 @@ namespace DemoApplication.Controllers
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadGateway);
         }
+        public List<PImage> fileDetails = new List<PImage>();
 
         // POST: Packages/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Package package, HttpPostedFileBase TImage, ICollection<HttpPostedFileBase> AImage)
+        public ActionResult Create(Package package, HttpPostedFileBase TImage, ICollection<HttpPostedFileBase> AImage)
         {
             if (ModelState.IsValid)
             {
-                
-                        List<PImage> fileDetails = new List<PImage>();
+
                 foreach (var file in AImage)
                 {
                     if (file != null && file.ContentLength > 0)
                     {
-                        var fileName = Path.Combine(Server.MapPath("/uploads/PIMage/"), Guid.NewGuid() + Path.GetExtension(file.FileName));
-
-                        PImage Pimage = new PImage()
-                        {
-                            ImageName = "/Uploads/PImage/" + Path.GetFileName(fileName),
-                            Path = Path.GetExtension(fileName),
-
-                        };
-                        fileDetails.Add(Pimage);
-                        file.SaveAs(fileName);
-
+                        imgesUpload = new ImageUpload { Width = 200 };
+                        ImageResult imageResult = imgesUpload.RenameUploadFile(file);
+                        fileDetails.Add(imgesUpload.fileDetails);
                     }
                 }
+
                 package.PImage = fileDetails;
+                package.CreatedBy = Session["userEmail"].ToString();
+                package.CreatedDate = DateTime.Now;
+                db.packages.Add(package);
+                db.SaveChanges();
+                db.Entry(package).GetDatabaseValues();
+                string from = "dbugtest2016@gmail.com";
+                string fromPassword = "my@test#";
+                //string body = "<html><head> <style>body { margin: 0; padding: 0; min - width: 100 % !important; } .content{width:100 %;max-width:600px;}</ style ></head>< body style='color:grey; font-size:15px;'><div style='background-color:#ece8d4;width:600px;height:600px; padding:30px 30px; margin-top:30px;'><p> Dear <b>{0}</b>,<p><p> New package is being created.</p><p> Please Contact soon as possible</p><p>";
+                string body;
+
+                using (var sr = new StreamReader(Server.MapPath("\\App_Data\\HtmlTamplate\\PackageTemplate.html")))
+                {
+                    body = sr.ReadToEnd();
+                }
+                var charts = db.pImages.Where(m => m.PackageId == package.Id);
+                //int j = 0;
+                //foreach (var item in charts)
+                //{
+                //    string img = " <div class='column'><img src='cid:" + j + "'/></div><br/>";
+                //    body= body+ img;
+                //    j++;
+                //}
+
+                
+
+               // body =body + " The package starts from {1} and last {2} days.</p><p> Thank you </p><p> <b>DebugSoft</b> </p></div></body></html>";
+
+
+                string category = Session["ACategory"].ToString();
+                var costumer = db.customers.Where(t => t.category == category).Select(t => t.email1).ToList();
+                var rate = db.customers.Where(t => t.category == category).Select(t => t.CustomerCategory).ToList();
+
+                try
+                {
+                    for (int i = 0; i < costumer.Count; i++)
+
+
+                    {
+                        using (MailMessage mail = new MailMessage(from, costumer[i]))
+                        {
+                            string email = costumer[i];
+                            var name = db.customers.FirstOrDefault(t => t.category == category && t.email1 == email).Firstname;
+                            var image = package.thumbnail;
+                            string Packagenamename = package.PackageName;
+                            string costumername = Convert.ToString(name);
+                            string From = package.From;
+                            string to = package.TO;
+                            string startdate = package.BegainDate.ToString();
+                            DateTime endtime = Convert.ToDateTime(startdate).AddDays(package.Duration);
+                            string time = endtime.ToShortDateString();
+                            decimal rate1;
+                            if(rate[i]=="Wholesale")
+                            {
+                                 rate1 = package.Rate1;
+                            }
+                            else
+                            {
+                                 rate1 = package.Rate2;
+                            }
+
+                            
+                                string messageBody = string.Format(body, Packagenamename,costumername, startdate, time, From,to,rate1);
+                            //int k = 0;
+                            //foreach (var item in charts)
+                            //{
+                            // string path = Server.MapPath(item.ImageName); // my logo is placed in images folder
+                            string path = Server.MapPath(@"/images/dbug.gif"); // my logo is placed in images folder
+                           // string messageBody = string.Format(body, username, username, ticketdate, tickettime);
+
+                            AlternateView avHtml = AlternateView.CreateAlternateViewFromString(messageBody, null, MediaTypeNames.Text.Html);
+                                LinkedResource logo = new LinkedResource(path, MediaTypeNames.Image.Jpeg);
+
+                               // logo.ContentId = Convert.ToString(k);
+                                avHtml.LinkedResources.Add(logo);
+                                mail.AlternateViews.Add(avHtml);
+                               logo.ContentId = "logo";
+
+                            // k++;
+                            // }
+                            // avHtml.LinkedResources.Add(logo);
+                           
 
 
 
+
+
+                            mail.Subject = "New Package Has Been Added";
+                            mail.Body = messageBody;
+                            mail.IsBodyHtml = true;
+                            SmtpClient smtp = new SmtpClient();
+                            smtp.Host = "smtp.gmail.com";
+                            smtp.EnableSsl = true;
+                            smtp.UseDefaultCredentials = false;
+                            NetworkCredential networkCredential = new NetworkCredential(from, fromPassword);
+
+                            smtp.Credentials = networkCredential;
+                            smtp.Port = 587;
+                            smtp.Send(mail);
+
+
+                       }
+                    }
+                }
+
+
+                catch
+                {
+                    return RedirectToAction("Error");
+                }
 
                 if (TImage != null)
                 {
@@ -112,16 +214,17 @@ namespace DemoApplication.Controllers
                     filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/Package/"), filename3);
                     TImage.SaveAs(filename3);
                 }
-                package.CreatedBy = Session["userEmail"].ToString();
-                package.CreatedDate = DateTime.Now;
-                db.packages.Add(package);
+                db.packages.Attach(package);
+                db.Entry(package).Property(x => x.thumbnail).IsModified = true;
                 db.SaveChanges();
-                return RedirectToAction("Index");
 
+                return RedirectToAction("Index");
             }
+
 
             return View(package);
         }
+
 
 
 
@@ -147,7 +250,7 @@ namespace DemoApplication.Controllers
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadGateway);
         }
-        
+
 
         // POST: Packages/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -193,7 +296,7 @@ namespace DemoApplication.Controllers
                             {
                                 ImageName = "/Uploads/PImage/" + Path.GetFileName(fileName),
                                 Path = Path.GetExtension(fileName),
-                                 PackageId = package.Id,
+                                PackageId = package.Id,
 
                             };
                             fileDetails.Add(image);
@@ -237,8 +340,8 @@ namespace DemoApplication.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-           
-        }
+
+            }
             return View(package);
         }
 
@@ -263,14 +366,14 @@ namespace DemoApplication.Controllers
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadGateway);
         }
-       
+
 
         // POST: Packages/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Package package= db.packages.Find(id);
+            Package package = db.packages.Find(id);
             var model = db.packages.Include(t => t.PImage).SingleOrDefault(x => x.Id == package.Id);
             foreach (var images in model.PImage)
             {
@@ -278,7 +381,7 @@ namespace DemoApplication.Controllers
                 var fileName = Path.Combine(Server.MapPath("/uploads/PImage/"), Path.GetFileName(imagename));
 
                 System.IO.File.Delete(fileName);
-
+                //Directory.Delete(fileName);
                 //  db.Database.ExecuteSqlCommand("delete from Images where ImageName='" + imagename + "'");
 
             }
@@ -300,6 +403,25 @@ namespace DemoApplication.Controllers
             return RedirectToAction("Index");
 
         }
+        public Size NewImageSize(int OriginalHeight, int OriginalWidth, double thumbSize)
+        {
+            Size NewSize;
+            double tempval;
+            if (OriginalHeight < thumbSize && OriginalWidth > thumbSize)
+            {
+                if (OriginalHeight > OriginalWidth)
+                    tempval = thumbSize / Convert.ToDouble(OriginalHeight);
+                else
+                    tempval = thumbSize / Convert.ToDouble(OriginalWidth);
+
+                NewSize = new Size(Convert.ToInt32(tempval * OriginalWidth),
+                                 Convert.ToInt32(tempval * OriginalHeight));
+            }
+            else
+                NewSize = new Size(OriginalWidth, OriginalHeight);
+            return NewSize;
+        }
+
 
         protected override void Dispose(bool disposing)
         {

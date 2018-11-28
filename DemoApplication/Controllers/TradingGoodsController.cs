@@ -9,7 +9,10 @@ using System.Web;
 using System.Web.Mvc;
 using DemoApplication.Models;
 using DemoApplication.Models.DAL;
+using DemoApplication.Models.ViewModels;
 using Newspaper.Filters;
+using Newspaper.Models;
+using Newspaper.Models.ViewModels;
 
 namespace DemoApplication.Controllers
 {
@@ -20,7 +23,6 @@ namespace DemoApplication.Controllers
         private DemoDbContext db = new DemoDbContext();
 
         // GET: TradingGoods
-        [OutputCache(Duration = 60, VaryByParam = "Id")]
 
         public ActionResult Index()
         {
@@ -72,6 +74,111 @@ namespace DemoApplication.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateCart(ShoppingCartDetails cartDetails,FormCollection col)//[Bind(Include = "Id,GoodId,Name,ShortDetail,LongDetail,Thumbail,WholesaleRate,Quantity,CoupenCode,CreatedDate,CreatedBy,EditedBy,EditedDate,Imag )
+        {
+            if (Session["ACategory"] != null)
+            {
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        try
+                        {
+
+
+                            if (Convert.ToInt32(col["customerId"]) != 0)
+                            {
+                                int customerId = Convert.ToInt32(col["customerId"]);
+                                decimal Vat = Convert.ToDecimal(col["vatTotal"]);
+                                decimal Subtotal = Convert.ToDecimal(col["Total"]);
+                                decimal GrandTotal = Convert.ToDecimal(col["GrandTotal"]);
+                                decimal other = Convert.ToDecimal(col["Other"]);
+
+                                var objInvoiceGoods = new Invoice();
+                                var objInvoice = new INVProduct();
+                                objInvoiceGoods.CustomerId = customerId;
+                                objInvoiceGoods.Vat = Vat;
+                                objInvoiceGoods.Subtotal = Subtotal;
+                                objInvoiceGoods.GrandTotal = GrandTotal;
+                                objInvoiceGoods.Other = other;
+                                InvoiceGenerate invoice = db.InvoiceGenerates.FirstOrDefault();
+                                if (invoice == null)
+                                {
+                                    db.InvoiceGenerates.Add(new InvoiceGenerate { InvoiceId = 1 });
+                                    db.SaveChanges();
+                                    invoice = db.InvoiceGenerates.FirstOrDefault();
+                                }
+                                else
+                                {
+                                    invoice.InvoiceId = invoice.InvoiceId + 1;
+                                    db.SaveChanges();
+                                }
+                                string invoicet = invoice.InvoiceId.ToString();
+                                objInvoiceGoods.InvoiceNo = invoice.InvoiceId.ToString();
+                                db.Invoices.Add(objInvoiceGoods);
+                                db.SaveChanges();
+                                try
+                                {
+                                    foreach (var item in cartDetails.AddToCarts)
+                                    {
+
+                                        objInvoice.InvoiceId = invoicet;
+                                        objInvoice.Rate = item.price;
+                                        objInvoice.Quantity = item.Quantity;
+                                        objInvoice.TradingGoodsId = item.ProductId;
+                                        objInvoice.Total = item.Subtotal;
+                                        var goods = db.TradingGoods.Where(t => t.Id == item.ProductId).FirstOrDefault();
+                                        goods.Quantity -= item.Quantity;
+                                        db.INVProducts.Add(objInvoice);
+                                        db.SaveChanges();
+                                    }
+                                    var Sesson = Session["userEmail"].ToString();
+
+                                    db.Database.ExecuteSqlCommand("Delete From cart where SessonId ='" + Sesson + "'");
+                                    return RedirectToAction("Index", "TradingCompletes");
+                                }
+                                catch
+                                {
+
+                                    return RedirectToAction("ViewCart");
+                                }
+
+                            }
+                            TempData["message"] = "Please select costumer";
+                            return RedirectToAction("ViewCart");
+                        }
+                        catch
+                        {
+                            return RedirectToAction("ViewCart");
+                        }
+                        }
+
+                    return RedirectToAction("ViewCart");
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+        }
+        [HttpPost]
+        
+        public ActionResult DeleteCart(int CartId)
+        {
+            try
+            {
+                AddToCart cout = db.addToCarts.Find(CartId);
+                db.addToCarts.Remove(cout);
+                db.SaveChanges();
+                return RedirectToAction("ViewCart");
+
+            }
+            catch
+            {
+                return RedirectToAction("ViewCart");
+            }
+            }
+
+
         // POST: TradingGoods/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -79,52 +186,80 @@ namespace DemoApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TradingGoods TradingGoods,HttpPostedFileBase TImage,ICollection<HttpPostedFileBase> AImage)//[Bind(Include = "Id,GoodId,Name,ShortDetail,LongDetail,Thumbail,WholesaleRate,Quantity,CoupenCode,CreatedDate,CreatedBy,EditedBy,EditedDate,Imag )
         {
-            if (ModelState.IsValid)
+            if (Session["ACategory"] != null)
             {
-               
-                    List<Image> fileDetails = new List<Image>();
-                    foreach (var file in AImage)
-                    {
-                        if (file != null && file.ContentLength > 0)
-                        {
-                            var fileName = Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName));
-
-                       Image image = new Image()
-                        {
-                            ImageName = "/Uploads/Trading"+Path.GetFileName(fileName),
-                            Path = Path.GetExtension(fileName),
-                           
-                            };
-                            fileDetails.Add(image);
-                        file.SaveAs(fileName);
-
-                    }
-                    }
-                TradingGoods.Image = fileDetails;
-
-
-
-
-                if (TImage != null)
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
                 {
-                    string fileName3 = TImage.FileName;
+                    if (ModelState.IsValid)
+                    {
 
-                    string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);
-                    string extension3 = Path.GetExtension(TImage.FileName);
-                    filename3 = TradingGoods.Id + extension3;
-                    TradingGoods.Thumbail = "/images/Thumbail/Trading/" + filename3;
-                    filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/Trading/"), filename3);
-                   TImage.SaveAs(filename3);
+                        List<Image> fileDetails = new List<Image>();
+                        foreach (var file in AImage)
+                        {
+                            if (file != null && file.ContentLength > 0)
+                            {
+                                var fileName = Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName));
+
+                                Image image = new Image()
+                                {
+                                    ImageName = "/Uploads/Trading" + Path.GetFileName(fileName),
+                                    Path = Path.GetExtension(fileName),
+
+                                };
+                                fileDetails.Add(image);
+                                file.SaveAs(fileName);
+
+                            }
+                        }
+                        TradingGoods.Image = fileDetails;
+
+                        db.TradingGoods.Add(TradingGoods);
+                        db.SaveChanges();
+                        db.Entry(TradingGoods).GetDatabaseValues();
+
+
+                        if (TImage != null)
+                        {
+                            string fileName3 = TImage.FileName;
+
+                            string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);
+                            string extension3 = Path.GetExtension(TImage.FileName);
+                            filename3 = TradingGoods.Id + extension3;
+                            TradingGoods.Thumbail = "/images/Thumbail/Trading/" + filename3;
+                            filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/Trading/"), filename3);
+                            TImage.SaveAs(filename3);
+                        }
+
+                        TradingGoods.CreatedBy = Session["userEmail"].ToString();
+                        TradingGoods.CreatedDate = DateTime.Now;
+                        try
+                        {
+                            db.TradingGoods.Attach(TradingGoods);
+                            db.Entry(TradingGoods).Property(x => x.Thumbail).IsModified = true;
+                            db.SaveChanges();
+
+                            String Operation = "Goods created successfully";
+                            db.ActivityLogs.Add(new ActivityLog
+                            {
+                                Operation = Operation,
+                                CreatedBy = Session["userEmail"].ToString(),
+                                CreatedDate = DateTime.Now
+
+                            });
+                            return RedirectToAction("Index");
+                        }
+                        catch
+                        {
+                            return View(TradingGoods);
+                        }
+
+                    }
+                    var modelStateErrors = this.ModelState.Keys.SelectMany(key => this.ModelState[key].Errors);
+
+                    return View(TradingGoods);
                 }
-                TradingGoods.CreatedBy = Session["userEmail"].ToString();
-                TradingGoods.CreatedDate = DateTime.Now;
-                db.TradingGoods.Add(TradingGoods);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                  
             }
-
-            return View(TradingGoods);
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
         }
 
         // GET: TradingGoods/Edit/5
@@ -202,28 +337,37 @@ namespace DemoApplication.Controllers
                         }
                     }
 
-                 
-                        if (TImage != null)
-                        {
-                            string fileName3 = TImage.FileName;
 
-                            string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);
-                            string extension3 = Path.GetExtension(TImage.FileName);
-                            filename3 = TradingGoods.Id + extension3;
-                            TradingGoods.Thumbail = "/images/Thumbail/Trading/" + filename3;
-                            filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/Trading/"), filename3);
-                            TImage.SaveAs(filename3);
+                    if (TImage != null)
+                    {
+                        string fileName3 = TImage.FileName;
+
+                        string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);
+                        string extension3 = Path.GetExtension(TImage.FileName);
+                        filename3 = TradingGoods.Id + extension3;
+                        TradingGoods.Thumbail = "/images/Thumbail/Trading/" + filename3;
+                        filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/Trading/"), filename3);
+                        TImage.SaveAs(filename3);
 
 
-                        }
-                        else
+                    }
+                    else
                     {
                         TradingGoods.Thumbail = thumbail;
                     }
-                        db.SaveChanges();
+                    try { db.SaveChanges();
+                        String Operation = "Goods Edited Sucessfully";
+                        db.ActivityLogs.Add(new ActivityLog
+                        {
+                            Operation = Operation,
+                            CreatedBy = Session["userEmail"].ToString(),
+                            CreatedDate = DateTime.Now
+
+                        });
                         // TradingGoods.Image = fileDetails;
                         var objTradingGoods = db.TradingGoods.SingleOrDefault(m => m.Id == TradingGoods.Id);
                         objTradingGoods.GoodId = TradingGoods.GoodId;
+                        objTradingGoods.Vat = TradingGoods.Vat;
                         objTradingGoods.CoupenCode = TradingGoods.CoupenCode;
                         objTradingGoods.GoodName = TradingGoods.GoodName;
                         objTradingGoods.LongDetail = TradingGoods.LongDetail;
@@ -238,13 +382,39 @@ namespace DemoApplication.Controllers
                         db.Entry(objTradingGoods).Property(x => x.Thumbail).IsModified = true;
                         db.SaveChanges();
                         return RedirectToAction("Index");
-                  
+
+                    }
+                    catch
+                    {
+                        return View(TradingGoods);
+                    }
                     }
 
             }
             return View(TradingGoods);
         }
+        public ActionResult AddGoods()
+        {
+            if (Session["ACategory"] != null)
+            {
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    ViewBag.Id = new SelectList(db.TradingGoods, "Id", "GoodName");
+                    return View();
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+        }
+        [HttpPost]
+        public ActionResult AddGoods([Bind(Include ="Id,Quantity")] TradingGoods tradingGoods)
+        {
+            var goods = db.TradingGoods.Where(t => t.Id == tradingGoods.Id).FirstOrDefault();
+            goods.Quantity += tradingGoods.Quantity;
+           // db.Entry(tradingGoods).Property(x => x.Quantity).IsModified = true;
+            db.SaveChanges();
+            return RedirectToAction("index");
 
+        }
         // GET: TradingGoods/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -290,13 +460,28 @@ namespace DemoApplication.Controllers
                 var fileName1 = Path.Combine(Server.MapPath("~/Images/Thumbail/Trading/"), Path.GetFileName(TradingGoods.Thumbail));
                 System.IO.File.Delete(fileName1);
                 db.TradingGoods.Remove(TradingGoods);
+                string Operation = "Goods deleted successfully";
+                db.ActivityLogs.Add(new ActivityLog
+                {
+                    Operation = Operation,
+                    CreatedBy = Session["userEmail"].ToString(),
+                    CreatedDate = DateTime.Now
+
+                });
 
                 db.SaveChanges();
             }
             catch
             {
                 db.TradingGoods.Remove(TradingGoods);
+                string Operation = "Goods deleted successfully";
+                db.ActivityLogs.Add(new ActivityLog
+                {
+                    Operation = Operation,
+                    CreatedBy = Session["userEmail"].ToString(),
+                    CreatedDate = DateTime.Now
 
+                });
                 db.SaveChanges();
 
             }
@@ -324,11 +509,104 @@ namespace DemoApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             
         }
-        public ActionResult ActivityLog()
+        public ActionResult AddToCart(int ?id)
         {
-            var count = db.ActivityLogs.OrderByDescending(u => u.Id);
-            return View(count.ToList());
+            if (Session["ACategory"] != null)
+            {
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    var good = db.TradingGoods.Find(id);
 
+                    AddToCart add = new AddToCart();
+                    var sesssonid = Session["userEmail"].ToString();
+
+                    var cartitem = db.addToCarts.FirstOrDefault(t => t.ProductId == id && t.SessonId == sesssonid);
+
+                    if (cartitem == null)
+                    {
+                        if (good.Quantity > 0)
+                        {
+                            add.GoodName = good.GoodName;
+                            add.price = good.RetailRate;
+                            add.Quantity = good.Quantity;
+                            add.Subtotal = Convert.ToDecimal(good.Quantity * good.RetailRate);
+                            add.ProductId = good.Id;
+                            add.SessonId = Session["userEmail"].ToString();
+                            if (good.Vat == true)
+                            {
+                                var vat = db.vat.Where(t => t.Id == 1).FirstOrDefault();
+                                add.VatAmount = vat.VatPercent;
+                                add.vat = vat.VatPercent * add.Subtotal / 100;
+                            }
+                            else
+                            {
+                                add.VatAmount = 0;
+                                add.vat = 0;
+                            }
+                            db.addToCarts.Add(add);
+                            db.SaveChanges();
+                            TempData["Message"] = "Added to cart Successfully";
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            TempData["Message"] = " Please update quantity and try again";
+                            return RedirectToAction("Index");
+                        }
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Already exist in cart";
+                        return RedirectToAction("Index");
+
+                    }
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            
+        }
+      
+        public ActionResult EditVats (int id=1)
+        {
+            Vat TradingGoods = db.vat.Find(id);
+            return View(TradingGoods);
+        }
+        [HttpPost]
+        public ActionResult EditVats(Vat vat)
+        {
+            if (ModelState.IsValid)
+            {
+            
+                db.Entry(vat).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+                
+            }
+            return View(vat);
+        }
+        public ActionResult ViewCart()
+        {
+            if (Session["ACategory"] != null)
+            {
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    ShoppingCartDetails mymodel = new ShoppingCartDetails();
+                    string Sesson = Session["userEmail"].ToString();
+                    mymodel.AddToCarts = db.addToCarts.Where(t => t.SessonId == Sesson).ToList();
+                    mymodel.Customers = db.customers.ToList();
+
+                    return View(mymodel);
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+        }
+        public ActionResult Dashboard() {
+            var Customer = db.customers.Where(t => t.CustomerCategory == "Trading");
+             ViewBag.good = db.TradingGoods.Count();
+            var sesson = Session["userEmail"].ToString();
+             ViewBag.cartitem = db.addToCarts.Where(t => t.SessonId ==sesson).Count();
+            ViewBag.Message = db.Costumers.Count();
+            return View();
         }
         protected override void Dispose(bool disposing)
         {

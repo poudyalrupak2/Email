@@ -13,6 +13,7 @@ using System.Net;
 using System.Data.Entity;
 using DemoApplication.Models.DAL;
 using Newspaper.Models.ViewModels;
+using System.Web.Helpers;
 
 namespace Newspaper.Controllers
 {
@@ -32,7 +33,6 @@ namespace Newspaper.Controllers
         }
 
         [HttpPost]
-
         public ActionResult Login(DemoApplication.Models.Login l, string ReturnUrl = "")
          {
 
@@ -40,7 +40,8 @@ namespace Newspaper.Controllers
             var Admin = _db.Login.FirstOrDefault(a => (a.Email ==l.Email));
             if (Admin != null)
             {
-                if (l.Password == Admin.Password)
+                string pass = Crypto.Hash(l.Password);
+               if(string.Compare(pass,Admin.Password)==0)
                 {
                     // FormsAuthentication.SetAuthCookie(l.Email);
                     if (Url.IsLocalUrl(ReturnUrl))
@@ -60,8 +61,8 @@ namespace Newspaper.Controllers
                         Session.Add("id", Admin.Id);
                         Session.Add("userEmail", Admin.Email);
                         Session.Add("category", Admin.Category);
-                    
-                        var objAdmin = _db.Login.FirstOrDefault(a => (a.Email == l.Email && a.Password == l.Password));
+              
+                        var objAdmin = _db.Login.FirstOrDefault(a => (a.Email == l.Email && a.Password == pass));
                         if (objAdmin.Category == "Admin")
                         {
                          
@@ -70,6 +71,12 @@ namespace Newspaper.Controllers
                             Session.Add("ACategory", catecory);
                             if (catecory == "Trading")
                             {
+                                string email = Session["userEmail"].ToString();
+                                var cartitem = _db.addToCarts.Where(t => t.SessonId == email).ToList();
+                              if(cartitem.Count>0)
+                                {
+                                    _db.Database.ExecuteSqlCommand("Delete From cart where SessonId ='" + email + "'");
+                                }
                                 ViewBag.message = "Trading";
                                 return RedirectToAction("Index", "TradingGoods");
                             }
@@ -284,7 +291,7 @@ namespace Newspaper.Controllers
                              where q.Email ==message
                              select q).First();
                 string password =pass.Password;
-                query.Password = password;
+                query.Password = Crypto.Hash(password);
                 query.randompass = null;
                 _db.SaveChanges();
                 return RedirectToAction("Login");
@@ -300,8 +307,20 @@ namespace Newspaper.Controllers
         }
         public ActionResult Logout()
         {
-            Session.Abandon();
-            return RedirectToAction("Login");
+           
+            var Sesson= Session["userEmail"].ToString();
+           string category=_db.Login.Where(t => t.Email == Sesson).Select(t=>t.Category).FirstOrDefault();
+            if (category != null)
+            {
+                _db.Database.ExecuteSqlCommand("Delete From cart where SessonId ='" + Sesson + "'");
+                Session.Abandon();
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                Session.Abandon();
+                return RedirectToAction("Login");
+            }
         }
         public ActionResult ActivityLog()
         {

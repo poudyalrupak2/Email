@@ -24,7 +24,6 @@ namespace DemoApplication.Controllers
     {
         private DemoDbContext db = new DemoDbContext();
         // GET: CustomerSuperAdmins
-        [OutputCache(Duration = 60, VaryByParam = "Id")]
 
         public ActionResult Index()
         {
@@ -130,7 +129,8 @@ namespace DemoApplication.Controllers
 
                     string from = "dbugtest2016@gmail.com";
                     string fromPassword = "my@test#";
-                    string password = Membership.GeneratePassword(6, 1);
+                    Random generator = new Random();
+                    String password = generator.Next(0, 999999).ToString("D6");
                     using (MailMessage mail = new MailMessage(from, customerSuperAdmin.email1))
                     {
 
