@@ -39,18 +39,20 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.MfdDate, new { @class = "control-label col-md-2" })
 
-                @Html.TextBoxFor(model => model.MfdDate, new { @class = "form-control",id="datepicker" })
+                @Html.TextBoxFor(model => model.MfdDate, new { @class = "form-control", id = "datepicker" })
                 @Html.ValidationMessageFor(model => model.MfdDate, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="col-md-4 mb-3">
             <div class="form-group">
                 @Html.LabelFor(model => model.ExpiryDate, new { @class = "control-label col-md-2" })
 
-                @Html.TextBoxFor(model => model.ExpiryDate, new { @class = "form-control",id="datepicker1" })
+                @Html.TextBoxFor(model => model.ExpiryDate, new { @class = "form-control", id = "datepicker1" })
                 @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         <div class="col-md-4 mb-3">
             <div class="form-group">
@@ -60,12 +62,14 @@
                 @Html.ValidationMessageFor(model => model.ShortDetail, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="col-md-4 mb-3">
             <div class="form-group">
-                @Html.LabelFor(model => model.Vat, new { @class = "control-label col-md-2" })
-
-                @Html.CheckBoxFor(model => model.Vat, new { @class = "form-control" })
+                <label>Vat</label>&nbsp;
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="true" name="Vat" style="height:15px;width:15px;" />
+                    </label>
+                </div>
                 @Html.ValidationMessageFor(model => model.Vat, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -74,7 +78,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.LongDetail, new { @class = "control-label col-md-2" })
 
-                @Html.TextAreaFor(model => model.LongDetail, new { @class = "form-control", @cols = 20, @rows = 8 })
+                @Html.TextAreaFor(model => model.LongDetail, new { @class = "form-control", @cols = 20, @rows = 5 })
                 @Html.ValidationMessageFor(model => model.LongDetail, "", new { @class = "text-danger" })
             </div>
         </div>

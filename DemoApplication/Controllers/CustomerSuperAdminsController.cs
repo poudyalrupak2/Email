@@ -71,7 +71,7 @@ namespace DemoApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CustumerId,Name,RegisterDate,Categoty,email1,email2,Phone1,PanNo,URL,CustomerType,Detail,WorkingArea,NatureOfWork,CitizenShipPhoto,CompanyDocument,Logo,PpsizePhoto,RandomPass,Password")] CustomerSuperAdmin customerSuperAdmin, Models.Login login, HttpPostedFileBase CImageFile, HttpPostedFileBase PPImageFile, HttpPostedFileBase LImageFile, HttpPostedFileBase CDImageFile)
+        public ActionResult Create(CustomerSuperAdmin customerSuperAdmin, Models.Login login, HttpPostedFileBase CImageFile, HttpPostedFileBase PPImageFile, HttpPostedFileBase LImageFile, HttpPostedFileBase CDImageFile)
         {
 
             if (ModelState.IsValid)
@@ -127,8 +127,8 @@ namespace DemoApplication.Controllers
                     }
                     //save new record in database
 
-                    string from = "dbugtest2016@gmail.com";
-                    string fromPassword = "my@test#";
+                    string from = "hsakib2051@gmail.com";
+                    string fromPassword = "0815826X";
                     Random generator = new Random();
                     String password = generator.Next(0, 999999).ToString("D6");
                     using (MailMessage mail = new MailMessage(from, customerSuperAdmin.email1))
@@ -163,7 +163,7 @@ namespace DemoApplication.Controllers
 
 
                         }
-                        catch
+                        catch(Exception e)
                         {
                             return RedirectToAction("Error");
                         }

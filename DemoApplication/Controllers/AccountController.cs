@@ -38,6 +38,7 @@ namespace Newspaper.Controllers
 
 
             var Admin = _db.Login.FirstOrDefault(a => (a.Email ==l.Email));
+            
             if (Admin != null)
             {
                 string pass = Crypto.Hash(l.Password);
@@ -61,8 +62,14 @@ namespace Newspaper.Controllers
                         Session.Add("id", Admin.Id);
                         Session.Add("userEmail", Admin.Email);
                         Session.Add("category", Admin.Category);
-              
                         var objAdmin = _db.Login.FirstOrDefault(a => (a.Email == l.Email && a.Password == pass));
+                        if (objAdmin != null)
+                        {
+                            string username = _db.Costumers.FirstOrDefault(m => m.email1 == objAdmin.Email).Name;
+                            string phone = _db.Costumers.FirstOrDefault(m => m.email1 == objAdmin.Email).Phone1;
+                            Session.Add("name", username);
+                            Session.Add("phone", phone);
+                        }
                         if (objAdmin.Category == "Admin")
                         {
                          

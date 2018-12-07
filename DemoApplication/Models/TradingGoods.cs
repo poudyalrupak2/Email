@@ -11,7 +11,7 @@ namespace DemoApplication.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Goodid is required")]
-        public int GoodId { get; set; }
+        public String GoodId { get; set; }
         [Required(ErrorMessage = "GoodName is required")]
         public string GoodName { get; set; }
         [Required]
@@ -26,8 +26,6 @@ namespace DemoApplication.Models
         public HttpPostedFileBase TImageFile { get; set; }
         [Required(ErrorMessage ="retail price is required ")]
        public decimal RetailRate { get; set; }
-        [Required(ErrorMessage = "wholesale rate is required")]
-
         public int? WholesaleRate { get; set; }
         //[Required(ErrorMessage = "Quantity is   required")]
         //public int? Discount { get; set; }
