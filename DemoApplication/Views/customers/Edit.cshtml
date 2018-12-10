@@ -25,7 +25,7 @@
 
         <div class="col-md-4 mb-3">
             <div class="form-group">
-                @Html.LabelFor(model => model.Firstname, new { @class = "control-label col-md-2" })
+                <label>First Name</label>
                 @Html.TextBoxFor(model => model.Firstname, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
             </div>
@@ -33,16 +33,14 @@
 
         <div class="col-md-4 mb-3">
             <div class="form-group">
-                @Html.LabelFor(model => model.Middlename, new { @class = "control-label col-md-2" })
-
+<label>Middle Name</label>
                 @Html.TextBoxFor(model => model.Middlename, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Middlename, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="form-group">
-                @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
-
+<label>Last Name</label>
                 @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
             </div>
@@ -141,20 +139,20 @@
 
 
 
-
+        
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="col-md col-md-12">
+                <center>
+                    <input type="submit" value="Edit Customers" class="btn btn-primary" />
+                    @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-primary" })
+
+                </center>
             </div>
         </div>
     </div>
 }
 
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-</div>
+
 @section Scripts {
     <link rel="stylesheet" href="~/Scripts/jquery-ui-1.12.1/jquery-ui.css">
     <link rel="stylesheet" href="~/Scripts/nepali.datepicker.v2.2.min.css">

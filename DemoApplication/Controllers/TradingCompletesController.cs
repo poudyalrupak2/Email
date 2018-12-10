@@ -78,43 +78,43 @@ namespace DemoApplication.Controllers
 
         }
         [HttpPost]
-        public ActionResult Printlist(string name, string email,string invoice)
+        public ActionResult Printlist(string invoiceNo)//,string name, string email,string invoice)
         {
             var objTradingGoods = db.Invoices.Include(m => m.Customer).ToList();
-            if (name != "")
-            {
-                objTradingGoods = db.Invoices.Include(m => m.Customer).Where(s => s.Customer.Firstname.Contains(name) || s.Customer.LastName.Contains(name) || (s.Customer.Firstname + " " + s.Customer.Middlename).Contains(name) || (s.Customer.Firstname + " " + s.Customer.Middlename + " " + s.Customer.LastName).Contains(name) || (s.Customer.Firstname + " " + s.Customer.LastName).Contains(name)).ToList();
+            //if (name != "")
+            //{
+            //    objTradingGoods = db.Invoices.Include(m => m.Customer).Where(s => s.Customer.Firstname.Contains(name) || s.Customer.LastName.Contains(name) || (s.Customer.Firstname + " " + s.Customer.Middlename).Contains(name) || (s.Customer.Firstname + " " + s.Customer.Middlename + " " + s.Customer.LastName).Contains(name) || (s.Customer.Firstname + " " + s.Customer.LastName).Contains(name)).ToList();
 
-                if (email != "")
-                {
-                    objTradingGoods = objTradingGoods.Where(x => x.Customer.email1.Contains(email)).ToList();// db.TradingCompletes.Include(m => m.Customer).Include(m => m.TradingGoods).Where(x => x.Customer.Firstname.Contains(search1) && x.Customer.email1.Contains(search2)).ToList();
-                }
+            //    if (email != "")
+            //    {
+            //        objTradingGoods = objTradingGoods.Where(x => x.Customer.email1.Contains(email)).ToList();// db.TradingCompletes.Include(m => m.Customer).Include(m => m.TradingGoods).Where(x => x.Customer.Firstname.Contains(search1) && x.Customer.email1.Contains(search2)).ToList();
+            //    }
 
-                if (invoice != "")
+                if (invoiceNo != "")
                 {
-                    objTradingGoods = objTradingGoods.Where(x => x.InvoiceNo.Contains(invoice)).ToList();// db.TradingCompletes.Include(m => m.Customer).Include(m => m.TradingGoods).Where(x => x.Customer.Firstname.Contains(search1) && x.Customer.email1.Contains(search2)).ToList();
+                    objTradingGoods = objTradingGoods.Where(x => x.InvoiceNo==invoiceNo).ToList();// db.TradingCompletes.Include(m => m.Customer).Include(m => m.TradingGoods).Where(x => x.Customer.Firstname.Contains(search1) && x.Customer.email1.Contains(search2)).ToList();
                 }
-            }
-           else if (email != "")
-            {
-                objTradingGoods = objTradingGoods.Where(x => x.Customer.email1.Contains(email)).ToList();// db.TradingCompletes.Include(m => m.Customer).Include(m => m.TradingGoods).Where(x => x.Customer.Firstname.Contains(search1) && x.Customer.email1.Contains(search2)).ToList();
-                if (name != "")
-                {
-                      objTradingGoods = db.Invoices.Include(m => m.Customer).Where(s => s.Customer.Firstname.Contains(name) || s.Customer.LastName.Contains(name) || (s.Customer.Firstname + " " + s.Customer.Middlename).Contains(name) || (s.Customer.Firstname + " " + s.Customer.Middlename + " " + s.Customer.LastName).Contains(name) || (s.Customer.Firstname + " " + s.Customer.LastName).Contains(name)).ToList();
+           // }
+           //else if (email != "")
+           // {
+           //     objTradingGoods = objTradingGoods.Where(x => x.Customer.email1.Contains(email)).ToList();// db.TradingCompletes.Include(m => m.Customer).Include(m => m.TradingGoods).Where(x => x.Customer.Firstname.Contains(search1) && x.Customer.email1.Contains(search2)).ToList();
+           //     if (name != "")
+           //     {
+           //           objTradingGoods = db.Invoices.Include(m => m.Customer).Where(s => s.Customer.Firstname.Contains(name) || s.Customer.LastName.Contains(name) || (s.Customer.Firstname + " " + s.Customer.Middlename).Contains(name) || (s.Customer.Firstname + " " + s.Customer.Middlename + " " + s.Customer.LastName).Contains(name) || (s.Customer.Firstname + " " + s.Customer.LastName).Contains(name)).ToList();
 
                   
-                }
+           //     }
 
-                if (invoice != "")
-                {
-                    objTradingGoods = objTradingGoods.Where(x => x.InvoiceNo.Contains(invoice)).ToList();// db.TradingCompletes.Include(m => m.Customer).Include(m => m.TradingGoods).Where(x => x.Customer.Firstname.Contains(search1) && x.Customer.email1.Contains(search2)).ToList();
-                }
-            }
+           //     if (invoice != "")
+           //     {
+           //         objTradingGoods = objTradingGoods.Where(x => x.InvoiceNo.Contains(invoice)).ToList();// db.TradingCompletes.Include(m => m.Customer).Include(m => m.TradingGoods).Where(x => x.Customer.Firstname.Contains(search1) && x.Customer.email1.Contains(search2)).ToList();
+           //     }
+           // }
 
-            else
-            {
-                objTradingGoods = db.Invoices.Include(m => m.Customer).Where(x => x.InvoiceNo==invoice).ToList();
-            }
+           // else
+           // {
+           //     objTradingGoods = db.Invoices.Include(m => m.Customer).Where(x => x.InvoiceNo==invoice).ToList();
+           // }
             invoiceVM invoiceVM = new invoiceVM();
             invoiceVM.Goods = new List<Goods>();
             if (objTradingGoods.Count() == 1)

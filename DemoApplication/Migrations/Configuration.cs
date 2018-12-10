@@ -4,6 +4,7 @@ namespace DemoApplication.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Web.Helpers;
 
     internal sealed class Configuration : DbMigrationsConfiguration<DemoApplication.Models.DAL.DemoDbContext>
     {
@@ -20,6 +21,12 @@ namespace DemoApplication.Migrations
             //  to avoid creating duplicate seed data.
             context.vat.AddOrUpdate(x => x.Id,
        new Models.Vat() { Id = 1, VatPercent = 13 });
+            context.Login.AddOrUpdate(x => x.Id, new Models.Login()
+            {
+                Id = 1,
+                Email ="poudyalrupak2@gmail.com",
+                Password = Crypto.Hash("nepalnepal1")
+            });
         }
     }
 }

@@ -124,15 +124,16 @@ namespace DemoApplication.Controllers
                 string category = Session["ACategory"].ToString();
                 var costumer = db.customers.Where(t => t.category == category).Select(t => t.email1).ToList();
                 var rate = db.customers.Where(t => t.category == category).Select(t => t.CustomerCategory).ToList();
-
-                try
-                {
-                    for (int i = 0; i < costumer.Count; i++)
-
-
+               
+                    try
                     {
-                        using (MailMessage mail = new MailMessage(from, costumer[i]))
+                    using (var smtp = new SmtpClient())
+                    {
+                        for (int i = 0; i < costumer.Count; i++)
                         {
+
+                            var message = new MailMessage();
+                            message.To.Add(new MailAddress(costumer[i]));
                             string email = costumer[i];
                             var name = db.customers.FirstOrDefault(t => t.category == category && t.email1 == email).Firstname;
                             var image = package.thumbnail;
@@ -144,58 +145,52 @@ namespace DemoApplication.Controllers
                             DateTime endtime = Convert.ToDateTime(startdate).AddDays(package.Duration);
                             string time = endtime.ToShortDateString();
                             decimal rate1;
-                            if(rate[i]=="Wholesale")
+                            if (rate[i] == "Wholesale")
                             {
-                                 rate1 = package.Rate1;
+                                rate1 = package.Rate1;
                             }
                             else
                             {
-                                 rate1 = package.Rate2;
+                                rate1 = package.Rate2;
                             }
 
-                            
-                                string messageBody = string.Format(body, Packagenamename,costumername, startdate, time, From,to,rate1);
+
+                            string messageBody = string.Format(body, Packagenamename, costumername, startdate, time, From, to, rate1);
                             //int k = 0;
                             //foreach (var item in charts)
                             //{
                             // string path = Server.MapPath(item.ImageName); // my logo is placed in images folder
                             string path = Server.MapPath(@"/images/dbug.gif"); // my logo is placed in images folder
-                           // string messageBody = string.Format(body, username, username, ticketdate, tickettime);
+                                                                               // string messageBody = string.Format(body, username, username, ticketdate, tickettime);
 
                             AlternateView avHtml = AlternateView.CreateAlternateViewFromString(messageBody, null, MediaTypeNames.Text.Html);
-                                LinkedResource logo = new LinkedResource(path, MediaTypeNames.Image.Jpeg);
+                            LinkedResource logo = new LinkedResource(path, MediaTypeNames.Image.Jpeg);
 
-                               // logo.ContentId = Convert.ToString(k);
-                                avHtml.LinkedResources.Add(logo);
-                                mail.AlternateViews.Add(avHtml);
-                               logo.ContentId = "logo";
+                            // logo.ContentId = Convert.ToString(k);
+                            avHtml.LinkedResources.Add(logo);
+                            message.AlternateViews.Add(avHtml);
+                            logo.ContentId = "logo";
 
                             // k++;
                             // }
                             // avHtml.LinkedResources.Add(logo);
-                           
 
 
 
 
 
-                            mail.Subject = "New Package Has Been Added";
-                            mail.Body = messageBody;
-                            mail.IsBodyHtml = true;
-                            SmtpClient smtp = new SmtpClient();
-                            smtp.Host = "smtp.gmail.com";
-                            smtp.EnableSsl = true;
-                            smtp.UseDefaultCredentials = false;
-                            NetworkCredential networkCredential = new NetworkCredential(from, fromPassword);
 
-                            smtp.Credentials = networkCredential;
-                            smtp.Port = 587;
-                            smtp.Send(mail);
+                            message.Subject = "New Package Has Been Added";
+                            message.Body = messageBody;
+                            message.IsBodyHtml = true;
 
 
+                            smtp.Send(message);
+
+                        }
                        }
                     }
-                }
+                
 
 
                 catch

@@ -7,7 +7,6 @@
 
 
 <div>
-    <h4>CustomerSuperAdmin</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RegisterDate)
+            <label>Registration date:</label>
         </dt>
 
         <dd>
@@ -91,7 +90,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WorkingArea)
+           <label> Nature of Work</label>
         </dt>
 
         <dd>
@@ -99,7 +98,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NatureOfWork)
+            <label>Objectives:</label>
         </dt>
 
         <dd>
@@ -132,8 +131,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Back to List", "Index",null,new{ @class = "btn btn-primary"})
 </p>
 
 @section Nav{

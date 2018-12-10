@@ -198,10 +198,23 @@ namespace DemoApplication.Controllers
                         {
                             if (file != null && file.ContentLength > 0)
                             {
+                                string firstpath = "/uploads/";
+                                string subPath = "/uploads/Trading/"; // your code goes here
+                                bool imageexist = System.IO.Directory.Exists(Server.MapPath(firstpath));
+                                bool exists = System.IO.Directory.Exists(Server.MapPath(subPath));
+                                if (!imageexist)
+                                {
+                                    System.IO.Directory.CreateDirectory(Server.MapPath(firstpath));
+                                }
+                                if (!exists)
+                                {
+                                    System.IO.Directory.CreateDirectory(Server.MapPath(subPath));
+                                }
                                 var fileName = Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName));
 
                                 Image image = new Image()
                                 {
+
                                     ImageName = "/Uploads/Trading" + Path.GetFileName(fileName),
                                     Path = Path.GetExtension(fileName),
 
@@ -220,6 +233,24 @@ namespace DemoApplication.Controllers
 
                         if (TImage != null)
                         {
+                            string firstpath = "/image/";
+                            string subPath = "/uploads/Thumbail/"; // your code goes here
+                            string TPAth = "/Uploads/Thumbail/Trading/";
+                            bool imageexist = System.IO.Directory.Exists(Server.MapPath(firstpath));
+                            bool exists = System.IO.Directory.Exists(Server.MapPath(subPath));
+                            bool Texists = System.IO.Directory.Exists(Server.MapPath(TPAth));
+                            if (!imageexist)
+                            {
+                                System.IO.Directory.CreateDirectory(Server.MapPath(firstpath));
+                            }
+                            if (!exists)
+                            {
+                                System.IO.Directory.CreateDirectory(Server.MapPath(subPath));
+                            }
+                            if(!Texists)
+                            {
+                                System.IO.Directory.CreateDirectory(Server.MapPath(TPAth));
+                            }
                             string fileName3 = TImage.FileName;
 
                             string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);

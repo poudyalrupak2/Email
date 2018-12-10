@@ -4,9 +4,9 @@
     ViewBag.Title = "ViewCart";
     Layout = "~/Views/Shared/_LayoutTrading.cshtml";
 }
-@if (TempData["message"]!= null)
+@if (TempData["message"] != null)
 {
-<div class="alert alert-danger">@TempData["message"] </div>
+    <div class="alert alert-danger">@TempData["message"] </div>
 }
 
 
@@ -113,7 +113,7 @@
             <td></td>
             <td></td>
             <td align="right">SubTotal:</td>
-            <td>
+            <td style="width:20%;">
                 @{
                     decimal sum = Model.AddToCarts.Sum(modelItem => modelItem.Subtotal);
                     <input class="form-control" name="Total" id="txtGrandTotal" readonly="readonly" value="@sum">
@@ -156,7 +156,7 @@
             </td>
         </tr>
     </table>
-                   @Html.ActionLink("Back to Goods", "Index", null, new {@Class="btn btn-primary" })
+    <center>@Html.ActionLink("Back to Goods", "Index", null, new { @Class = "btn btn-primary" })</center>
     <table class="table" id="tblCustomer">
         <thead>
             <tr>
@@ -236,7 +236,7 @@
 
     </table>
 
-    <input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary btn-lg" />
+    <center>  <input type="submit" value=" &nbsp;&nbsp;Submit &nbsp;&nbsp;" id="btnSubmit" class="btn btn-primary mb-xl-5" style="text-align:center"/></center>
 }
 @section scripts{
     <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />

@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<DemoApplication.Models.Invoice>
 
-@{
-    /**/
-
+@{ 
 
     Layout = "~/Views/Shared/_LayoutTrading.cshtml";
 }
@@ -18,196 +16,226 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    @using (Html.BeginForm("Printlist", "TradingCompletes", null, FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
 
-                        <div class="form-group">
+                        <div class="col-md-12">
                             <div class="col-md-4 mb-3">
+                                <div class="form-group">
 
-                                <label> Name:</label><input type="text" id="txtName" class="form-control" name="name">
+                                    <label>Name:</label><input type="text" id="txtName" class="form-control" name="name">
+
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
+
                             <div class="col-md-4 mb-3">
-                                <label>Email:</label><input type="text" id="txtSearch" class="form-control" name="email" />
+                                <div class="form-group">
+
+                                    <label>Email:</label><input type="text" id="txtSearch" class="form-control" name="email" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
                             <div class="col-md-4 mb-3">
-                                <label> Invoice:</label><input type="text" id="txtinvoice" class="form-control" name="invoice">
+                                <div class="form-group">
+
+                                    <label>Invoice:</label><input type="text" id="txtinvoice" class="form-control" name="invoice">
+                                </div>
                             </div>
-                        </div>
-                        <table class="table" id="tblCustomer">
+                    </div>
+                    <table class="table" id="tblCustomer">
 
 
-                            <thead>
+                        <thead>
+                            <tr>
+                                <th>
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.InvoiceNo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Vat)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Other)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.GrandTotal)
+                                </th>
+                                <th>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
                                 <tr>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th>
-                                        Email
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.InvoiceNo)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Vat)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Other)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.GrandTotal)
-                                    </th>
+                                    <td></td>
+                                    <td>
+                                        @item.Customer.Firstname &nbsp;@item.Customer.LastName
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Customer.email1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InvoiceNo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Vat)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Other)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GrandTotal)
+                                    </td>
+                                    <td>
+                                        @using (Html.BeginForm("Printlist", "TradingCompletes", null, FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="invoiceNo" value="@item.InvoiceNo" />
+                                            <input type="submit" value="View" class="btn btn-primary" />
+                                        }
+
+                                    </td>
 
                                 </tr>
-                            </thead>
+                            }
+                        </tbody>
 
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.Customer.Firstname &nbsp;@item.Customer.LastName
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Customer.email1)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.InvoiceNo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Vat)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Other)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.GrandTotal)
-                                        </td>
+                    </table>
 
-                                    </tr>
-                                }
-                            </tbody>
-
-                        </table>
-                        <input type="submit" value="submit" class="btn btn-primary" />
-                    }
-                    </div>
                 </div>
             </div>
-                    @section Scripts {
-                        @Scripts.Render("~/bundles/jquery")
-                        @Scripts.Render("~/bundles/jqueryval")
-                        <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/jqueryval")
+            <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
 
-                        <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
-                        <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
-                        <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+            <link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+            <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+            <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
 
-                        <script src="~/Scripts/datatables/dataTables.bootstrap.js"></script>
+            <script src="~/Scripts/datatables/dataTables.bootstrap.js"></script>
 
-                        <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
+            <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
 
-                        <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
-                        <script src="~/Content/DataTables/css/jquery.dataTables.yadcf.js"></script>
-                        <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
-                        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-                        <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css" />
-                        <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap.css" />
-
-
-
-                        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-                        <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
-                        <script src="~/Scripts/datatables/dataTables.bootstrap.js"></script>
-                        <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
-
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                oTable = $("#tblCustomer").DataTable({
-                                    "dom": "rt",
-                                });
-
-
-                                //$("#tblCustomer").DataTable();
-
-                                //$('body #tblCustomer tfoot th').each(function () {
-                                //    var title = $(this).text();
-                                //    if (title == "Email") {
-                                //        $(this).html('<input name="email" id="txtEmail" type="text" placeholder="Search ' + title + '" />');
-                                //    }
-                                //    else if (title == "Name") {
-                                //        $(this).html('<input name="name" type="text" id="txtName" placeholder="Search ' + title + '" />');
-                                //    }
-                                //    else if (title == "Invoice") {
-                                //        $(this).html('<input name="invoice" type="text" id="txtInvoice" placeholder="Search ' + title + '" />');
-                                //    }
-                                //    else {
-                                //        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-                                //    }
-                                //});
-
-
-                                //var table = $('#tblCustomer').DataTable();
-
-                                // Apply the search
-
-                                //$('body #tblCustomer tfoot input#txtEmail').on('keyup change', function () {
-                                //    if (table.columns(1).search() !== this.value) {
-                                //        table.columns(1)
-                                //            .search(this.value)
-                                //            .draw();
-                                //    }
-                                //});
-                                //$('body #tblCustomer tfoot input#txtName').on('keyup change', function () {
-                                //    if (table.columns(0).search() !== this.value) {
-                                //        table.columns(0)
-                                //            .search(this.value)
-                                //            .draw();
-                                //    }
-                                //});
-                                //$('body #tblCustomer tfoot input#txtInvoice').on('keyup change', function () {
-                                //    if (table.columns(2).search() !== this.value) {
-                                //        table.columns(2)
-                                //            .search(this.value)
-                                //            .draw();
-                                //    }
-                                //});
-                                var table = $('#tblCustomer').DataTable();
+            <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+            <script src="~/Content/DataTables/css/jquery.dataTables.yadcf.js"></script>
+            <link rel=" stylesheet" href="~/Content/DataTables/css/jquery.dataTables.yadcf.css" />
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+            <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css" />
+            <link rel="stylesheet" href="~/Content/DataTables/css/dataTables.bootstrap.css" />
 
 
 
-                                $('#txtSearch').on('keyup change', function () {
-                                    if (table.columns(1).search() !== this.value) {
-                                        table.columns(1)
-                                            .search(this.value)
-                                            .draw();
-                                    }
-                                });
-                                $('#txtName').on('keyup change', function () {
-                                    if (table.columns(0).search() !== this.value) {
-                                        table.columns(0)
-                                            .search(this.value)
-                                            .draw();
-                                    }
-                                });
-                                $('#txtinvoice').on('keyup change', function () {
-                                    if (table.columns(2).search() !== this.value) {
-                                        table.columns(2)
-                                            .search(this.value)
-                                            .draw();
-                                    }
-                                });
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script src="~/Scripts/datatables/jquery.dataTables.js"></script>
+            <script src="~/Scripts/datatables/dataTables.bootstrap.js"></script>
+            <script src="~/Scripts/datatables/bootstrap3-typeahead.js"></script>
 
-                                $('#myInputTextField').keyup(function () {
-                                    oTable.search($(this).val()).draw();
-                                });
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    var t = $("#tblCustomer").DataTable({
+                        "dom": "rt",
+                        "order": [[3, "assc"]],
+                        "columnDefs": [
 
-                            });
+                            { "orderable": false, "targets": 0 },
+                            { "orderable": false, "targets": 7 }
 
-                        </script>
+                            ]
 
-                    }
+
+                    });
+                    t.on('order.dt search.dt', function () {
+                        t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                            cell.innerHTML = i + 1;
+                        })
+                    }).draw();
+
+
+                        var table = $('#tblCustomer').DataTable();
+
+
+
+                        $('#txtSearch').on('keyup change', function () {
+                            if (table.columns(2).search() !== this.value) {
+                                table.columns(2)
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        });
+                        $('#txtName').on('keyup change', function () {
+                            if (table.columns(1).search() !== this.value) {
+                                table.columns(1)
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        });
+                        $('#txtinvoice').on('keyup change', function () {
+                            if (table.columns(3).search() !== this.value) {
+                                table.columns(3)
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        });
+
+                        $('#myInputTextField').keyup(function () {
+                            oTable.search($(this).val()).draw();
+                        });
+
+                                        
+                });
+
+            </script>
+
+        }
+
+        @*//$("#tblCustomer").DataTable();
+
+        //$('body #tblCustomer tfoot th').each(function () {
+        //    var title = $(this).text();
+        //    if (title == "Email") {
+        //        $(this).html('<input name="email" id="txtEmail" type="text" placeholder="Search ' + title + '" />');
+        //    }
+        //    else if (title == "Name") {
+        //        $(this).html('<input name="name" type="text" id="txtName" placeholder="Search ' + title + '" />');
+        //    }
+        //    else if (title == "Invoice") {
+        //        $(this).html('<input name="invoice" type="text" id="txtInvoice" placeholder="Search ' + title + '" />');
+        //    }
+        //    else {
+        //        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        //    }
+        //});
+
+
+        //var table = $('#tblCustomer').DataTable();
+
+        // Apply the search
+
+        //$('body #tblCustomer tfoot input#txtEmail').on('keyup change', function () {
+        //    if (table.columns(1).search() !== this.value) {
+        //        table.columns(1)
+        //            .search(this.value)
+        //            .draw();
+        //    }
+        //});
+        //$('body #tblCustomer tfoot input#txtName').on('keyup change', function () {
+        //    if (table.columns(0).search() !== this.value) {
+        //        table.columns(0)
+        //            .search(this.value)
+        //            .draw();
+        //    }
+        //});
+        //$('body #tblCustomer tfoot input#txtInvoice').on('keyup change', function () {
+        //    if (table.columns(2).search() !== this.value) {
+        //        table.columns(2)
+        //            .search(this.value)
+        //            .draw();
+        //    }
+        //});*@

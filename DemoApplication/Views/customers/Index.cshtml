@@ -76,7 +76,7 @@
 
                                 <td>
                                     @Html.ActionLink("Edit", "Edit", new { id = item.CustomerId }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.CustomerId }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.CustomerId }) 
                                 </td>
                             </tr>
                         }
@@ -84,7 +84,9 @@
                 </table>
 
                 <p>
-                    @Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-primary" })
+                    <center>
+                        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+                    </center>
                 </p>
             </div>
         </div>
@@ -134,7 +136,7 @@
                         "bInfo": false,
                         "dom": "Bfrtp",
                         "language": {
-                            "search": "Filter :"
+                            "search": "Filter Customers :"
                         },
 
                         'initComplete': function () {

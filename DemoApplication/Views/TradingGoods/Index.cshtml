@@ -5,7 +5,7 @@
 }
 @if (TempData["Message"] != null)
 {
-    <div class="alert alert-danger">@TempData["Message"] </div>
+    <div class="alert alert-info">@TempData["Message"] </div>
 }
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -58,8 +58,10 @@
             </tbody>
         </table>
         <p>
-            @Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-primary" })|
-            @Html.ActionLink("Add", "AddGoods", null, new { @class = "btn btn-primary" })
+            <center>
+                @Html.ActionLink("Create Goods", "Create", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Add Goods", "AddGoods", null, new { @class = "btn btn-primary" })
+            </center>
 
         </p>
     </div>
@@ -108,7 +110,7 @@
                         "bInfo": false,
                         "dom": "Bfrtp",
                         "language": {
-                            "search": "Filter :"
+                            "search": "Filter Goods:"
                         },
 
                         'initComplete': function () {

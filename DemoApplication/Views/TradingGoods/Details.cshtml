@@ -72,43 +72,14 @@
             @Html.DisplayFor(model => model.CoupenCode)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EditedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EditedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EditedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EditedDate)
-        </dd>
-
+       
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <center>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+    </center>
 </p>
 

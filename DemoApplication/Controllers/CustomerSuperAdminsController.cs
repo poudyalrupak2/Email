@@ -82,6 +82,18 @@ namespace DemoApplication.Controllers
                     HttpFileCollectionBase image = Request.Files;
                     if (CImageFile != null)
                     {
+                        string firstpath = "/images/";
+                        string subPath = "/images/Citizenship/"; // your code goes here
+                        bool imageexist = System.IO.Directory.Exists(Server.MapPath(firstpath));
+                        bool exists = System.IO.Directory.Exists(Server.MapPath(subPath));
+                        if(!imageexist)
+                        {
+                            System.IO.Directory.CreateDirectory(Server.MapPath(firstpath));
+                        }
+                        if (!exists)
+                        {
+                            System.IO.Directory.CreateDirectory(Server.MapPath(subPath));
+                        }
                         string fileName1 = CImageFile.FileName;
                         string filename1 = Path.GetFileNameWithoutExtension(CImageFile.FileName);
                         string extension1 = Path.GetExtension(CImageFile.FileName);
@@ -92,6 +104,19 @@ namespace DemoApplication.Controllers
                     }
                     if (CDImageFile != null)
                     {
+                        string firstpath = "/images/";
+                        string subPath = "/images/CompanyDocument/"; // your code goes here
+                        bool imageexist = System.IO.Directory.Exists(Server.MapPath(firstpath));
+                        bool exists = System.IO.Directory.Exists(Server.MapPath(subPath));
+                        if (!imageexist)
+                        {
+                            System.IO.Directory.CreateDirectory(Server.MapPath(firstpath));
+                        }
+                        if (!exists)
+                        {
+                            System.IO.Directory.CreateDirectory(Server.MapPath(subPath));
+                        }
+
                         string fileName2 = CDImageFile.FileName;
                         string filename2 = Path.GetFileNameWithoutExtension(CDImageFile.FileName);
                         string extension2 = Path.GetExtension(CDImageFile.FileName);
@@ -103,6 +128,19 @@ namespace DemoApplication.Controllers
                     }
                     if (LImageFile != null)
                     {
+                        string firstpath = "/images/";
+                        string subPath = "/images/Logo/"; // your code goes here
+                        bool imageexist = System.IO.Directory.Exists(Server.MapPath(firstpath));
+                        bool exists = System.IO.Directory.Exists(Server.MapPath(subPath));
+                        if (!imageexist)
+                        {
+                            System.IO.Directory.CreateDirectory(Server.MapPath(firstpath));
+                        }
+                        if (!exists)
+                        {
+                            System.IO.Directory.CreateDirectory(Server.MapPath(subPath));
+                        }
+
                         string fileName3 = LImageFile.FileName;
 
                         string filename3 = Path.GetFileNameWithoutExtension(LImageFile.FileName);
@@ -114,6 +152,20 @@ namespace DemoApplication.Controllers
                     }
                     if (PPImageFile != null)
                     {
+                        string firstpath = "/images/";
+                        string subPath = "/images/PPSizePhoto/"; // your code goes here
+                        bool imageexist = System.IO.Directory.Exists(Server.MapPath(firstpath));
+                        bool exists = System.IO.Directory.Exists(Server.MapPath(subPath));
+                        if (!imageexist)
+                        {
+                            System.IO.Directory.CreateDirectory(Server.MapPath(firstpath));
+                        }
+                        if (!exists)
+                        {
+                            System.IO.Directory.CreateDirectory(Server.MapPath(subPath));
+                        }
+
+
                         string fileName4 = PPImageFile.FileName;
 
                         string filename4 = Path.GetFileNameWithoutExtension(PPImageFile.FileName);
@@ -127,31 +179,25 @@ namespace DemoApplication.Controllers
                     }
                     //save new record in database
 
-                    string from = "hsakib2051@gmail.com";
-                    string fromPassword = "0815826X";
+                 
                     Random generator = new Random();
                     String password = generator.Next(0, 999999).ToString("D6");
-                    using (MailMessage mail = new MailMessage(from, customerSuperAdmin.email1))
-                    {
+                  
+                        
 
+
+
+                           
+                            var message = new MailMessage();
+                            message.To.Add(new MailAddress(customerSuperAdmin.email1));
+                        message.Subject = "Change Password";
+                        message.Body = "Use this Password to login:" + password;
+                        using (var smtp = new SmtpClient())
+                        {
                         try
                         {
-
-
-
-                            mail.Subject = "Change Password";
-                            mail.Body = "Use this Password to login:" + password;
-
-                            mail.IsBodyHtml = false;
-                            SmtpClient smtp = new SmtpClient();
-                            smtp.Host = "smtp.gmail.com";
-                            smtp.EnableSsl = true;
-                            smtp.UseDefaultCredentials = false;
-                            NetworkCredential networkCredential = new NetworkCredential(from, fromPassword);
-
-                            smtp.Credentials = networkCredential;
-                            smtp.Port = 587;
-                            smtp.Send(mail);
+                          
+                            smtp.Send(message);
 
                             login.Email = customerSuperAdmin.email1;
                             login.randompass = password;

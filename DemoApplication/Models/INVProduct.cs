@@ -7,8 +7,11 @@ using System.Web;
 
 namespace DemoApplication.Models
 {
+    [Table("ProductInvoice")]
+
     public class INVProduct
     {
+
         [Key]
         public int Id { get; set; }
         public Invoice Invoice { get; set; }

@@ -84,8 +84,7 @@ namespace DemoApplication.Controllers
                     {
                         tickets.CreatedBy = Session["userEmail"].ToString();
                         tickets.CreatedDate = DateTime.Now.Date;
-                        string from = "dbugtest2016@gmail.com";
-                        string fromPassword = "my@test#";
+                        
                         string body;
 
                         using (var sr = new StreamReader(Server.MapPath("\\App_Data\\HtmlTamplate\\template.html")))
@@ -100,23 +99,24 @@ namespace DemoApplication.Controllers
 
                         try
                         {
-
-                            using (MailMessage mail = new MailMessage(from, tickets.Email))
+                            using (var smtp = new SmtpClient())
                             {
-
-                                try
+                                
+                                    try
                                 {
                                         string username =tickets.CostumerName;
                                     string ticketdate =tickets.DepartureDate.ToString("dd MMM yyyy");
                                     string tickettime =tickets.DepartureTime.ToString();
 
+                                    var message = new MailMessage();
+                                    message.To.Add(new MailAddress(tickets.Email));
                                     string messageBody = string.Format(body, username,username,ticketdate,tickettime);
                                     string path = Server.MapPath(@"/images/dbug.gif"); // my logo is placed in images folder
                                   AlternateView avHtml = AlternateView.CreateAlternateViewFromString(messageBody, null, MediaTypeNames.Text.Html);
                                     LinkedResource logo = new LinkedResource(path,MediaTypeNames.Image.Gif);
                                     logo.ContentId = "logo";
                                     avHtml.LinkedResources.Add(logo);
-                                    mail.AlternateViews.Add(avHtml);
+                                    message.AlternateViews.Add(avHtml);
                                    
                                    // avHtml.LinkedResources.Add(logo);
 
@@ -124,18 +124,11 @@ namespace DemoApplication.Controllers
 
 
 
-                                    mail.Subject = "Tickets Created";
+                                    message.Subject = "Tickets Created";
                                     //mail.Body = messageBody;
-                                    mail.IsBodyHtml = true;
-                                    SmtpClient smtp = new SmtpClient();
-                                    smtp.Host = "smtp.gmail.com";
-                                    smtp.EnableSsl = true;
-                                    smtp.UseDefaultCredentials = false;
-                                    NetworkCredential networkCredential = new NetworkCredential(from, fromPassword);
+                                    message.IsBodyHtml = true;
+                                    smtp.Send(message);
 
-                                    smtp.Credentials = networkCredential;
-                                    smtp.Port = 587;
-                                    smtp.Send(mail);
 
 
                                     db.Tickets.Add(tickets);

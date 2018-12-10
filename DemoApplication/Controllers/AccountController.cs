@@ -63,7 +63,7 @@ namespace Newspaper.Controllers
                         Session.Add("userEmail", Admin.Email);
                         Session.Add("category", Admin.Category);
                         var objAdmin = _db.Login.FirstOrDefault(a => (a.Email == l.Email && a.Password == pass));
-                        if (objAdmin != null)
+                        if (objAdmin != null&& Admin.Category!=null)
                         {
                             string username = _db.Costumers.FirstOrDefault(m => m.email1 == objAdmin.Email).Name;
                             string phone = _db.Costumers.FirstOrDefault(m => m.email1 == objAdmin.Email).Phone1;

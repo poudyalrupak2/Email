@@ -14,7 +14,7 @@ namespace DemoApplication.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Please Enter CustumerId")]
 
-        public int CustumerId { get; set; }
+        public String CustumerId { get; set; }
         [Required(ErrorMessage = "Please Enter Name")]
 
         public String Name { get; set; }

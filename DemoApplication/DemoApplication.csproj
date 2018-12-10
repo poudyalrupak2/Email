@@ -247,6 +247,22 @@
     <Compile Include="Migrations\201812060640387_New1.Designer.cs">
       <DependentUpon>201812060640387_New1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812082355555_Table-changed.cs" />
+    <Compile Include="Migrations\201812082355555_Table-changed.Designer.cs">
+      <DependentUpon>201812082355555_Table-changed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812100551229_IdString.cs" />
+    <Compile Include="Migrations\201812100551229_IdString.Designer.cs">
+      <DependentUpon>201812100551229_IdString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812100641383_Seeded-data.cs" />
+    <Compile Include="Migrations\201812100641383_Seeded-data.Designer.cs">
+      <DependentUpon>201812100641383_Seeded-data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812100702453_Seeded-data1.cs" />
+    <Compile Include="Migrations\201812100702453_Seeded-data1.Designer.cs">
+      <DependentUpon>201812100702453_Seeded-data1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActivityLog.cs" />
     <Compile Include="Models\AddToCart.cs" />
@@ -1006,6 +1022,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812060640387_New1.resx">
       <DependentUpon>201812060640387_New1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812082355555_Table-changed.resx">
+      <DependentUpon>201812082355555_Table-changed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812100551229_IdString.resx">
+      <DependentUpon>201812100551229_IdString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812100641383_Seeded-data.resx">
+      <DependentUpon>201812100641383_Seeded-data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812100702453_Seeded-data1.resx">
+      <DependentUpon>201812100702453_Seeded-data1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -46,8 +46,7 @@
         <div class="col-md-4 mb-3">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.RegisterDate, new { id = "ddlRegisterdate" })
-
+<label>Register Date</label>
                 @Html.TextBoxFor(model => model.RegisterDate, new { id = "datepicker", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.RegisterDate, "", new { @class = "text-danger" })
             </div>
@@ -106,23 +105,21 @@
             <div class="form-group">
 
 
-                @Html.LabelFor(model => model.CustomerType, new { @class = "control-label col-md-2" })
-
+<label>Customer Type</label>
                 @Html.DropDownList("CustomerType", new List<SelectListItem> { new SelectListItem { Text = "---Select Costumer--", Value = "" }, new SelectListItem { Text = "Tour and Travel", Value = "Tour and Travel" }, new SelectListItem { Text = "Trading", Value = "Trading" }, new SelectListItem { Text = "Food and Beverage", Value = "Food and Beverage" }, new SelectListItem { Text = "Hotel", Value = "Hotel" } }, new { @class = "form-control", id = "ddlCustomerType" })
 
                 @Html.ValidationMessageFor(model => model.CustomerType, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-8 mb-3">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Detail, new { @class = "control-label col-md-2" })
-
-                @Html.TextBoxFor(model => model.Detail, new { @class = "form-control" })
+<label>Short Description</label>
+                @Html.TextAreaFor(model => model.Detail, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-12 mb-3">
 
             <div class="form-group">
                 @Html.LabelFor(model => model.WorkingArea, new { @class = "control-label col-md-2" })
@@ -131,11 +128,10 @@
                 @Html.ValidationMessageFor(model => model.WorkingArea, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-12 mb-3">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.NatureOfWork, new { @class = "control-label col-md-2" })
-
+<label>Objective</label>
                 @Html.TextBoxFor(model => model.NatureOfWork, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.NatureOfWork, "", new { @class = "text-danger" })
             </div>
@@ -179,21 +175,17 @@
             </div>
         </div>
 
-
+       
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md col-md-12">
+                <center>
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+                </center>
             </div>
         </div>
 
-        <div class="form-group">
-
-            <div class="col-md-offset-2 col-md-10">
-
-                @Html.ActionLink("Back to List", "Index")
-            </div>
-        </div>
-    </div>
+       </div>
 
 }
 
