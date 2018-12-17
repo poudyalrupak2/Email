@@ -98,8 +98,7 @@ namespace DemoApplication.Controllers
                 db.packages.Add(package);
                 db.SaveChanges();
                 db.Entry(package).GetDatabaseValues();
-                string from = "dbugtest2016@gmail.com";
-                string fromPassword = "my@test#";
+
                 //string body = "<html><head> <style>body { margin: 0; padding: 0; min - width: 100 % !important; } .content{width:100 %;max-width:600px;}</ style ></head>< body style='color:grey; font-size:15px;'><div style='background-color:#ece8d4;width:600px;height:600px; padding:30px 30px; margin-top:30px;'><p> Dear <b>{0}</b>,<p><p> New package is being created.</p><p> Please Contact soon as possible</p><p>";
                 string body;
 

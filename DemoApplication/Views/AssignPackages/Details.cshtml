@@ -6,37 +6,65 @@
 }
 
 
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
 
 <div>
+    <div style="overflow-x:auto;">
+        <div class="alert">
+            <table class="table table-responsive table-bordered">
+                <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Customer.Firstname)
+                </td>
 
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.Firstname)
-        </dt>
+                <td>
+                    @Html.DisplayFor(model => model.Customer.Firstname)
+                </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.Customer.Firstname)
-        </dd>
+                </tr>
+                <tr>
+                    <td>
+                    @Html.DisplayNameFor(model => model.Package.PackageCode)
+                  </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Package.PackageCode)
-        </dt>
+                    <td>
+                        @Html.DisplayFor(model => model.Package.PackageCode)
+                    </td>
+                </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Package.PackageCode)
-        </dd>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.AssignDate)
+                    </td>
+                
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AssignDate)
-        </dt>
+                    <td>
+                        @Html.DisplayFor(model => model.AssignDate)
+                    </td>
+                </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.AssignDate)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AssignPackageId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                </table>
+            </div>
+        </div>
+    </div>
+        <p>
+            <center>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.AssignPackageId },new { @class = "btn btn-primary" })
+                @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-primary" })
+            </center>
+        </p>

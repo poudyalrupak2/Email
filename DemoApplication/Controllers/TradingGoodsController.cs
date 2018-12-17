@@ -233,9 +233,9 @@ namespace DemoApplication.Controllers
 
                         if (TImage != null)
                         {
-                            string firstpath = "/image/";
-                            string subPath = "/uploads/Thumbail/"; // your code goes here
-                            string TPAth = "/Uploads/Thumbail/Trading/";
+                            string firstpath = "/Images/";
+                            string subPath = "/Images/Thumbail/"; // your code goes here
+                            string TPAth = "/Images/Thumbail/Trading/";
                             bool imageexist = System.IO.Directory.Exists(Server.MapPath(firstpath));
                             bool exists = System.IO.Directory.Exists(Server.MapPath(subPath));
                             bool Texists = System.IO.Directory.Exists(Server.MapPath(TPAth));
@@ -256,7 +256,7 @@ namespace DemoApplication.Controllers
                             string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);
                             string extension3 = Path.GetExtension(TImage.FileName);
                             filename3 = TradingGoods.Id + extension3;
-                            TradingGoods.Thumbail = "/images/Thumbail/Trading/" + filename3;
+                            TradingGoods.Thumbail = "/Images/Thumbail/Trading/" + filename3;
                             filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/Trading/"), filename3);
                             TImage.SaveAs(filename3);
                         }
@@ -631,7 +631,25 @@ namespace DemoApplication.Controllers
             }
             return new HttpStatusCodeResult(HttpStatusCode.NotFound);
         }
-        public ActionResult Dashboard() {
+        public ActionResult UserProfile()
+        {
+            if (Session["ACategory"] != null)
+            {
+                if (Session["ACategory"].ToString() == "Trading" && Session["ACategory"] != null)
+                {
+                    var customerEmail = Session["UserEmail"].ToString();
+                    CustomerSuperAdmin CustomerSuperAdmin = db.Costumers.Where(m => m.email1 == customerEmail).FirstOrDefault();
+
+                    return View(CustomerSuperAdmin);
+
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+        }
+
+
+            public ActionResult Dashboard() {
             var Customer = db.customers.Where(t => t.CustomerCategory == "Trading");
              ViewBag.good = db.TradingGoods.Count();
             var sesson = Session["userEmail"].ToString();

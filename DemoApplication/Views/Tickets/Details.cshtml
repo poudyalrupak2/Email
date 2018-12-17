@@ -6,112 +6,141 @@
 }
 
 
+<style>
+    table {
+        border-collapse: collapse;
+        witdh: 100%;
+        border: 1px solid #ttd;
+    }
+
+    th, td {
+        text-align: left;
+        patding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
 <div>
-    <h4>Tickets</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CostumerName)
-        </dt>
+    <div style="overflow-x:auto;">
+        <div class="alert">
+            <table class="table table-responsive table-bordered">
 
-        <dd>
-            @Html.DisplayFor(model => model.CostumerName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.CostumerName)
+                    </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
+                    <td>
+                        @Html.DisplayFor(model => model.CostumerName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.DOB)
+                    </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
+                    <td>
+                        @Html.DisplayFor(model => model.DOB)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
+                    <td>
+                        @Html.DisplayFor(model => model.Category)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.From)
+                    </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.From)
-        </dt>
+                    <td>
+                        @Html.DisplayFor(model => model.From)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.TO)
+                    </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.From)
-        </dd>
+                    <td>
+                        @Html.DisplayFor(model => model.TO)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       Departure Date
+                    </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TO)
-        </dt>
+                    <td>
+                        @Html.DisplayFor(model => model.DepartureDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Departure Time
+                    </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.TO)
-        </dd>
+                    <td>
+                       @Model.DepartureTime
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ReturnDate)
+                    </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DepartureDate)
-        </dt>
+                    <td>
+                        @Html.DisplayFor(model => model.ReturnDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                       Return Time
+                    </td>
+                    <td>
+                        @Model.ReturnTime
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.NoOfPersons)
+                    </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.DepartureDate)
-        </dd>
+                    <td>
+                        @Html.DisplayFor(model => model.NoOfPersons)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Nationality)
+                    </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DepartureTime)
-        </dt>
+                    <td>
+                        @Html.DisplayFor(model => model.Nationality)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.TotalCost)
+                    </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.DepartureTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReturnDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReturnDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReturnTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReturnTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NoOfPersons)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NoOfPersons)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nationality)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nationality)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalCost)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalCost)
-        </dd>
-
-     
-    </dl>
+                    <td>
+                        @Html.DisplayFor(model => model.TotalCost)
+                    </td>
+                </tr>
+                </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new { @class = "btn btn-primary" }) |
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
 
-    
-</p>
+
+        </p>

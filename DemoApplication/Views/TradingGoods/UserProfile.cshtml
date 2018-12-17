@@ -1,4 +1,11 @@
-﻿@model DemoApplication.Models.CustomerSuperAdmin
+﻿
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_LayoutTrading.cshtml";
+}
+
+
+@model DemoApplication.Models.CustomerSuperAdmin
 
 @{
     ViewBag.Title = "Details";
@@ -24,7 +31,25 @@
     <div style="overflow-x:auto;">
         <div class="alert">
             <table class="table table-responsive table-bordered">
+                <tr>
+                    <td colspan="2">
+                        <center>
+                            @if (Model.Logo != null)
+                            {
 
+                                <img src=@Model.Logo height="100" witdh="100">
+                            }
+                            else
+                            {
+                                <img src=@Model.PpsizePhoto height="100" witdh="100">
+
+                            }
+                        </center>
+                    </td>
+                    
+                </tr>
+                       
+                
 
 
                 <tr>
@@ -136,72 +161,14 @@
                     </td>
                 </tr>
 
-                <tr>
-
-                    <td>
-                        @Html.DisplayNameFor(model => model.Logo)
-                    </td>
-
-                    <td>
-                        <img src=@Model.Logo height="100" witdh="100">
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayNameFor(model => model.PpsizePhoto)
-                    </td>
-
-                    <td>
-                        <img src=@Model.PpsizePhoto height="100" witdh="100">
-
-                    </td>
-                </tr>
 
 
-</table>
-            </div>
-        
+
+
+            </table>
         </div>
-                <p>
-                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
-                </p>
 
-                @section Nav{
+    </div>
+   
 
-                    <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav navbar-collapse">
-                            <ul class="nav" id="side-menu">
-                                <li class="sidebar-search">
-                                    <div class="input-group custom-search-form">
-                                        <input type="text" class="form-control" placeholder="Search...">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
-                                </li>
-
-                                <li>
-                                    <a href="@Url.Action("Index","CustomerSuperAdmins")"><i class="fa fa-users"></i> View Customer</a>
-
-                                    <!-- /.nav-second-level -->
-                                </li>
-
-
-                                <li>
-                                    <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                        <!-- /.sidebar-collapse -->
-                    </div>
-                }
+    

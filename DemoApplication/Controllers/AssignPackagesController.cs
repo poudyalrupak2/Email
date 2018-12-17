@@ -44,7 +44,7 @@ namespace DemoApplication.Controllers
                     {
                         return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                     }
-                    AssignPackage assignPackage = db.AssignPackages.Find(id);
+                    AssignPackage assignPackage = db.AssignPackages.Include(m => m.Customer).Include(a => a.Customer).Include(a => a.Package).Where(m => m.AssignPackageId == id).SingleOrDefault();
                     if (assignPackage == null)
                     {
                         return HttpNotFound();

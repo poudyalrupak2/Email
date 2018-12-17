@@ -6,80 +6,111 @@
 
 
 <div>
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.GoodId)
-        </dt>
+    <div>
+        <h4>Package</h4>
+        <style>
+            table {
+                border-collapse: collapse;
+                witdh: 100%;
+                border: 1px solid #ttd;
+            }
 
-        <dd>
-            @Html.DisplayFor(model => model.GoodId)
-        </dd>
+            th, td {
+                text-align: left;
+                patding: 8px;
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GoodName)
-        </dt>
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        </style>
 
-        <dd>
-            @Html.DisplayFor(model => model.GoodName)
-        </dd>
+        <div>
+            <div style="overflow-x:auto;">
+                <div class="alert">
+                    <table class="table table-responsive table-bordered">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ShortDetail)
-        </dt>
+                        <tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.ShortDetail)
-        </dd>
+                            <td>
+                                @Html.DisplayNameFor(model => model.GoodId)
+                            </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LongDetail)
-        </dt>
+                            <td>
+                                @Html.DisplayFor(model => model.GoodId)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.GoodName)
+                            </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.LongDetail)
-        </dd>
+                            <td>
+                                @Html.DisplayFor(model => model.GoodName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.ShortDetail)
+                            </td>
 
-        <dt>
-            Thumbnail
-        </dt>
+                            <td>
+                                @Html.DisplayFor(model => model.ShortDetail)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.LongDetail)
+                            </td>
 
-        <dd>
-            <img src=@Model.Thumbail height=100 width="100">
-        </dd>
+                            <td>
+                                @Html.DisplayFor(model => model.LongDetail)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Thumbnail
+                            </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WholesaleRate)
-        </dt>
+                            <td>
+                                <img src=@Model.Thumbail height=100 witdh="100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.WholesaleRate)
+                            </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.WholesaleRate)
-        </dd>
+                            <td>
+                                @Html.DisplayFor(model => model.WholesaleRate)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.Quantity)
+                            </td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
+                            <td>
+                                @Html.DisplayFor(model => model.Quantity)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayNameFor(model => model.CoupenCode)
+                            </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
+                            <td>
+                                @Html.DisplayFor(model => model.CoupenCode)
+                            </td>
+                        </tr>
+</table>
+                   
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CoupenCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CoupenCode)
-        </dd>
-
-       
-
-    </dl>
 </div>
-<p>
-    <center>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
-    </center>
-</p>
+                <p>
+                    <center>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+                    </center>
+                </p>
 
