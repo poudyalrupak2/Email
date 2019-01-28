@@ -9,278 +9,288 @@
 {
     <div class="alert alert-danger">@ViewBag.Message </div>
 }
-
-@using (Html.BeginForm("Create", "CustomerSuperAdmins", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="form-row">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="col-md-4 mb-3">
-            <div class="form-group">
-                @Html.LabelFor(model => model.CustumerId, new { @class = "control-label col-md-2" })
-
-                @Html.TextBoxFor(model => model.CustumerId, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CustumerId, "", new { @class = "text-danger" })
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <i class="fa fa-clock-o fa-fw"></i>Edit Customers
             </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-3" id="category">
-            <div class="form-group">
-                @Html.LabelFor(model => model.Categoty, new { @class = "control-label col-md-2" })
-
-                @Html.DropDownList("Categoty", new List<SelectListItem> { new SelectListItem { Text = "---Select Category--", Value = "" }, new SelectListItem { Text = "Individual", Value = "Individual" }, new SelectListItem { Text = "Organization", Value = "Organization" } }, new { @class = "form-control", id = "ddlCustomerType" })
-
-                @Html.ValidationMessageFor(model => model.Categoty, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-
-            <div class="form-group">
-<label>Register Date</label>
-                @Html.TextBoxFor(model => model.RegisterDate, new { id = "datepicker", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.RegisterDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
 
 
+                @using (Html.BeginForm("Create", "CustomerSuperAdmins", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-row">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="col-md-4 mb-3">
-            <div class="form-group">
-                @Html.LabelFor(model => model.email1, new { @class = "control-label col-md-2" })
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CustumerId, new { @class = "control-label col-md-2" })
 
-                @Html.TextBoxFor(model => model.email1, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.email1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
+                                @Html.TextBoxFor(model => model.CustumerId, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CustumerId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.email2, new { @class = "control-label col-md-2" })
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
 
-                @Html.TextBoxFor(model => model.email2, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.email2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Phone1, new { @class = "control-label col-md-2" })
+                        <div class="col-md-4 mb-3" id="category">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Categoty, new { @class = "control-label col-md-2" })
 
-                @Html.TextBoxFor(model => model.Phone1, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Phone1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-4 mb-3">
-            <div class="form-group">
+                                @Html.DropDownList("Categoty", new List<SelectListItem> { new SelectListItem { Text = "---Select Category--", Value = "" }, new SelectListItem { Text = "Individual", Value = "Individual" }, new SelectListItem { Text = "Organization", Value = "Organization" } }, new { @class = "form-control", id = "ddlCustomerType" })
 
+                                @Html.ValidationMessageFor(model => model.Categoty, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
 
-                @Html.LabelFor(model => model.PanNo, new { @class = "control-label col-md-2" })
-
-                @Html.TextBoxFor(model => model.PanNo, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PanNo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <div class="form-group">
-
-                @Html.LabelFor(model => model.URL, new { @class = "control-label col-md-2" })
-
-                @Html.TextBoxFor(model => model.URL, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <div class="form-group">
-
-
-<label>Customer Type</label>
-                @Html.DropDownList("CustomerType", new List<SelectListItem> { new SelectListItem { Text = "---Select Costumer--", Value = "" }, new SelectListItem { Text = "Tour and Travel", Value = "Tour and Travel" }, new SelectListItem { Text = "Trading", Value = "Trading" }, new SelectListItem { Text = "Food and Beverage", Value = "Food and Beverage" }, new SelectListItem { Text = "Hotel", Value = "Hotel" } }, new { @class = "form-control", id = "ddlCustomerType" })
-
-                @Html.ValidationMessageFor(model => model.CustomerType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-8 mb-3">
-
-            <div class="form-group">
-<label>Short Description</label>
-                @Html.TextAreaFor(model => model.Detail, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-12 mb-3">
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.WorkingArea, new { @class = "control-label col-md-2" })
-
-                @Html.TextBoxFor(model => model.WorkingArea, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.WorkingArea, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-12 mb-3">
-
-            <div class="form-group">
-<label>Objective</label>
-                @Html.TextBoxFor(model => model.NatureOfWork, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.NatureOfWork, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-4 mb-3" id="cshipphoto">
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.CitizenShipPhoto, new { @class = "control-label col-md-2" })
-                <input type="file" id="CImageFile" name="CImageFile" class="form-control" />
-                @Html.ValidationMessageFor(model => model.CitizenShipPhoto, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <div class="form-group">
+                                <label>Register Date</label>
+                                @Html.TextBoxFor(model => model.RegisterDate, new { id = "datepicker", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.RegisterDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
 
 
-        <div class="col-md-4 mb-3" id="pp">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.email1, new { @class = "control-label col-md-2" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PpsizePhoto, new { @class = "control-label col-md-2" })
+                                @Html.TextBoxFor(model => model.email1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.email1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
 
-                <input type="file" id="PPImageFile" name="PPImageFile" class="form-control" />
-                @Html.ValidationMessageFor(model => model.PpsizePhoto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-4 mb-3" id="logo">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.email2, new { @class = "control-label col-md-2" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Logo, new { @class = "control-label col-md-2" })
+                                @Html.TextBoxFor(model => model.email2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.email2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
 
-                <input type="file" id="LImageFile" name="LImageFile" class="form-control" />
-                @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-4 mb-3" id="cdocument">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Phone1, new { @class = "control-label col-md-2" })
 
-                @Html.LabelFor(model => model.CompanyDocument, new { @class = "control-label col-md-2" })
-                <input type="file" id="CDImageFile" name="CDImageFile" class="form-control" />
-
-                @Html.ValidationMessageFor(model => model.CompanyDocument, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-       
-        <div class="form-group">
-            <div class="col-md col-md-12">
-                <center>
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
-                </center>
-            </div>
-        </div>
-
-       </div>
-
-}
+                                @Html.TextBoxFor(model => model.Phone1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Phone1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
 
 
+                                @Html.LabelFor(model => model.PanNo, new { @class = "control-label col-md-2" })
 
-@section Scripts {
-    <link rel="stylesheet" href="~/Scripts/jquery-ui-1.12.1/jquery-ui.css">
-    <link rel="stylesheet" href="~/Scripts/nepali.datepicker.v2.2.min.css">
+                                @Html.TextBoxFor(model => model.PanNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PanNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script src="~/Scripts/nepali.datepicker.v2.2.min.js"></script>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
 
-    <script src="~/Scripts/jquery-ui-1.12.1/jquery-ui.js"></script>
+                                @Html.LabelFor(model => model.URL, new { @class = "control-label col-md-2" })
 
-    <script>
-        $(function () {
-            $("#datepicker").datepicker({
+                                @Html.TextBoxFor(model => model.URL, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-            });
-           
-        });
-        $("#cshipphoto").hide();
-        $("#cdocument").hide();
-        $("#logo").hide();
-        $("#pp").hide();
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
 
 
-        $("#ddlCustomerType").change(function () {
+                                <label>Customer Type</label>
+                                @Html.DropDownList("CustomerType", new List<SelectListItem> { new SelectListItem { Text = "---Select Costumer--", Value = "" }, new SelectListItem { Text = "Tour and Travel", Value = "Tour and Travel" }, new SelectListItem { Text = "Trading", Value = "Trading" }, new SelectListItem { Text = "Food and Beverage", Value = "Food and Beverage" }, new SelectListItem { Text = "Hotel", Value = "Hotel" } }, new { @class = "form-control", id = "ddlCustomerType" })
 
-            if ($(this).val() === "Individual") {
-                $("#cshipphoto").show();
-                $("#pp").show();
-                $("#cdocument").hide();
-                $("#logo").hide();
-            }
-            else if ($(this).val() === "Organization") {
-                $("#cdocument").show();
-                $("#logo").show();
-                $("#cshipphoto").hide();
-                $("#pp").hide();
-            }
-            else {
-                $("#cshipphoto").hide();
-                $("#cdocument").hide();
-                $("#logo").hide();
-                $("#pp").hide();
+                                @Html.ValidationMessageFor(model => model.CustomerType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-8 mb-3">
 
-            }
-        });
+                            <div class="form-group">
+                                <label>Short Description</label>
+                                @Html.TextAreaFor(model => model.Detail, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+
+                            <div class="form-group">
+<label>Working Area</label>
+                                @Html.TextBoxFor(model => model.WorkingArea, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.WorkingArea, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+
+                            <div class="form-group">
+                                <label>Objective</label>
+                                @Html.TextBoxFor(model => model.NatureOfWork, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.NatureOfWork, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3" id="cshipphoto">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CitizenShipPhoto, new { @class = "control-label col-md-2" })
+                                <input type="file" id="CImageFile" name="CImageFile" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.CitizenShipPhoto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
 
-    </script>
 
-}
-@section Nav {
+                        <div class="col-md-4 mb-3" id="pp">
 
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PpsizePhoto, new { @class = "control-label col-md-2" })
+
+                                <input type="file" id="PPImageFile" name="PPImageFile" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.PpsizePhoto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3" id="logo">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Logo, new { @class = "control-label col-md-2" })
+
+                                <input type="file" id="LImageFile" name="LImageFile" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4 mb-3" id="cdocument">
+
+                                @Html.LabelFor(model => model.CompanyDocument, new { @class = "control-label col-md-2" })
+                                <input type="file" id="CDImageFile" name="CDImageFile" class="form-control" />
+
+                                @Html.ValidationMessageFor(model => model.CompanyDocument, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md col-md-12">
+                                <center>
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+                                </center>
+                            </div>
+                        </div>
+
                     </div>
-                    <!-- /input-group -->
-                </li>
-                <li>
-                    <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
-                </li>
 
-                <li>
-                    <a href="@Url.Action("Index","Customer")"><i class="fa fa-users"></i> View Customer</a>
+                }
 
-                    <!-- /.nav-second-level -->
-                </li>
-
-                <li>
-                    <a href="@Url.Action("ActivityLog","DashBoard")"><i class="fa fa-user-secret"></i>Activity Log</a>
-
-                    <!-- /.nav-second-level -->
-                </li>
-                <li>
-                    <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
-                </li>
-
-
-            </ul>
+                </div>
+            </div>
         </div>
-        <!-- /.sidebar-collapse -->
-    </div>
-}
+
+
+                @section Scripts {
+                    <link rel="stylesheet" href="~/Scripts/jquery-ui-1.12.1/jquery-ui.css">
+                    <link rel="stylesheet" href="~/Scripts/nepali.datepicker.v2.2.min.css">
+
+                    <link rel="stylesheet" href="/resources/demos/style.css">
+                    <script src="~/Scripts/jquery-1.10.2.js"></script>
+                    <script src="~/Scripts/nepali.datepicker.v2.2.min.js"></script>
+
+                    <script src="~/Scripts/jquery-ui-1.12.1/jquery-ui.js"></script>
+
+                    <script>
+                        $(function () {
+                            $("#datepicker").datepicker({
+
+                            });
+
+                        });
+                        $("#cshipphoto").hide();
+                        $("#cdocument").hide();
+                        $("#logo").hide();
+                        $("#pp").hide();
+
+
+                        $("#ddlCustomerType").change(function () {
+
+                            if ($(this).val() === "Individual") {
+                                $("#cshipphoto").show();
+                                $("#pp").show();
+                                $("#cdocument").hide();
+                                $("#logo").hide();
+                            }
+                            else if ($(this).val() === "Organization") {
+                                $("#cdocument").show();
+                                $("#logo").show();
+                                $("#cshipphoto").hide();
+                                $("#pp").hide();
+                            }
+                            else {
+                                $("#cshipphoto").hide();
+                                $("#cdocument").hide();
+                                $("#logo").hide();
+                                $("#pp").hide();
+
+                            }
+                        });
+
+
+                    </script>
+
+                }
+                @section Nav {
+
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+                                <li class="sidebar-search">
+                                    <div class="input-group custom-search-form">
+                                        <input type="text" class="form-control" placeholder="Search...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <!-- /input-group -->
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("Index","Customer")"><i class="fa fa-users"></i> View Customer</a>
+
+                                    <!-- /.nav-second-level -->
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("ActivityLog","DashBoard")"><i class="fa fa-user-secret"></i>Activity Log</a>
+
+                                    <!-- /.nav-second-level -->
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Logout","Account")"><i class="fa fa-sign-out-alt"></i>Logout</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <!-- /.sidebar-collapse -->
+                    </div>
+                }
 
 

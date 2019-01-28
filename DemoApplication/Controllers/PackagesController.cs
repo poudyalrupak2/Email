@@ -200,12 +200,31 @@ namespace DemoApplication.Controllers
                 if (TImage != null)
                 {
                     string fileName3 = TImage.FileName;
+                    string firstpath = "/images/";
+                    string subPath = "/images/Thumbail/"; // your code goes here
+                    string ppath = "/images/Thumbail/Package/";
+                    bool imageexist = System.IO.Directory.Exists(Server.MapPath(firstpath));
+                    bool exists = System.IO.Directory.Exists(Server.MapPath(subPath));
+                    bool ppp= System.IO.Directory.Exists(Server.MapPath(ppath));
+                    if (!imageexist)
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath(firstpath));
+                    }
+                    if (!exists)
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath(subPath));
+                    }
+                    if(!ppp)
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath(ppath));
+
+                    }
 
                     string filename3 = Path.GetFileNameWithoutExtension(TImage.FileName);
                     string extension3 = Path.GetExtension(TImage.FileName);
                     filename3 = package.Id + extension3;
                     package.thumbnail = "/images/Thumbail/Package/" + filename3;
-                    filename3 = Path.Combine(Server.MapPath("~/Images/Thumbail/Package/"), filename3);
+                    filename3 = Path.Combine(Server.MapPath("~/images/Thumbail/Package/"), filename3);
                     TImage.SaveAs(filename3);
                 }
                 db.packages.Attach(package);

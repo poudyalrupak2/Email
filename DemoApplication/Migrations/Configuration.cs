@@ -24,8 +24,8 @@ namespace DemoApplication.Migrations
             context.Login.AddOrUpdate(x => x.Id, new Models.Login()
             {
                 Id = 1,
-                Email ="poudyalrupak2@gmail.com",
-                Password = Crypto.Hash("nepalnepal1")
+                Email = "dbugtest2016@gmail.com",
+                Password = Crypto.Hash("nepalnepal")
             });
         }
     }

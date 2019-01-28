@@ -210,12 +210,12 @@ namespace DemoApplication.Controllers
                                 {
                                     System.IO.Directory.CreateDirectory(Server.MapPath(subPath));
                                 }
-                                var fileName = Path.Combine(Server.MapPath("/uploads"), Guid.NewGuid() + Path.GetExtension(file.FileName));
+                                var fileName = Path.Combine(Server.MapPath("/uploads/Trading"), Guid.NewGuid() + Path.GetExtension(file.FileName));
 
                                 Image image = new Image()
                                 {
 
-                                    ImageName = "/Uploads/Trading" + Path.GetFileName(fileName),
+                                    ImageName = "/uploads/Trading" + Path.GetFileName(fileName),
                                     Path = Path.GetExtension(fileName),
 
                                 };

@@ -14,6 +14,18 @@ namespace DemoApplication.Models
         public string filename(HttpPostedFileBase file)
         {
             var fileName = Path.GetFileName(file.FileName);
+            string firstpath = "/Uploads/";
+            string subPath = "/Uploads/PImage/"; // your code goes here
+            bool imageexist = System.IO.Directory.Exists(System.Web.HttpContext.Current.Server.MapPath(firstpath));
+            bool exists = System.IO.Directory.Exists(System.Web.HttpContext.Current.Server.MapPath(subPath));
+            if (!imageexist)
+            {
+                System.IO.Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath(firstpath));
+            }
+            if (!exists)
+            {
+                System.IO.Directory.CreateDirectory(System.Web.HttpContext.Current.Server.MapPath(subPath));
+            }
 
             string finalFileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
             string ImageName = "/Uploads/PImage/" + Path.GetFileName(finalFileName);
