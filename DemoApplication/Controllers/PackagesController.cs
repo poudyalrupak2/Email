@@ -99,7 +99,6 @@ namespace DemoApplication.Controllers
                 db.SaveChanges();
                 db.Entry(package).GetDatabaseValues();
 
-                //string body = "<html><head> <style>body { margin: 0; padding: 0; min - width: 100 % !important; } .content{width:100 %;max-width:600px;}</ style ></head>< body style='color:grey; font-size:15px;'><div style='background-color:#ece8d4;width:600px;height:600px; padding:30px 30px; margin-top:30px;'><p> Dear <b>{0}</b>,<p><p> New package is being created.</p><p> Please Contact soon as possible</p><p>";
                 string body;
 
                 using (var sr = new StreamReader(Server.MapPath("\\App_Data\\HtmlTamplate\\PackageTemplate.html")))
@@ -107,17 +106,7 @@ namespace DemoApplication.Controllers
                     body = sr.ReadToEnd();
                 }
                 var charts = db.pImages.Where(m => m.PackageId == package.Id);
-                //int j = 0;
-                //foreach (var item in charts)
-                //{
-                //    string img = " <div class='column'><img src='cid:" + j + "'/></div><br/>";
-                //    body= body+ img;
-                //    j++;
-                //}
-
-                
-
-               // body =body + " The package starts from {1} and last {2} days.</p><p> Thank you </p><p> <b>DebugSoft</b> </p></div></body></html>";
+               
 
 
                 string category = Session["ACategory"].ToString();

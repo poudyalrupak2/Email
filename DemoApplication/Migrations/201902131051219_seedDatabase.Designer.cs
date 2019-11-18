@@ -7,13 +7,13 @@ namespace DemoApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Seededdata : IMigrationMetadata
+    public sealed partial class seedDatabase : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Seededdata));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(seedDatabase));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812100641383_Seeded-data"; }
+            get { return "201902131051219_seedDatabase"; }
         }
         
         string IMigrationMetadata.Source

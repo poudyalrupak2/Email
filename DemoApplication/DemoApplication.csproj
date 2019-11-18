@@ -166,81 +166,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809191132012_TradingComplete.cs" />
-    <Compile Include="Migrations\201809191132012_TradingComplete.Designer.cs">
-      <DependentUpon>201809191132012_TradingComplete.cs</DependentUpon>
+    <Compile Include="Migrations\201902131040435_abc.cs" />
+    <Compile Include="Migrations\201902131040435_abc.Designer.cs">
+      <DependentUpon>201902131040435_abc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809200931246_dateUpdated.cs" />
-    <Compile Include="Migrations\201809200931246_dateUpdated.Designer.cs">
-      <DependentUpon>201809200931246_dateUpdated.cs</DependentUpon>
+    <Compile Include="Migrations\201902131051219_seedDatabase.cs" />
+    <Compile Include="Migrations\201902131051219_seedDatabase.Designer.cs">
+      <DependentUpon>201902131051219_seedDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809230555426_date.cs" />
-    <Compile Include="Migrations\201809230555426_date.Designer.cs">
-      <DependentUpon>201809230555426_date.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809230723178_AddInvoice1.cs" />
-    <Compile Include="Migrations\201809230723178_AddInvoice1.Designer.cs">
-      <DependentUpon>201809230723178_AddInvoice1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809230725259_AddINvoice.cs" />
-    <Compile Include="Migrations\201809230725259_AddINvoice.Designer.cs">
-      <DependentUpon>201809230725259_AddINvoice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809230828411_AddINvoice123.cs" />
-    <Compile Include="Migrations\201809230828411_AddINvoice123.Designer.cs">
-      <DependentUpon>201809230828411_AddINvoice123.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809230902312_new.cs" />
-    <Compile Include="Migrations\201809230902312_new.Designer.cs">
-      <DependentUpon>201809230902312_new.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809230924221_new4.cs" />
-    <Compile Include="Migrations\201809230924221_new4.Designer.cs">
-      <DependentUpon>201809230924221_new4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809231115487_new7.cs" />
-    <Compile Include="Migrations\201809231115487_new7.Designer.cs">
-      <DependentUpon>201809231115487_new7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809260703210_others.cs" />
-    <Compile Include="Migrations\201809260703210_others.Designer.cs">
-      <DependentUpon>201809260703210_others.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809261038306_othe.cs" />
-    <Compile Include="Migrations\201809261038306_othe.Designer.cs">
-      <DependentUpon>201809261038306_othe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809270731523_init.cs" />
-    <Compile Include="Migrations\201809270731523_init.Designer.cs">
-      <DependentUpon>201809270731523_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809270826218_init1.cs" />
-    <Compile Include="Migrations\201809270826218_init1.Designer.cs">
-      <DependentUpon>201809270826218_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809270830287_init2.cs" />
-    <Compile Include="Migrations\201809270830287_init2.Designer.cs">
-      <DependentUpon>201809270830287_init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812060640387_New1.cs" />
-    <Compile Include="Migrations\201812060640387_New1.Designer.cs">
-      <DependentUpon>201812060640387_New1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812082355555_Table-changed.cs" />
-    <Compile Include="Migrations\201812082355555_Table-changed.Designer.cs">
-      <DependentUpon>201812082355555_Table-changed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812100551229_IdString.cs" />
-    <Compile Include="Migrations\201812100551229_IdString.Designer.cs">
-      <DependentUpon>201812100551229_IdString.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812100641383_Seeded-data.cs" />
-    <Compile Include="Migrations\201812100641383_Seeded-data.Designer.cs">
-      <DependentUpon>201812100641383_Seeded-data.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812100702453_Seeded-data1.cs" />
-    <Compile Include="Migrations\201812100702453_Seeded-data1.Designer.cs">
-      <DependentUpon>201812100702453_Seeded-data1.cs</DependentUpon>
+    <Compile Include="Migrations\201903250903518_requireddeleted.cs" />
+    <Compile Include="Migrations\201903250903518_requireddeleted.Designer.cs">
+      <DependentUpon>201903250903518_requireddeleted.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActivityLog.cs" />
@@ -774,62 +710,14 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809191132012_TradingComplete.resx">
-      <DependentUpon>201809191132012_TradingComplete.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902131040435_abc.resx">
+      <DependentUpon>201902131040435_abc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809200931246_dateUpdated.resx">
-      <DependentUpon>201809200931246_dateUpdated.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902131051219_seedDatabase.resx">
+      <DependentUpon>201902131051219_seedDatabase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809230555426_date.resx">
-      <DependentUpon>201809230555426_date.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809230723178_AddInvoice1.resx">
-      <DependentUpon>201809230723178_AddInvoice1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809230725259_AddINvoice.resx">
-      <DependentUpon>201809230725259_AddINvoice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809230828411_AddINvoice123.resx">
-      <DependentUpon>201809230828411_AddINvoice123.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809230902312_new.resx">
-      <DependentUpon>201809230902312_new.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809230924221_new4.resx">
-      <DependentUpon>201809230924221_new4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809231115487_new7.resx">
-      <DependentUpon>201809231115487_new7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809260703210_others.resx">
-      <DependentUpon>201809260703210_others.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809261038306_othe.resx">
-      <DependentUpon>201809261038306_othe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809270731523_init.resx">
-      <DependentUpon>201809270731523_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809270826218_init1.resx">
-      <DependentUpon>201809270826218_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809270830287_init2.resx">
-      <DependentUpon>201809270830287_init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812060640387_New1.resx">
-      <DependentUpon>201812060640387_New1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812082355555_Table-changed.resx">
-      <DependentUpon>201812082355555_Table-changed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812100551229_IdString.resx">
-      <DependentUpon>201812100551229_IdString.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812100641383_Seeded-data.resx">
-      <DependentUpon>201812100641383_Seeded-data.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812100702453_Seeded-data1.resx">
-      <DependentUpon>201812100702453_Seeded-data1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903250903518_requireddeleted.resx">
+      <DependentUpon>201903250903518_requireddeleted.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

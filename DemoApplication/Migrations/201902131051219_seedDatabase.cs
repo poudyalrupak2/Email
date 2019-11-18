@@ -1,12 +1,15 @@
 namespace DemoApplication.Migrations
 {
+    using System.Linq;
     using System;
     using System.Data.Entity.Migrations;
-    
-    public partial class Seededdata : DbMigration
+    using System.Web.Helpers;
+
+    public partial class seedDatabase : DbMigration
     {
         public override void Up()
         {
+           
         }
         
         public override void Down()

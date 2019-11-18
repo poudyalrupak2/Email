@@ -124,8 +124,7 @@ namespace DemoApplication.Controllers
                 //                   from iv in db.Invoices
                 //                   where ip.InvoiceId == iv.InvoiceNo && ip.InvoiceId == strInvoiceNo
                 //                   select new { ip }).ToList();
-                var listInvoice= (from ip in db.INVProducts
-                                  join iv in db.Invoices
+                var listInvoice= (from ip in db.INVProducts join iv in db.Invoices
                                   on ip.InvoiceId equals iv.InvoiceNo
                                   where iv.InvoiceNo==strInvoiceNo
                                   select new{Quantity=ip.Quantity,

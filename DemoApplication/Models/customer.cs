@@ -27,22 +27,17 @@ namespace DemoApplication.Models
         public string email1 { get; set; }
 
         public string  email2 { get; set; }
-        [Required(ErrorMessage = "Phone is required")]
 
         public long phone { get; set; }
         public long phone2 { get; set; }
-        [Required(ErrorMessage = "NationalId is required")]
 
         public string NationalIdNo { get; set; }
         public string tole { get; set; }
         public string homeno { get; set; }
-        [Required(ErrorMessage = "State is required")]
 
         public string State { get; set; }
-        [Required(ErrorMessage = "counrty is required")]
 
         public string Country { get; set; }
-        [Required(ErrorMessage = "ZipCode is required")]
 
         public string ZipCode { get; set; }
         public string CreatedBy { get; set; }

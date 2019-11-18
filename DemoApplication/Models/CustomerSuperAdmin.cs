@@ -30,11 +30,9 @@ namespace DemoApplication.Models
      
         public string email1 { get; set; }
         public string email2 { get; set; }
-        [Required(ErrorMessage = "Please enter your phone number")]
         public string Phone1 { get; set; }
         public long? PanNo { get; set; }
         public string URL { get; set; }
-        [Required(ErrorMessage ="Please select costumer type")]
         public string CustomerType { get; set; }
         public string Detail { get; set; }
         public string WorkingArea { get; set; }

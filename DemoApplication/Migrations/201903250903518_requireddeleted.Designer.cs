@@ -7,13 +7,13 @@ namespace DemoApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Tablechanged : IMigrationMetadata
+    public sealed partial class requireddeleted : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Tablechanged));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(requireddeleted));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812082355555_Table-changed"; }
+            get { return "201903250903518_requireddeleted"; }
         }
         
         string IMigrationMetadata.Source
