@@ -1,0 +1,1 @@
+This is small billing application which facilitates the features of email to the customers when the product is updated and also after the purchage of products by the customers.Here, Admin registers their customers and only the registered customers can buy the products and email notification is enabled to the customers.
